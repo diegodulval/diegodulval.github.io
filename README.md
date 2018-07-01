@@ -4,7 +4,7 @@
 
 **Telefone:** +55 (035) 99766 0281
 
-**Blog:** [diegodulval.com.br](http://diegodulval.com.br)
+**Blog:** [dulval.com](http://dulval.com)
 
 **E-mail:** diegodulval@gmail.com
 
