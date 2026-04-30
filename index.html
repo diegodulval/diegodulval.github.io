@@ -1,58 +1,992 @@
-<!DOCTYPE HTML>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="pt-BR">
 <head>
-	<title>Diego Dulval | Full-Stack Developer</title>
-	<meta charset="utf-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1" />
-	<meta name="description" content="Portfolio of Diego Dulval, full-stack developer focused on modern web products, performance, and user-centered experiences." />
-	<meta name="theme-color" content="#0a1825" />
-	<meta name="google-site-verification" content="b5GVLWKek9ntv8bVYDDoHH1lsX1LEsF4_2ATmUqZyws" />
-	<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-	<link rel="stylesheet" href="assets/css/main.css" />
-	<link rel="stylesheet" href="assets/css/custom.css" />
-	<!--[if lte IE 8]><link rel="stylesheet" href="assets/css/ie8.css" /><![endif]-->
-	<!--[if lte IE 9]><link rel="stylesheet" href="assets/css/ie9.css" /><![endif]-->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Diego Dulval — Construtor de Sistemas</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:       #0e0c0a;
+  --ink-soft:  #1c1915;
+  --paper:     #f4efe8;
+  --paper-dim: #e8e1d6;
+  --sand:      #c8a97e;
+  --clay:      #9b6f45;
+  --mist:      #6b6459;
+  --fog:       #9e9589;
+  --rule:      rgba(14,12,10,.1);
+  --rule-light:rgba(14,12,10,.06);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; scroll-behavior: smooth; }
+
+body {
+  background: var(--ink);
+  color: var(--paper);
+  font-family: 'Lora', Georgia, serif;
+  font-weight: 400;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ─── NOISE TEXTURE ─────────────────────────────── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+  opacity: .6;
+}
+
+/* ─── SELECTION ─────────────────────────────────── */
+::selection { background: var(--sand); color: var(--ink); }
+
+/* ─── TYPOGRAPHY SCALE ──────────────────────────── */
+.display {
+  font-family: 'DM Serif Display', 'Georgia', serif;
+  font-style: italic;
+  line-height: .95;
+  letter-spacing: -.02em;
+}
+.mono {
+  font-family: 'DM Mono', 'Courier New', monospace;
+  letter-spacing: -.01em;
+}
+.label {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+
+/* ─── LAYOUT ────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 48px;
+}
+@media (max-width: 768px) { .container { padding: 0 24px; } }
+
+/* ─── NAV ───────────────────────────────────────── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 22px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba(244,239,232,.06);
+  background: rgba(14,12,10,.85);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+.nav-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.05rem;
+  color: var(--paper);
+  letter-spacing: -.01em;
+  text-decoration: none;
+}
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fog);
+  text-decoration: none;
+  transition: color .25s;
+}
+.nav-links a:hover { color: var(--sand); }
+@media (max-width: 600px) { .nav-links { display: none; } }
+
+/* ─── HERO ───────────────────────────────────────── */
+#hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding-top: 80px;
+  padding-bottom: 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(155,111,69,.08) 0%, transparent 70%),
+    radial-gradient(ellipse 50% 80% at 20% 80%, rgba(200,169,126,.05) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-rule {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, transparent, var(--sand));
+  margin-bottom: 40px;
+  opacity: .5;
+}
+
+.hero-eyebrow {
+  margin-bottom: 28px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.hero-eyebrow .dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--sand);
+  flex-shrink: 0;
+}
+
+.hero-title {
+  font-size: clamp(3.5rem, 9vw, 7.5rem);
+  color: var(--paper);
+  margin-bottom: 32px;
+  max-width: 900px;
+}
+
+.hero-title .light-word {
+  color: var(--sand);
+}
+
+.hero-sub {
+  max-width: 520px;
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--fog);
+  margin-bottom: 52px;
+  font-style: italic;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 48px;
+  padding-top: 40px;
+  border-top: 1px solid var(--rule);
+}
+.hero-stat .n {
+  font-family: 'DM Serif Display', serif;
+  font-size: 2.4rem;
+  color: var(--paper);
+  line-height: 1;
+  letter-spacing: -.02em;
+}
+.hero-stat .n em { color: var(--sand); font-style: normal; }
+.hero-stat .l { font-family: 'DM Mono', monospace; font-size: .58rem; letter-spacing: .18em; text-transform: uppercase; color: var(--mist); margin-top: 6px; }
+
+.hero-cta {
+  margin-top: 40px;
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.btn {
+  font-family: 'DM Mono', monospace;
+  font-size: .62rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 14px 28px;
+  border: 1px solid;
+  transition: all .25s ease;
+  display: inline-block;
+}
+.btn-primary {
+  background: var(--sand);
+  color: var(--ink);
+  border-color: var(--sand);
+}
+.btn-primary:hover { background: var(--clay); border-color: var(--clay); }
+.btn-ghost {
+  background: transparent;
+  color: var(--fog);
+  border-color: rgba(244,239,232,.15);
+}
+.btn-ghost:hover { color: var(--paper); border-color: rgba(244,239,232,.4); }
+
+/* ─── SECTION BASE ──────────────────────────────── */
+section { padding: 100px 0; }
+section + section { border-top: 1px solid var(--rule-light); }
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 24px;
+  margin-bottom: 64px;
+}
+.section-header .label { flex-shrink: 0; }
+.section-header hr { flex: 1; border: none; border-top: 1px solid var(--rule); }
+
+/* ─── ABOUT ─────────────────────────────────────── */
+#about .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+@media (max-width: 768px) { #about .grid { grid-template-columns: 1fr; gap: 48px; } }
+
+.about-text h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1.1;
+  color: var(--paper);
+  margin-bottom: 24px;
+  letter-spacing: -.02em;
+}
+.about-text h2 em { font-style: italic; color: var(--sand); }
+
+.about-text p {
+  font-size: .97rem;
+  color: var(--fog);
+  margin-bottom: 20px;
+  line-height: 1.85;
+}
+.about-text p strong { color: var(--paper); font-weight: 500; }
+
+.about-aside {
+  padding-top: 8px;
+}
+.aside-block {
+  padding: 24px 0;
+  border-top: 1px solid var(--rule);
+}
+.aside-block:last-child { border-bottom: 1px solid var(--rule); }
+.aside-block .label { margin-bottom: 10px; display: block; }
+.aside-block p {
+  font-size: .88rem;
+  color: var(--fog);
+  line-height: 1.7;
+}
+.aside-block strong { color: var(--paper); font-weight: 500; }
+
+/* ─── TIMELINE ──────────────────────────────────── */
+#trajectory .entries { display: flex; flex-direction: column; gap: 0; }
+
+.entry {
+  display: grid;
+  grid-template-columns: 180px 1px 1fr;
+  gap: 0 40px;
+  padding: 48px 0;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity .6s ease, transform .6s ease;
+}
+.entry.visible { opacity: 1; transform: translateY(0); }
+
+.entry-time {
+  text-align: right;
+  padding-top: 4px;
+}
+.entry-time .year {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.5rem;
+  color: var(--paper);
+  display: block;
+  letter-spacing: -.02em;
+}
+.entry-time .span {
+  font-family: 'DM Mono', monospace;
+  font-size: .55rem;
+  letter-spacing: .15em;
+  color: var(--mist);
+  text-transform: uppercase;
+  display: block;
+  margin-top: 4px;
+}
+
+.entry-line {
+  width: 1px;
+  background: var(--rule);
+  position: relative;
+  flex-shrink: 0;
+}
+.entry-line::before {
+  content: '';
+  width: 9px; height: 9px;
+  border-radius: 50%;
+  background: var(--sand);
+  position: absolute;
+  top: 8px;
+  left: 50%;
+  transform: translateX(-50%);
+  box-shadow: 0 0 0 3px rgba(200,169,126,.15);
+}
+
+.entry-body { padding-top: 4px; }
+.entry-body .role {
+  font-family: 'DM Mono', monospace;
+  font-size: .6rem;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--sand);
+  margin-bottom: 6px;
+}
+.entry-body h3 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.55rem;
+  color: var(--paper);
+  margin-bottom: 4px;
+  letter-spacing: -.02em;
+}
+.entry-body .company-note {
+  font-style: italic;
+  font-size: .82rem;
+  color: var(--mist);
+  margin-bottom: 18px;
+}
+.entry-body p {
+  font-size: .9rem;
+  color: var(--fog);
+  line-height: 1.85;
+  margin-bottom: 12px;
+}
+.entry-body p strong { color: var(--paper); font-weight: 500; }
+
+.entry-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 20px;
+}
+.tag {
+  font-family: 'DM Mono', monospace;
+  font-size: .52rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border: 1px solid rgba(200,169,126,.2);
+  color: rgba(200,169,126,.6);
+  border-radius: 1px;
+}
+
+.entry-highlight {
+  margin-top: 20px;
+  padding: 16px 20px;
+  border-left: 2px solid var(--sand);
+  background: rgba(200,169,126,.04);
+}
+.entry-highlight p {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  color: var(--sand);
+  margin: 0;
+  letter-spacing: .02em;
+}
+
+@media (max-width: 768px) {
+  .entry { grid-template-columns: 1fr; gap: 12px; }
+  .entry-time { text-align: left; }
+  .entry-line { display: none; }
+}
+
+/* ─── COMPETENCIES ──────────────────────────────── */
+#competencies .grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+@media (max-width: 768px) { #competencies .grid { grid-template-columns: 1fr; } }
+
+.comp-cell {
+  background: var(--ink);
+  padding: 36px 32px;
+  transition: background .25s;
+}
+.comp-cell:hover { background: var(--ink-soft); }
+.comp-cell .icon {
+  width: 32px; height: 32px;
+  border: 1px solid rgba(200,169,126,.2);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  font-family: 'DM Mono', monospace;
+  font-size: .65rem;
+  color: var(--sand);
+}
+.comp-cell h4 {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.15rem;
+  color: var(--paper);
+  margin-bottom: 10px;
+  letter-spacing: -.01em;
+}
+.comp-cell p {
+  font-size: .82rem;
+  color: var(--fog);
+  line-height: 1.75;
+}
+.comp-cell .stack {
+  margin-top: 16px;
+  font-family: 'DM Mono', monospace;
+  font-size: .56rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--mist);
+  line-height: 2;
+}
+
+/* ─── AWARDS ────────────────────────────────────── */
+#awards .list {
+  display: flex;
+  flex-direction: column;
+}
+.award-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule-light);
+  opacity: 0;
+  transform: translateX(-12px);
+  transition: opacity .5s ease, transform .5s ease;
+}
+.award-row.visible { opacity: 1; transform: translateX(0); }
+.award-row:first-child { border-top: 1px solid var(--rule-light); }
+.award-name {
+  font-family: 'DM Serif Display', serif;
+  font-size: 1.1rem;
+  color: var(--paper);
+  letter-spacing: -.01em;
+}
+.award-meta {
+  font-family: 'DM Mono', monospace;
+  font-size: .56rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: var(--mist);
+  white-space: nowrap;
+}
+.award-place {
+  font-family: 'DM Mono', monospace;
+  font-size: .7rem;
+  color: var(--sand);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ─── IDENTITY ──────────────────────────────────── */
+#identity {
+  background: var(--ink-soft);
+  border-top: 1px solid var(--rule-light);
+  border-bottom: 1px solid var(--rule-light);
+}
+#identity .inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+@media (max-width: 768px) { #identity .inner { grid-template-columns: 1fr; gap: 48px; } }
+
+.identity-quote {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+  font-style: italic;
+  line-height: 1.3;
+  color: var(--paper);
+  letter-spacing: -.02em;
+  position: relative;
+  padding-left: 24px;
+}
+.identity-quote::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 6px;
+  width: 3px;
+  height: calc(100% - 12px);
+  background: var(--sand);
+}
+.identity-quote em { color: var(--sand); }
+
+.identity-details { display: flex; flex-direction: column; gap: 28px; }
+.id-item .label { margin-bottom: 6px; display: block; }
+.id-item p {
+  font-size: .88rem;
+  color: var(--fog);
+  line-height: 1.7;
+}
+.id-item strong { color: var(--paper); font-weight: 500; }
+
+/* ─── CONTACT ───────────────────────────────────── */
+#contact {
+  text-align: center;
+  padding: 120px 0;
+}
+#contact h2 {
+  font-family: 'DM Serif Display', serif;
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  color: var(--paper);
+  letter-spacing: -.03em;
+  margin-bottom: 20px;
+}
+#contact h2 em { color: var(--sand); font-style: italic; }
+#contact p {
+  font-size: .95rem;
+  color: var(--fog);
+  font-style: italic;
+  margin-bottom: 48px;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.75;
+}
+.contact-links {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* ─── FOOTER ────────────────────────────────────── */
+footer {
+  padding: 32px 48px;
+  border-top: 1px solid var(--rule-light);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+footer .copy {
+  font-family: 'DM Mono', monospace;
+  font-size: .56rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--mist);
+}
+footer .loc {
+  font-family: 'DM Mono', monospace;
+  font-size: .56rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--mist);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+footer .loc::before {
+  content: '';
+  width: 5px; height: 5px;
+  border-radius: 50%;
+  background: var(--sand);
+  opacity: .5;
+}
+
+/* ─── SCROLL REVEAL ─────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+</style>
 </head>
+<body>
 
-<body class="loading">
-	<div id="wrapper">
-		<div id="bg"></div>
-		<div id="overlay"></div>
-		<div id="main">
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-name">Diego Dulval</a>
+  <ul class="nav-links">
+    <li><a href="#about">Sobre</a></li>
+    <li><a href="#trajectory">Trajetória</a></li>
+    <li><a href="#competencies">Competências</a></li>
+    <li><a href="#contact">Contato</a></li>
+  </ul>
+</nav>
 
-			<!-- Header -->
-			<header id="header">
-				<span class="eyebrow">Available for freelance and remote projects</span>
-				<h1>Diego Dulval</h1>
-				<p class="tagline">Full-Stack Developer &nbsp;&bull;&nbsp; Web Product Builder &nbsp;&bull;&nbsp; UI-Focused Engineering</p>
-				<p class="summary">I design and build fast, reliable web experiences with clean architecture and a product mindset that turns ideas into results.</p>
-				<ul class="quick-actions">
-					<li><a href="mailto:diego@dulval.com">Let's Talk</a></li>
-					<li><a href="https://github.com/diegodulval" target="_blank" rel="noopener noreferrer">See Projects</a></li>
-				</ul>
-				<nav>
-					<ul>
-						<li><a href="https://twitter.com/DiegoDulval" class="icon fa-twitter" target="_blank" rel="noopener noreferrer" aria-label="Twitter profile"><span class="label">Twitter</span></a></li>
-						<li><a href="https://www.facebook.com/profile.php?id=100010410877060" class="icon fa-facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook profile"><span class="label">Facebook</span></a></li>
-						<li><a href="https://github.com/diegodulval" class="icon fa-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile"><span class="label">GitHub</span></a></li>
-						<li><a href="mailto:diego@dulval.com" class="icon fa-envelope" aria-label="Send email"><span class="label">Email</span></a></li>
-					</ul>
-				</nav>
-			</header>
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="container">
+    <div class="hero-rule"></div>
 
-			<!-- Footer -->
-			<footer id="footer">
-				<span class="copyright">Contact: <a href="mailto:diego@dulval.com">diego@dulval.com</a></span>
-			</footer>
+    <div class="hero-eyebrow reveal">
+      <span class="dot"></span>
+      <span class="label">Borda da Mata · Minas Gerais · Brasil</span>
+    </div>
 
-		</div>
-	</div>
-	<!--[if lte IE 8]><script src="assets/js/ie/respond.min.js"></script><![endif]-->
-	<script>
-		window.onload = function () { document.body.className = ''; }
-		window.onorientationchange = function () { document.body.scrollTop = 0; }
-	</script>
+    <h1 class="display hero-title reveal" style="transition-delay:.1s">
+      Construtor<br>
+      de <span class="light-word">sistemas</span><br>
+      reais.
+    </h1>
+
+    <p class="hero-sub reveal" style="transition-delay:.2s">
+      Quinze anos levando produtos do zero à escala. Do código à arquitetura,
+      da estratégia à operação em produção. Não teoria — entrega.
+    </p>
+
+    <div class="hero-cta reveal" style="transition-delay:.3s">
+      <a href="#trajectory" class="btn btn-primary">Ver trajetória</a>
+      <a href="#contact" class="btn btn-ghost">Entrar em contato</a>
+    </div>
+
+    <div class="hero-stats reveal" style="transition-delay:.4s">
+      <div class="hero-stat">
+        <span class="n">15<em>+</em></span>
+        <span class="l">anos de experiência</span>
+      </div>
+      <div class="hero-stat">
+        <span class="n">60<em>M+</em></span>
+        <span class="l">TPV mensal na Noh</span>
+      </div>
+      <div class="hero-stat">
+        <span class="n">0<em>→1</em></span>
+        <span class="l">produtos fundados</span>
+      </div>
+      <div class="hero-stat">
+        <span class="n">F<em>100</em></span>
+        <span class="l">clientes atendidos</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">01 — Sobre</span>
+      <hr>
+    </div>
+    <div class="grid">
+      <div class="about-text reveal">
+        <h2>Além do<br><em>desenvolvimento</em><br>tradicional.</h2>
+        <p>Diego Dulval é um engenheiro sênior cujo trabalho vai além de escrever código. Ele <strong>constrói operações tecnológicas completas</strong> — sistemas que nascem de uma ideia, escalam sob pressão e sustentam negócios reais.</p>
+        <p>Com domínio em arquitetura distribuída, desenvolvimento mobile, integrações complexas e aplicação prática de inteligência artificial, transita com naturalidade entre o nível técnico mais profundo e as decisões estratégicas que moldam um produto.</p>
+        <p>Foi <strong>founding engineer</strong>, CTO fundador, tech lead e AI engineer. Em cada papel, o mesmo compromisso: <em>sistemas que funcionam em produção, não em apresentações</em>.</p>
+      </div>
+      <div class="about-aside reveal" style="transition-delay:.15s">
+        <div class="aside-block">
+          <span class="label">Formação</span>
+          <p><strong>MBA em Data Science e Analytics</strong> — USP/Esalq (2020–2022)<br>Bacharelado em Sistemas de Informação — FAI (2014–2017)</p>
+        </div>
+        <div class="aside-block">
+          <span class="label">Perfil técnico</span>
+          <p>Backend · Mobile Flutter · Arquitetura distribuída · AI/ML aplicado · DevOps · Integrações de pagamento · Observabilidade · On-call em produção</p>
+        </div>
+        <div class="aside-block">
+          <span class="label">Idiomas</span>
+          <p><strong>Português</strong> nativo · <strong>Inglês</strong> profissional · Espanhol básico</p>
+        </div>
+        <div class="aside-block">
+          <span class="label">Certificações</span>
+          <p>Scrum Foundation Professional · Cisco Networking Academy · Infra ágil com DevOps</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRAJECTORY -->
+<section id="trajectory">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">02 — Trajetória</span>
+      <hr>
+    </div>
+
+    <div class="entries">
+
+      <div class="entry">
+        <div class="entry-time">
+          <span class="year">2022</span>
+          <span class="span">4 anos</span>
+        </div>
+        <div class="entry-line"></div>
+        <div class="entry-body">
+          <div class="role">Founding Staff Software Engineer</div>
+          <h3>Noh</h3>
+          <p class="company-note">Fintech · São Paulo, Brasil</p>
+          <p>Construiu a plataforma inteira do <strong>zero até +60M de TPV mensal</strong>. Responsável por decisões críticas de arquitetura, garantindo escalabilidade, observabilidade e resiliência ao longo do crescimento.</p>
+          <p>Liderou o backend, o desenvolvimento mobile com <strong>Flutter</strong>, as integrações com Apple Pay e Google Pay, e a criação das ferramentas internas que sustentam a operação. Atuou como on-call, com responsabilidade direta sobre a estabilidade em produção.</p>
+          <p>Trabalhou em contato direto com produto e negócio na definição de backlog, garantindo que as decisões técnicas estivessem alinhadas ao crescimento da empresa.</p>
+          <div class="entry-highlight">
+            <p>↗ R$ 60M+ de TPV mensal · Plataforma de zero à escala · Founding Engineer</p>
+          </div>
+          <div class="entry-tags">
+            <span class="tag">Flutter</span>
+            <span class="tag">Go</span>
+            <span class="tag">Firebase</span>
+            <span class="tag">Apple Pay</span>
+            <span class="tag">Google Pay</span>
+            <span class="tag">Arquitetura distribuída</span>
+            <span class="tag">Observabilidade</span>
+            <span class="tag">On-call</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-time">
+          <span class="year">2019</span>
+          <span class="span">2,5 anos</span>
+        </div>
+        <div class="entry-line"></div>
+        <div class="entry-body">
+          <div class="role">Tech Lead · AI Engineer</div>
+          <h3>Avenue Code</h3>
+          <p class="company-note">Consultoria global · Minas Gerais, Brasil</p>
+          <p>Atendeu clientes <strong>Fortune 100</strong> nos EUA, Brasil, Canadá e Europa em setores como fintech, healthcare, automotive e retail. Iniciou como Senior Software Engineer e progrediu para Tech Lead e AI Engineer em menos de dois anos.</p>
+          <p>Liderou decisões técnicas críticas em projetos de alta complexidade, aplicando <strong>inteligência artificial em contextos reais</strong> de produção — não em experimentos. Foco constante em impacto prático e eficiência operacional.</p>
+          <div class="entry-tags">
+            <span class="tag">Tech Lead</span>
+            <span class="tag">AI Engineering</span>
+            <span class="tag">Fortune 100</span>
+            <span class="tag">Fintech</span>
+            <span class="tag">Healthcare</span>
+            <span class="tag">Automotive</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-time">
+          <span class="year">2018</span>
+          <span class="span">2 anos</span>
+        </div>
+        <div class="entry-line"></div>
+        <div class="entry-body">
+          <div class="role">CTO Fundador · Arquiteto de Software</div>
+          <h3>Aurora Soluções Tecnológicas</h3>
+          <p class="company-note">Empresa própria · Santa Rita do Sapucaí, MG</p>
+          <p>Fundou e liderou tecnicamente uma empresa de produtos próprios, construindo três soluções com equipes enxutas:</p>
+          <p><strong>Gestão financeira pessoal</strong> — aplicação mobile completa para controle e educação financeira.</p>
+          <p><strong>IoT industrial</strong> — monitoramento em tempo real de temperatura, umidade, qualidade do ar e pressão em freezers, estoques, fornos e ambientes logísticos.</p>
+          <p><strong>Automação agropecuária</strong> — sistema de ativação remota de equipamentos de alimentação para animais confinados e pets.</p>
+          <div class="entry-tags">
+            <span class="tag">CTO Fundador</span>
+            <span class="tag">IoT</span>
+            <span class="tag">Sensores</span>
+            <span class="tag">Mobile</span>
+            <span class="tag">AgTech</span>
+            <span class="tag">Finanças pessoais</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-time">
+          <span class="year">2017</span>
+          <span class="span">2 anos</span>
+        </div>
+        <div class="entry-line"></div>
+        <div class="entry-body">
+          <div class="role">Software Engineer</div>
+          <h3>FAI Centro de Ensino</h3>
+          <p class="company-note">Santa Rita do Sapucaí, MG</p>
+          <p>Quatro projetos em contextos radicalmente diferentes — a melhor escola para um engenheiro generalista. <strong>Plataforma de manutenção preditiva</strong> para ativos industriais com alertas em tempo real. <strong>Sistema desktop</strong> para atualização de firmware em tablets e smartphones. <strong>LMS educacional</strong> com disciplinas, atividades e avaliações para estudantes de todas as idades. <strong>CRM pós-venda</strong> para fabricante de componentes eletrônicos.</p>
+          <div class="entry-tags">
+            <span class="tag">Indústria 4.0</span>
+            <span class="tag">Manutenção preditiva</span>
+            <span class="tag">LMS</span>
+            <span class="tag">EdTech</span>
+            <span class="tag">Desktop</span>
+            <span class="tag">Firmware</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="entry">
+        <div class="entry-time">
+          <span class="year">2015</span>
+          <span class="span">1 ano</span>
+        </div>
+        <div class="entry-line"></div>
+        <div class="entry-body">
+          <div class="role">Web Designer · Front-End Developer</div>
+          <h3>Citrox</h3>
+          <p class="company-note">Santa Rita do Sapucaí, MG</p>
+          <p>Onde o olhar para <strong>design e experiência do usuário</strong> se formou. Desenvolvimento de interfaces web e identidades digitais para clientes regionais, construindo a base visual e criativa que complementa o perfil técnico.</p>
+          <div class="entry-tags">
+            <span class="tag">Front-End</span>
+            <span class="tag">Web Design</span>
+            <span class="tag">HTML/CSS</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPETENCIES -->
+<section id="competencies">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">03 — Competências</span>
+      <hr>
+    </div>
+    <div class="grid">
+      <div class="comp-cell reveal">
+        <div class="icon">01</div>
+        <h4>Arquitetura de Sistemas</h4>
+        <p>Projeta sistemas distribuídos com foco em escalabilidade, resiliência e observabilidade. Experiência real levando plataformas de zero ao processamento de alto volume transacional.</p>
+        <div class="stack">Microserviços · Event-driven · APIs REST/gRPC · Mensageria</div>
+      </div>
+      <div class="comp-cell reveal" style="transition-delay:.08s">
+        <div class="icon">02</div>
+        <h4>Desenvolvimento Mobile</h4>
+        <p>Desenvolvimento cross-platform com Flutter para iOS e Android. Integrações nativas com Apple Pay, Google Pay e sistemas de pagamento complexos.</p>
+        <div class="stack">Flutter · Dart · Firebase · iOS · Android</div>
+      </div>
+      <div class="comp-cell reveal" style="transition-delay:.16s">
+        <div class="icon">03</div>
+        <h4>Inteligência Artificial Aplicada</h4>
+        <p>Aplicação de ML e AI em produtos reais, com foco em eficiência e impacto direto no negócio. Formação em Data Science pelo MBA USP/Esalq.</p>
+        <div class="stack">ML · LLMs · Data Science · Analytics · Python</div>
+      </div>
+      <div class="comp-cell reveal" style="transition-delay:.24s">
+        <div class="icon">04</div>
+        <h4>Liderança Técnica</h4>
+        <p>Atuação como founding engineer e tech lead em ambientes de alta pressão. Decisões técnicas que moldam o longo prazo de um produto, com proximidade ao produto e ao negócio.</p>
+        <div class="stack">Founding Eng. · Staff · Tech Lead · Backlog · On-call</div>
+      </div>
+      <div class="comp-cell reveal" style="transition-delay:.32s">
+        <div class="icon">05</div>
+        <h4>DevOps & Operações</h4>
+        <p>Práticas de engenharia que garantem estabilidade em produção: CI/CD, monitoramento, alertas e resposta a incidentes. Experiência como responsável direto pela disponibilidade do sistema.</p>
+        <div class="stack">Docker · Git · Jenkins · Puppet · Ansible · Rundeck</div>
+      </div>
+      <div class="comp-cell reveal" style="transition-delay:.4s">
+        <div class="icon">06</div>
+        <h4>IoT & Sistemas Embarcados</h4>
+        <p>Soluções de ponta a ponta para monitoramento e automação de ambientes físicos — industriais, agropecuários e domésticos. Hardware encontrando software.</p>
+        <div class="stack">Sensores · Protocolos IoT · Tempo real · Dashboards · Alertas</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- IDENTITY -->
+<section id="identity">
+  <div class="container">
+    <div class="inner">
+      <div class="identity-quote reveal">
+        A mesma dedicação de cuidar de uma lavoura de café — paciência, ciclo longo, resultado que aparece no tempo certo — está em <em>cada sistema que constrói.</em>
+      </div>
+      <div class="identity-details">
+        <div class="id-item reveal" style="transition-delay:.1s">
+          <span class="label">Onde vive</span>
+          <p><strong>Borda da Mata, Minas Gerais</strong> — no meio das montanhas do Sul de Minas. Longe dos centros, perto do que importa.</p>
+        </div>
+        <div class="id-item reveal" style="transition-delay:.18s">
+          <span class="label">Além do código</span>
+          <p>Produtor de <strong>café especial</strong>. O mesmo cuidado com o processo, a mesma atenção ao detalhe que define um bom sistema define uma boa safra.</p>
+        </div>
+        <div class="id-item reveal" style="transition-delay:.26s">
+          <span class="label">Filosofia de trabalho</span>
+          <p>Simples na forma. Profundo na essência. Constrói para durar — não para impressionar em demo.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AWARDS -->
+<section id="awards">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="label">04 — Reconhecimentos</span>
+      <hr>
+    </div>
+    <div class="list">
+      <div class="award-row">
+        <span class="award-name">Startup Weekend Inatel</span>
+        <span class="award-meta">Inatel · Santa Rita do Sapucaí · 2014</span>
+        <span class="award-place">2º lugar</span>
+      </div>
+      <div class="award-row">
+        <span class="award-name">Prêmio Municipal de Inovação</span>
+        <span class="award-meta">Santa Rita do Sapucaí · Vale da Eletrônica</span>
+        <span class="award-place">Vencedor</span>
+      </div>
+      <div class="award-row">
+        <span class="award-name">Maratona de Programação</span>
+        <span class="award-meta">FAI Centro de Ensino Superior</span>
+        <span class="award-place">1º lugar</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <h2 class="display reveal">Vamos <em>conversar?</em></h2>
+    <p class="reveal" style="transition-delay:.1s">Aberto a projetos, desafios técnicos e conversas sobre construir coisas que duram.</p>
+    <div class="contact-links reveal" style="transition-delay:.2s">
+      <a href="mailto:diegodifreitas@gmail.com" class="btn btn-primary">diegodifreitas@gmail.com</a>
+      <a href="https://linkedin.com/in/diegodulval" target="_blank" class="btn btn-ghost">LinkedIn</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="copy">© 2025 Diego Dulval</span>
+  <span class="loc">Borda da Mata · Minas Gerais · Brasil</span>
+</footer>
+
+<script>
+// ── SCROLL REVEAL ──────────────────────────────────────────────────────
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.reveal, .entry, .award-row').forEach(el => observer.observe(el));
+
+// ── STAGGER ENTRIES ────────────────────────────────────────────────────
+document.querySelectorAll('.entry').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.08) + 's';
+});
+document.querySelectorAll('.award-row').forEach((el, i) => {
+  el.style.transitionDelay = (i * 0.07) + 's';
+});
+
+// ── NAV ACTIVE ON SCROLL ───────────────────────────────────────────────
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => a.style.color = '');
+      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      if (link) link.style.color = '#c8a97e';
+    }
+  });
+}, { threshold: 0.5 });
+sections.forEach(s => navObserver.observe(s));
+
+// ── SMOOTH NAV ─────────────────────────────────────────────────────────
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
 </body>
-
 </html>
