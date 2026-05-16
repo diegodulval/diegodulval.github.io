@@ -1,846 +1,818 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Diego Dulval</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=IBM+Plex+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
-<style>
-:root {
-  --bg:    #0b0b0b;
-  --bg2:   #111110;
-  --line:  rgba(255,255,255,.07);
-  --text:  #d8d4ce;
-  --dim:   #5a5650;
-  --amber: #c8955a;
-  --white: #f0ece6;
-}
-
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { font-size: 16px; scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: 'IBM Plex Sans', sans-serif;
-  font-weight: 300;
-  overflow-x: hidden;
-}
-
-/* ── GRAIN ── */
-body::before {
-  content: '';
-  position: fixed; inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none; z-index: 9000; opacity: .55;
-}
-
-/* ── LAYOUT ── */
-.wrap { max-width: 960px; margin: 0 auto; padding: 0 40px; }
-@media(max-width:600px){ .wrap { padding: 0 20px; } }
-
-/* ── NAV ── */
-nav {
-  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  padding: 18px 40px;
-  display: flex; justify-content: space-between; align-items: center;
-  border-bottom: 1px solid var(--line);
-  background: rgba(11,11,11,.9);
-  backdrop-filter: blur(12px);
-}
-.nav-id {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.1rem;
-  letter-spacing: .08em;
-  color: var(--white);
-}
-.nav-id span { color: var(--amber); }
-.nav-right {
-  display: flex; gap: 28px; align-items: center;
-}
-.nav-right a {
-  font-size: .65rem; letter-spacing: .18em; text-transform: uppercase;
-  color: var(--dim); text-decoration: none; transition: color .2s;
-}
-.nav-right a:hover { color: var(--amber); }
-
-/* ── HERO ── */
-#hero {
-  padding-top: 120px;
-  padding-bottom: 80px;
-  border-bottom: 1px solid var(--line);
-}
-
-.hero-grid {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 60px;
-  align-items: end;
-}
-@media(max-width:680px){ .hero-grid { grid-template-columns: 1fr; gap: 40px; } }
-
-.hero-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(5rem, 13vw, 11rem);
-  line-height: .88;
-  letter-spacing: .01em;
-  color: var(--white);
-}
-.hero-name .line2 { color: var(--amber); }
-
-.hero-meta {
-  display: flex; flex-direction: column; gap: 6px;
-  align-items: flex-end;
-  padding-bottom: 10px;
-}
-@media(max-width:680px){ .hero-meta { align-items: flex-start; } }
-
-.hero-role {
-  font-size: .7rem; letter-spacing: .2em; text-transform: uppercase;
-  color: var(--dim);
-}
-.hero-loc {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic; font-size: 1rem;
-  color: var(--dim);
-}
-
-/* ── NUMBERS BAR ── */
-.numbers {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  margin: 0;
-}
-@media(max-width:600px){ .numbers { grid-template-columns: repeat(2,1fr); } }
-
-.num-cell {
-  padding: 32px 0;
-  border-right: 1px solid var(--line);
-  text-align: center;
-}
-.num-cell:last-child { border-right: none; }
-
-.num-val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 2.6rem;
-  font-weight: 300;
-  color: var(--white);
-  line-height: 1;
-  display: block;
-}
-.num-val em {
-  font-style: italic;
-  color: var(--amber);
-  font-size: 2rem;
-}
-.num-label {
-  display: block;
-  font-size: .55rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: var(--dim);
-  margin-top: 8px;
-}
-
-/* ── SECTIONS ── */
-section { border-bottom: 1px solid var(--line); }
-
-.section-inner {
-  display: grid;
-  grid-template-columns: 160px 1fr;
-  gap: 48px;
-  padding: 64px 0;
-  align-items: start;
-}
-@media(max-width:680px){ .section-inner { grid-template-columns: 1fr; gap: 24px; padding: 48px 0; } }
-
-.section-label {
-  font-size: .58rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: var(--dim);
-  padding-top: 4px;
-  position: sticky;
-  top: 68px;
-}
-
-/* ── ABOUT ── */
-.about-headline {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2rem, 5vw, 3.4rem);
-  line-height: .95;
-  letter-spacing: .03em;
-  color: var(--white);
-  margin-bottom: 24px;
-}
-.about-body {
-  font-size: .9rem;
-  line-height: 1.8;
-  color: var(--text);
-  max-width: 580px;
-  margin-bottom: 32px;
-}
-.about-pills {
-  display: flex; flex-wrap: wrap; gap: 8px;
-}
-.pill {
-  font-size: .58rem;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 5px 11px;
-  border: 1px solid var(--line);
-  color: var(--dim);
-  border-radius: 1px;
-}
-
-/* ── TIMELINE / ACCORDION ── */
-.timeline { display: flex; flex-direction: column; }
-
-.t-row {
-  border-top: 1px solid var(--line);
-  cursor: pointer;
-  transition: background .2s;
-}
-.t-row:hover { background: rgba(255,255,255,.015); }
-.t-row:last-child { border-bottom: 1px solid var(--line); }
-
-.t-head {
-  display: grid;
-  grid-template-columns: 80px 1fr auto 32px;
-  gap: 24px;
-  align-items: center;
-  padding: 22px 0;
-  user-select: none;
-}
-@media(max-width:600px){
-  .t-head { grid-template-columns: 60px 1fr 20px; gap: 12px; }
-  .t-head .t-role { display: none; }
-}
-
-.t-year {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: var(--dim);
-  line-height: 1;
-}
-.t-row.open .t-year { color: var(--amber); }
-
-.t-company {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.3rem;
-  letter-spacing: .05em;
-  color: var(--white);
-}
-
-.t-role {
-  font-size: .6rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--dim);
-  text-align: right;
-}
-
-.t-icon {
-  width: 20px; height: 20px;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0;
-  transition: border-color .25s, transform .3s;
-}
-.t-icon::after {
-  content: '+';
-  font-size: .7rem;
-  color: var(--dim);
-  transition: color .25s;
-  line-height: 1;
-}
-.t-row.open .t-icon {
-  border-color: var(--amber);
-  transform: rotate(45deg);
-}
-.t-row.open .t-icon::after { color: var(--amber); }
-
-.t-body {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height .4s cubic-bezier(.4,0,.2,1);
-}
-.t-body-inner {
-  padding: 0 0 32px 104px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 40px;
-}
-@media(max-width:680px){ .t-body-inner { grid-template-columns: 1fr; padding: 0 0 28px 0; } }
-
-.t-desc {
-  font-size: .88rem;
-  line-height: 1.85;
-  color: var(--text);
-  max-width: 500px;
-}
-
-.t-aside { display: flex; flex-direction: column; gap: 20px; min-width: 160px; }
-
-.t-stat .val {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.6rem;
-  font-weight: 300;
-  color: var(--white);
-  display: block; line-height: 1;
-}
-.t-stat .val em { font-style: italic; color: var(--amber); }
-.t-stat .lbl {
-  font-size: .53rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--dim); display: block; margin-top: 4px;
-}
-
-.t-tags {
-  display: flex; flex-wrap: wrap; gap: 5px;
-  margin-top: 16px;
-}
-.t-tag {
-  font-size: .52rem; letter-spacing: .1em; text-transform: uppercase;
-  padding: 3px 8px;
-  border: 1px solid rgba(200,149,90,.18);
-  color: rgba(200,149,90,.55);
-}
-
-/* ── SKILLS ── */
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1px;
-  background: var(--line);
-  border: 1px solid var(--line);
-}
-@media(max-width:500px){ .skills-grid { grid-template-columns: 1fr; } }
-
-.sk-cell {
-  background: var(--bg);
-  padding: 28px 24px;
-  transition: background .2s;
-}
-.sk-cell:hover { background: var(--bg2); }
-.sk-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: .05em;
-  color: var(--white);
-  margin-bottom: 8px;
-}
-.sk-desc {
-  font-size: .78rem;
-  line-height: 1.7;
-  color: var(--dim);
-}
-
-/* ── IDENTITY STRIP ── */
-.identity-strip {
-  background: var(--bg2);
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-  padding: 48px 0;
-}
-.identity-quote {
-  font-family: 'Cormorant Garamond', serif;
-  font-style: italic;
-  font-size: clamp(1.3rem, 3vw, 1.8rem);
-  font-weight: 300;
-  color: var(--text);
-  line-height: 1.5;
-  max-width: 640px;
-}
-.identity-quote em { color: var(--white); font-style: normal; }
-.identity-sub {
-  margin-top: 12px;
-  font-size: .65rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--dim);
-}
-
-/* ── AWARDS ── */
-.awards-list { display: flex; flex-direction: column; }
-.award {
-  display: flex; justify-content: space-between; align-items: baseline;
-  gap: 20px; padding: 18px 0;
-  border-top: 1px solid var(--line);
-  opacity: 0; transform: translateX(-8px);
-  transition: opacity .5s, transform .5s;
-}
-.award:last-child { border-bottom: 1px solid var(--line); }
-.award.visible { opacity: 1; transform: none; }
-.award-name {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: .04em;
-  color: var(--white);
-}
-.award-info {
-  font-size: .6rem; letter-spacing: .12em; text-transform: uppercase;
-  color: var(--dim); text-align: right;
-}
-.award-place {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 1.1rem;
-  font-style: italic;
-  color: var(--amber);
-  white-space: nowrap;
-}
-
-/* ── CONTACT ── */
-#contact {
-  padding: 80px 0;
-  border-top: 1px solid var(--line);
-}
-.contact-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-.contact-head {
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(2.5rem, 7vw, 5rem);
-  letter-spacing: .03em;
-  color: var(--white);
-  line-height: .9;
-}
-.contact-head span { color: var(--amber); }
-.contact-links { display: flex; flex-direction: column; gap: 12px; align-items: flex-end; }
-@media(max-width:500px){ .contact-links { align-items: flex-start; } }
-
-.contact-link {
-  display: flex; align-items: center; gap: 10px;
-  text-decoration: none;
-  font-size: .65rem; letter-spacing: .16em; text-transform: uppercase;
-  color: var(--dim);
-  transition: color .2s;
-}
-.contact-link:hover { color: var(--amber); }
-.contact-link::before {
-  content: '→';
-  color: var(--amber);
-  opacity: 0;
-  transform: translateX(-4px);
-  transition: opacity .2s, transform .2s;
-}
-.contact-link:hover::before { opacity: 1; transform: none; }
-
-/* ── FOOTER ── */
-footer {
-  padding: 20px 40px;
-  border-top: 1px solid var(--line);
-  display: flex; justify-content: space-between;
-}
-footer span {
-  font-size: .53rem; letter-spacing: .14em;
-  text-transform: uppercase; color: var(--dim);
-}
-
-/* ── REVEAL ── */
-.reveal { opacity: 0; transform: translateY(14px); transition: opacity .6s ease, transform .6s ease; }
-.reveal.visible { opacity: 1; transform: none; }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dulval — Senior/AI Software Engineer</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    if (localStorage.getItem('theme') === 'dark') document.body && document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    });
+  </script>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <div class="nav-id">Diego<span>.</span></div>
-  <div class="nav-right">
-    <a href="#trajectory">Trajetória</a>
-    <a href="#contact">Contato</a>
-    <a href="https://linkedin.com/in/diegodulval" target="_blank">LinkedIn ↗</a>
+  <div id="hero-loader" aria-hidden="true">
+    <span class="loader-text">CARREGANDO</span>
+    <span class="loader-sub">[ INIT · SYS.LOAD ]</span>
   </div>
-</nav>
 
-<!-- HERO -->
-<div class="wrap">
   <section id="hero">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-name reveal">
-          <div>Diego</div>
-          <div class="line2">Dulval</div>
+    <video id="hero-video" src="assets/web/me.mp4" autoplay muted playsinline preload="auto" aria-hidden="true"></video>
+    <div class="hero-overlay"></div>
+    <div class="hud-grid" aria-hidden="true"></div>
+
+    <!-- Contour lines -->
+    <svg class="hud-contours" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+      <g class="cg cg1"><path class="contour-line cl1" d="M-100,620 Q180,545 420,592 T840,568 T1200,508 T1540,548"/></g>
+      <g class="cg cg2"><path class="contour-line cl2" d="M-100,660 Q220,590 460,628 T900,606 T1220,550 T1540,588"/></g>
+      <g class="cg cg3"><path class="contour-line cl3" d="M-100,700 Q260,638 500,672 T940,650 T1240,594 T1540,628"/></g>
+      <g class="cg cg4"><path class="contour-line cl4" d="M-100,580 Q160,510 380,558 T800,535 T1180,466 T1540,510"/></g>
+      <g class="cg cg5"><path class="contour-line cl5" d="M-100,740 Q300,682 540,716 T960,695 T1260,642 T1540,672"/></g>
+      <g class="cg cg6"><path class="contour-line cl6" d="M-100,540 Q140,474 360,520 T760,498 T1160,428 T1540,472"/></g>
+      <!-- Crossing structural lines -->
+      <line class="hud-line-diag" x1="0" y1="280" x2="360" y2="0"/>
+      <line class="hud-line-diag" x1="1440" y1="200" x2="1080" y2="0"/>
+      <line class="hud-line-vert" x1="300" y1="0" x2="300" y2="900"/>
+      <!-- HUD cross targets -->
+      <g class="hud-cross-group" transform="translate(300,240)">
+        <line x1="-16" y1="0" x2="-6" y2="0"/>
+        <line x1="6" y1="0" x2="16" y2="0"/>
+        <line x1="0" y1="-16" x2="0" y2="-6"/>
+        <line x1="0" y1="6" x2="0" y2="16"/>
+        <circle r="22" fill="none"/>
+      </g>
+      <g class="hud-cross-group" transform="translate(920,390)">
+        <line x1="-10" y1="0" x2="-4" y2="0"/>
+        <line x1="4" y1="0" x2="10" y2="0"/>
+        <line x1="0" y1="-10" x2="0" y2="-4"/>
+        <line x1="0" y1="4" x2="0" y2="10"/>
+        <circle r="14" fill="none"/>
+      </g>
+      <!-- Data connector lines -->
+      <line class="hud-connector" x1="322" y1="240" x2="430" y2="240"/>
+      <line class="hud-connector" x1="430" y1="240" x2="430" y2="268"/>
+      <line class="hud-connector" x1="430" y1="268" x2="520" y2="268"/>
+      <!-- Bottom horizontal ruler -->
+      <line class="hud-ruler" x1="0" y1="860" x2="1440" y2="860"/>
+      <line class="hud-ruler-tick" x1="360" y1="852" x2="360" y2="860"/>
+      <line class="hud-ruler-tick" x1="720" y1="848" x2="720" y2="860"/>
+      <line class="hud-ruler-tick" x1="1080" y1="852" x2="1080" y2="860"/>
+    </svg>
+
+    <!-- Scanning line -->
+    <div class="hud-scan" aria-hidden="true"></div>
+
+    <!-- Corner frames -->
+    <div class="hud-corner hud-corner--tl" aria-hidden="true"></div>
+    <div class="hud-corner hud-corner--tr" aria-hidden="true"></div>
+    <div class="hud-corner hud-corner--bl" aria-hidden="true"></div>
+    <div class="hud-corner hud-corner--br" aria-hidden="true"></div>
+
+    <!-- HUD status overlays -->
+    <div class="hud-status hud-status--tl" aria-hidden="true">
+      <span class="hud-dot"></span>
+      <span class="hud-label">SYS.ONLINE</span>
+    </div>
+    <div class="hud-status hud-status--tr" aria-hidden="true">
+      <span class="hud-label">19°37'S 46°09'W</span>
+      <span class="hud-sublabel">BORDA DA MATA · MG</span>
+    </div>
+    <div class="hud-status hud-status--br" aria-hidden="true">
+      <span class="hud-label">2026.v3</span>
+    </div>
+
+    <!-- Particles -->
+    <div class="hud-particles" aria-hidden="true">
+      <span class="particle p1"></span><span class="particle p2"></span>
+      <span class="particle p3"></span><span class="particle p4"></span>
+      <span class="particle p5"></span><span class="particle p6"></span>
+      <span class="particle p7"></span><span class="particle p8"></span>
+    </div>
+
+    <div class="container">
+      <div class="hero-content" id="hero-content">
+        <div class="hero-eyebrow">
+          <span class="hud-bracket">[</span>
+          <span>software engineer · ai · founder</span>
+          <span class="hud-bracket">]</span>
         </div>
-      </div>
-      <div class="hero-meta reveal" style="transition-delay:.1s">
-        <span class="hero-role">Senior Engineer · AI Engineer</span>
-        <span class="hero-loc">Minas Gerais, Brasil</span>
+        <div class="hero-identity">
+          <div class="hero-firstname-row">
+            <img src="assets/logo.png" class="hero-logo" alt="" aria-hidden="true">
+            <span class="hero-firstname">Diego</span>
+          </div>
+          <h1 class="hero-lastname">Dulval</h1>
+        </div>
+        <p class="hero-desc">Especializado em construir produtos do 0 ao 1, atuando junto a designers, pessoas de negócio, cientistas de dados e engenheiros.</p>
+        <div class="hero-meta">
+          <span>Borda da Mata, MG</span>
+          <span class="sep">·</span>
+          <span>disponível para projetos</span>
+        </div>
+        <button class="btn-contact" onclick="openModal()">fale comigo</button>
       </div>
     </div>
   </section>
-</div>
 
-<!-- NUMBERS -->
-<div class="numbers reveal" style="transition-delay:.2s">
-  <div class="num-cell">
-    <span class="num-val">15<em>+</em></span>
-    <span class="num-label">anos de experiência</span>
+  <section id="sobre" class="section-with-hud">
+    <div class="sec-overlay" aria-hidden="true">
+      <svg class="sec-svg" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path class="sec-contour sc1" d="M-80,105 Q260,62 600,88 T1280,72"/>
+        <path class="sec-contour sc2" d="M-80,165 Q300,126 600,148 T1280,134"/>
+        <path class="sec-contour sc3" d="M-80,225 Q240,190 600,208 T1280,196"/>
+        <line class="sec-hline" x1="0" y1="2" x2="1200" y2="2"/>
+        <line class="sec-vtick" x1="0" y1="0" x2="0" y2="18"/>
+        <line class="sec-vtick" x1="400" y1="0" x2="400" y2="10"/>
+        <line class="sec-vtick" x1="800" y1="0" x2="800" y2="10"/>
+        <line class="sec-vtick" x1="1200" y1="0" x2="1200" y2="18"/>
+        <polyline class="sec-corner-mark" points="0,30 0,2 28,2"/>
+        <polyline class="sec-corner-mark" points="1172,2 1200,2 1200,30"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="section-hud-bar" aria-hidden="true"><div class="shb-line-left"></div><span class="shb-num">01</span></div>
+      <h2 class="section-label animate">sobre</h2>
+
+      <div class="about-grid">
+        <div class="about-text animate">
+          <p>Senior Software Engineer com 12+ anos de experiência construindo e escalando produtos digitais.</p>
+          <p>Sólida base em arquitetura, sistemas distribuídos e integrações complexas. Experiência prática levando produtos do 0→1 e escalando com foco em performance, confiabilidade e simplicidade operacional.</p>
+          <p>Atuei como founding engineer e em nível staff, liderando decisões técnicas críticas e definindo as fundações arquiteturais de longo prazo.</p>
+          <p>Nos últimos anos, venho aplicando machine learning e IA em produtos reais — com foco em eficiência e impacto tangível no negócio, além do hype.</p>
+          <p>Perfil híbrido que combina execução e estratégia: confortável entre código, arquitetura e produto.</p>
+        </div>
+        <div class="about-aside animate" style="transition-delay:0.12s">
+          <div class="tag-group">
+            <p class="tag-group-label">foco</p>
+            <span class="tag">Founding Team</span>
+            <span class="tag">AI Engineering</span>
+            <span class="tag">0 → 1</span>
+            <span class="tag">Startups</span>
+            <span class="tag">Produtos e Negócios</span>
+          </div>
+          <div class="tag-group">
+            <p class="tag-group-label">stack</p>
+            <span class="tag">Python</span>
+            <span class="tag">Dart</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">React</span>
+            <span class="tag">Flutter</span>
+          </div>
+          <div class="tag-group">
+            <p class="tag-group-label">side quest</p>
+            <span class="tag">Produtor de café de montanha</span>
+            <span class="tag">Piloto de Drone</span>
+            <span class="tag">Apoio no Caminho da Fé</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="parallax-video-section">
+    <div class="parallax-inner" id="parallax-inner">
+      <video src="assets/web/intro.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    </div>
+    <span class="parallax-caption">borda da mata · minas gerais</span>
+  </section>
+
+  <section id="experiencia" class="section-with-hud">
+    <div class="sec-overlay" aria-hidden="true">
+      <svg class="sec-svg" viewBox="0 0 1200 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path class="sec-contour sc1" d="M-80,220 Q280,178 600,205 T1280,188"/>
+        <path class="sec-contour sc2" d="M-80,380 Q320,342 600,365 T1280,350"/>
+        <path class="sec-contour sc3" d="M-80,560 Q260,525 600,545 T1280,530"/>
+        <line class="sec-hline" x1="0" y1="2" x2="1200" y2="2"/>
+        <line class="sec-vtick" x1="0" y1="0" x2="0" y2="18"/>
+        <line class="sec-vtick" x1="600" y1="0" x2="600" y2="10"/>
+        <line class="sec-vtick" x1="1200" y1="0" x2="1200" y2="18"/>
+        <polyline class="sec-corner-mark" points="0,30 0,2 28,2"/>
+        <polyline class="sec-corner-mark" points="1172,2 1200,2 1200,30"/>
+        <line class="sec-vline-accent" x1="176" y1="60" x2="176" y2="900"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="section-hud-bar" aria-hidden="true"><div class="shb-line-left"></div><span class="shb-num">02</span></div>
+      <h2 class="section-label animate">trajetória</h2>
+      <div class="timeline">
+
+        <div class="timeline-item animate">
+          <div class="timeline-period">jan/2022 — fev/2026</div>
+          <div class="timeline-content">
+            <h3>Noh</h3>
+            <p class="timeline-role">Founding Staff Software Engineer</p>
+            <p class="timeline-desc">Plataforma financeira construída do zero. Arquitetura, backend, Flutter mobile, integrações com carteiras digitais, BaaS, Anti-fraude e sistemas de pagemento Pix, Debito, Creditos, atuação na criação de ferramentas de backoffice e atuação em on-call.</p>
+            <a href="https://noh.com.br" target="_blank" rel="noopener" class="timeline-link">noh.com.br ↗</a>
+          </div>
+        </div>
+
+        <div class="timeline-item animate" style="transition-delay:0.08s">
+          <div class="timeline-period">ago/2019 — jan/2022</div>
+          <div class="timeline-content">
+            <h3>Avenue Code</h3>
+            <p class="timeline-role">Tech Lead · AI Engineer · Senior Software Engineer</p>
+            <p class="timeline-desc">Liderança técnica de times e atuação em AI Engineering em projetos de AI Aplicada a contrução automatizadas de landingpages e sistemas de gestão financeira (GuiaBolso).</p>
+            <a href="https://avenuecode.com" target="_blank" rel="noopener" class="timeline-link">avenuecode.com ↗</a>
+          </div>
+        </div>
+        <div class="timeline-item animate" style="transition-delay:0.16s">
+          <div class="timeline-period">2018 — 2019</div>
+          <div class="timeline-content">
+            <h3>Aurora Soluções Tecnológicas</h3>
+            <p class="timeline-role">CTO</p>
+            <p class="timeline-desc">Projetos de IoT, Big Data e Automação Industrial. Responsável pelas decisões de arquitetura, tecnologia e infraestrutura. Consultoria em desenvolvimento de software, design e prototipação.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item animate" style="transition-delay:0.24s">
+          <div class="timeline-period">fev/2017 — dez/2018</div>
+          <div class="timeline-content">
+            <h3>FAI / NPDI</h3>
+            <p class="timeline-role">Software Engineer</p>
+            <p class="timeline-desc">Pesquisa aplicada no Núcleo de Desenvolvimento e Inovação da FAI. Especificação de requisitos, projeto e construção de software web e mobile. Stack: ReactJS, AngularJS, Java Spring, PostgreSQL, Hibernate, Docker, Jenkins.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item animate" style="transition-delay:0.32s">
+          <div class="timeline-period">ago/2016 — jan/2017</div>
+          <div class="timeline-content">
+            <h3>Inatel / ICC</h3>
+            <p class="timeline-role">Software Developer Intern</p>
+            <p class="timeline-desc">Desenvolvimento de aplicação web corporativa em .NET para controle de linha de produção, pré-venda, pós-venda e suporte ao cliente. Stack: C#, NHibernate, MVC, SQL, jQuery, Bootstrap, Razor.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item animate" style="transition-delay:0.4s">
+          <div class="timeline-period">jun/2015 — ago/2016</div>
+          <div class="timeline-content">
+            <h3>Citrox</h3>
+            <p class="timeline-role">Web Designer & Front-End Developer</p>
+            <p class="timeline-desc">Desenvolvimento de hotsites HTML5, email marketing, peças para redes sociais e materiais gráficos para empresa de segurança eletrônica. Ferramentas: Adobe Photoshop, Illustrator, CorelDraw, 3dsMax, Blender.</p>
+          </div>
+        </div>
+
+        <div class="timeline-item animate" style="transition-delay:0.48s">
+          <div class="timeline-period">2012 — 2015</div>
+          <div class="timeline-content">
+            <h3>Origem</h3>
+            <p class="timeline-role">Design · 3D · Programação</p>
+            <p class="timeline-desc">BluMonkey (jogos mobile 3D), Agência Opte (design e marca), FAI (programação, identidade visual, 3D).</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+  <section id="projetos" class="section-with-hud">
+    <div class="sec-overlay" aria-hidden="true">
+      <svg class="sec-svg" viewBox="0 0 1200 700" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path class="sec-contour sc1" d="M-80,140 Q280,102 600,128 T1280,112"/>
+        <path class="sec-contour sc2" d="M-80,220 Q320,185 600,205 T1280,192"/>
+        <path class="sec-contour sc3" d="M-80,490 Q260,460 600,478 T1280,465"/>
+        <line class="sec-hline" x1="0" y1="2" x2="1200" y2="2"/>
+        <line class="sec-vtick" x1="0" y1="0" x2="0" y2="18"/>
+        <line class="sec-vtick" x1="600" y1="0" x2="600" y2="10"/>
+        <line class="sec-vtick" x1="1200" y1="0" x2="1200" y2="18"/>
+        <polyline class="sec-corner-mark" points="0,30 0,2 28,2"/>
+        <polyline class="sec-corner-mark" points="1172,2 1200,2 1200,30"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="section-hud-bar" aria-hidden="true"><div class="shb-line-left"></div><span class="shb-num">03</span></div>
+      <h2 class="section-label animate">projetos</h2>
+      <div class="projects-grid">
+
+        <a href="projetos/noh.html" class="project-card animate" style="transition-delay:0s">
+          <div class="project-thumb" style="background:#0d0d0d;">
+            <span class="project-thumb-label">noh</span>
+          </div>
+          <div class="project-info">
+            <h3>Noh — Plataforma Financeira</h3>
+            <p class="project-meta">FinTech · jan/2022 – fev/2026</p>
+          </div>
+        </a>
+
+        <a href="projetos/avenue-code.html" class="project-card animate" style="transition-delay:0.1s">
+          <div class="project-thumb" style="background:#1a1f2e;">
+            <span class="project-thumb-label">avenue code</span>
+          </div>
+          <div class="project-info">
+            <h3>Avenue Code — Fortune 100</h3>
+            <p class="project-meta">Consultoria / Tech Lead · ago/2019 – jan/2022</p>
+          </div>
+        </a>
+
+        <a href="projetos/aurora.html" class="project-card animate" style="transition-delay:0.2s">
+          <div class="project-thumb" style="background:#1a1a1a;">
+            <span class="project-thumb-label">aurora</span>
+          </div>
+          <div class="project-info">
+            <h3>Aurora Soluções Tecnológicas</h3>
+            <p class="project-meta">Consultoria · 2018 – 2019</p>
+          </div>
+        </a>
+
+        <a href="projetos/fai-npdi.html" class="project-card animate" style="transition-delay:0.3s">
+          <div class="project-thumb" style="background:#161b1d;">
+            <span class="project-thumb-label">fai / npdi</span>
+          </div>
+          <div class="project-info">
+            <h3>FAI / NPDI — Pesquisa Aplicada</h3>
+            <p class="project-meta">Web + Mobile · 2017 – 2018</p>
+          </div>
+        </a>
+
+        <a href="projetos/inatel.html" class="project-card animate" style="transition-delay:0.4s">
+          <div class="project-thumb" style="background:#1a1714;">
+            <span class="project-thumb-label">inatel / icc</span>
+          </div>
+          <div class="project-info">
+            <h3>Inatel / ICC — Plataforma Corporativa</h3>
+            <p class="project-meta">.NET · ago/2016 – jan/2017</p>
+          </div>
+        </a>
+
+        <a href="projetos/blumonkey.html" class="project-card animate" style="transition-delay:0.5s">
+          <div class="project-thumb" style="background:#1a1628;">
+            <span class="project-thumb-label">bluemonkey</span>
+          </div>
+          <div class="project-info">
+            <h3>BluMonkey Games</h3>
+            <p class="project-meta">3D / Mobile · 2013</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="ladob" class="section-with-hud">
+    <div class="sec-overlay" aria-hidden="true">
+      <svg class="sec-svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path class="sec-contour sc1" d="M-80,110 Q260,78 600,100 T1280,86"/>
+        <path class="sec-contour sc2" d="M-80,185 Q300,155 600,172 T1280,160"/>
+        <line class="sec-hline" x1="0" y1="2" x2="1200" y2="2"/>
+        <line class="sec-vtick" x1="0" y1="0" x2="0" y2="18"/>
+        <line class="sec-vtick" x1="1200" y1="0" x2="1200" y2="18"/>
+        <polyline class="sec-corner-mark" points="0,30 0,2 28,2"/>
+        <polyline class="sec-corner-mark" points="1172,2 1200,2 1200,30"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="section-hud-bar" aria-hidden="true"><div class="shb-line-left"></div><span class="shb-num">04</span></div>
+      <h2 class="section-label animate">lado b</h2>
+      <div class="projects-grid">
+
+        <a href="https://instagram.com/cafedulval" target="_blank" rel="noopener" class="project-card animate">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #2a1508 0%, #4a2512 60%, #3a1c0c 100%);">
+            <span class="project-thumb-label">@cafedulval</span>
+          </div>
+          <div class="project-info">
+            <h3>café dulval</h3>
+            <p class="project-meta">instagram · café de montanha · Borda da Mata</p>
+          </div>
+        </a>
+
+        <a href="https://github.com/diegodulval" target="_blank" rel="noopener" class="project-card animate" style="transition-delay:0.1s">
+          <div class="project-thumb" style="background: linear-gradient(135deg, #070e1a 0%, #0c1828 60%, #050b14 100%);">
+            <span class="project-thumb-label">projetos de ia</span>
+          </div>
+          <div class="project-info">
+            <h3>projetos de IA</h3>
+            <p class="project-meta">llms · automação · em desenvolvimento</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="parallax-video-section parallax-drone">
+    <div class="parallax-inner">
+      <video src="assets/web/hero.mp4" autoplay muted loop playsinline preload="auto" aria-hidden="true"></video>
+    </div>
+    <span class="parallax-caption">sul de minas · drone</span>
+  </section>
+
+  <section id="contato" class="section-with-hud">
+    <div class="sec-overlay" aria-hidden="true">
+      <svg class="sec-svg" viewBox="0 0 1200 400" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <path class="sec-contour sc1" d="M-80,90 Q260,58 600,80 T1280,66"/>
+        <path class="sec-contour sc2" d="M-80,165 Q300,135 600,155 T1280,142"/>
+        <path class="sec-contour sc3" d="M-80,260 Q240,232 600,250 T1280,238"/>
+        <line class="sec-hline" x1="0" y1="2" x2="1200" y2="2"/>
+        <line class="sec-vtick" x1="0" y1="0" x2="0" y2="18"/>
+        <line class="sec-vtick" x1="400" y1="0" x2="400" y2="10"/>
+        <line class="sec-vtick" x1="800" y1="0" x2="800" y2="10"/>
+        <line class="sec-vtick" x1="1200" y1="0" x2="1200" y2="18"/>
+        <polyline class="sec-corner-mark" points="0,30 0,2 28,2"/>
+        <polyline class="sec-corner-mark" points="1172,2 1200,2 1200,30"/>
+      </svg>
+    </div>
+    <div class="container">
+      <div class="section-hud-bar" aria-hidden="true"><div class="shb-line-left"></div><span class="shb-num">05</span></div>
+      <h2 class="section-label animate">contato</h2>
+      <div class="contact-list">
+        <a href="mailto:diegodifreitas@gmail.com" class="contact-link">
+          <span class="contact-type">email</span>
+          <span class="contact-value">diegodifreitas@gmail.com</span>
+        </a>
+        <a href="https://linkedin.com/in/diegodulval" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-type">linkedin</span>
+          <span class="contact-value">linkedin.com/in/diegodulval</span>
+        </a>
+        <a href="https://github.com/diegodulval" target="_blank" rel="noopener" class="contact-link">
+          <span class="contact-type">github</span>
+          <span class="contact-value">github.com/diegodulval</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-inner">
+      <span>© 2026 Diego Dulval</span>
+      <span>Borda da Mata, MG</span>
+    </div>
+  </footer>
+
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <!-- Kill counter -->
+  <div class="duck-kills" id="duck-kills" aria-hidden="true">
+    <span class="duck-kills-count" id="duck-kills-count">0</span>
+    <span class="duck-kills-label">derrubados</span>
   </div>
-  <div class="num-cell">
-    <span class="num-val">60<em>M+</em></span>
-    <span class="num-label">TPV mensal · Noh</span>
+
+  <!-- Custom HUD cursor -->
+  <div class="hud-cursor" id="hud-cursor" aria-hidden="true">
+    <svg width="40" height="40" viewBox="-20 -20 40 40" xmlns="http://www.w3.org/2000/svg">
+      <circle r="10" fill="none"/>
+      <line x1="-18" y1="0" x2="-12" y2="0"/>
+      <line x1="12" y1="0" x2="18" y2="0"/>
+      <line x1="0" y1="-18" x2="0" y2="-12"/>
+      <line x1="0" y1="12" x2="0" y2="18"/>
+    </svg>
   </div>
-  <div class="num-cell">
-    <span class="num-val">0<em>→1</em></span>
-    <span class="num-label">founding engineer</span>
+
+  <!-- Dock flutuante -->
+  <div class="dock">
+    <a href="index.html" class="dock-logo" aria-label="Dulval — início">
+      <img src="assets/logo.png" class="dock-logo-img" alt="">
+    </a>
+    <div class="dock-sep"></div>
+    <nav class="dock-nav">
+      <a href="#sobre">sobre</a>
+      <a href="#projetos">projetos</a>
+      <a href="#experiencia">trajetória</a>
+      <a href="#contato">contato</a>
+    </nav>
   </div>
-  <div class="num-cell">
-    <span class="num-val">F<em>100</em></span>
-    <span class="num-label">clientes · Avenue Code</span>
+
+  <button class="theme-toggle" id="theme-toggle" aria-label="Alternar tema">☾</button>
+
+  <!-- Modal fale comigo -->
+  <div class="modal-overlay" id="modal" onclick="closeModalOverlay(event)">
+    <div class="modal-card">
+      <button class="modal-close" onclick="closeModal()">×</button>
+      <p class="modal-label">mensagem</p>
+      <form class="modal-form" onsubmit="sendMessage(event)">
+        <div class="form-field">
+          <label for="f-nome">nome</label>
+          <input id="f-nome" type="text" name="nome" required autocomplete="name">
+        </div>
+        <div class="form-field">
+          <label for="f-email">email</label>
+          <input id="f-email" type="email" name="email" required autocomplete="email">
+        </div>
+        <div class="form-field">
+          <label for="f-msg">mensagem</label>
+          <textarea id="f-msg" name="mensagem" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-send">enviar</button>
+      </form>
+    </div>
   </div>
-</div>
 
-<!-- ABOUT -->
-<div class="wrap">
-  <section id="about">
-    <div class="section-inner">
-      <div class="section-label">Sobre</div>
-      <div>
-        <div class="about-headline reveal">
-          Construtor<br>de sistemas<br>reais.
-        </div>
-        <p class="about-body reveal" style="transition-delay:.08s">
-          Engenheiro com 15 anos levando produtos do zero à escala. Transita entre código,
-          arquitetura e estratégia — sempre com foco em impacto real, não em demos.
-          Founding engineer, CTO fundador, tech lead. O mesmo perfil em qualquer contexto.
-        </p>
-        <div class="about-pills reveal" style="transition-delay:.15s">
-          <span class="pill">Arquitetura</span>
-          <span class="pill">Backend</span>
-          <span class="pill">Mobile · Flutter</span>
-          <span class="pill">AI aplicado</span>
-          <span class="pill">DevOps</span>
-          <span class="pill">Integrações</span>
-          <span class="pill">MBA USP · Data Science</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- TRAJECTORY -->
-  <section id="trajectory">
-    <div class="section-inner">
-      <div class="section-label">Trajetória</div>
-      <div class="timeline reveal">
-
-        <div class="t-row" data-idx="0">
-          <div class="t-head">
-            <span class="t-year">2022</span>
-            <span class="t-company">Noh</span>
-            <span class="t-role">Founding Staff Engineer</span>
-            <div class="t-icon"></div>
-          </div>
-          <div class="t-body">
-            <div class="t-body-inner">
-              <div>
-                <p class="t-desc">
-                  Construiu a plataforma fintech do zero. Liderou decisões de arquitetura — escalabilidade, observabilidade, resiliência. Backend, mobile Flutter, Apple Pay, Google Pay, backoffice e on-call em produção.
-                </p>
-                <div class="t-tags">
-                  <span class="t-tag">Flutter</span>
-                  <span class="t-tag">Go</span>
-                  <span class="t-tag">Firebase</span>
-                  <span class="t-tag">Apple Pay</span>
-                  <span class="t-tag">Google Pay</span>
-                  <span class="t-tag">On-call</span>
-                </div>
-              </div>
-              <div class="t-aside">
-                <div class="t-stat">
-                  <span class="val">60<em>M+</em></span>
-                  <span class="lbl">TPV mensal</span>
-                </div>
-                <div class="t-stat">
-                  <span class="val">0<em>→1</em></span>
-                  <span class="lbl">do zero</span>
-                </div>
-                <div class="t-stat">
-                  <span class="val">4<em>a</em></span>
-                  <span class="lbl">duração</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="t-row" data-idx="1">
-          <div class="t-head">
-            <span class="t-year">2019</span>
-            <span class="t-company">Avenue Code</span>
-            <span class="t-role">Tech Lead · AI Engineer</span>
-            <div class="t-icon"></div>
-          </div>
-          <div class="t-body">
-            <div class="t-body-inner">
-              <div>
-                <p class="t-desc">
-                  Fortune 100 nos EUA, Brasil e Europa. Fintech, healthcare, automotivo, retail. Liderança técnica e AI aplicado em produção — não experimentação. Progrediu de Senior Engineer a Tech Lead em menos de dois anos.
-                </p>
-                <div class="t-tags">
-                  <span class="t-tag">Tech Lead</span>
-                  <span class="t-tag">AI Engineering</span>
-                  <span class="t-tag">Fortune 100</span>
-                  <span class="t-tag">Healthcare</span>
-                  <span class="t-tag">Fintech</span>
-                </div>
-              </div>
-              <div class="t-aside">
-                <div class="t-stat">
-                  <span class="val">F<em>100</em></span>
-                  <span class="lbl">clientes</span>
-                </div>
-                <div class="t-stat">
-                  <span class="val">3</span>
-                  <span class="lbl">países</span>
-                </div>
-                <div class="t-stat">
-                  <span class="val">2,5<em>a</em></span>
-                  <span class="lbl">duração</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="t-row" data-idx="2">
-          <div class="t-head">
-            <span class="t-year">2018</span>
-            <span class="t-company">Aurora Soluções</span>
-            <span class="t-role">CTO Fundador</span>
-            <div class="t-icon"></div>
-          </div>
-          <div class="t-body">
-            <div class="t-body-inner">
-              <div>
-                <p class="t-desc">
-                  Empresa própria. Três produtos construídos: gestão financeira pessoal, IoT para monitoramento ambiental industrial, e automação de alimentação para animais. Tecnologia aplicada a problemas físicos reais.
-                </p>
-                <div class="t-tags">
-                  <span class="t-tag">Founder</span>
-                  <span class="t-tag">IoT</span>
-                  <span class="t-tag">AgTech</span>
-                  <span class="t-tag">Mobile</span>
-                  <span class="t-tag">Fintech</span>
-                </div>
-              </div>
-              <div class="t-aside">
-                <div class="t-stat">
-                  <span class="val">3</span>
-                  <span class="lbl">produtos próprios</span>
-                </div>
-                <div class="t-stat">
-                  <span class="val">2<em>a</em></span>
-                  <span class="lbl">duração</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="t-row" data-idx="3">
-          <div class="t-head">
-            <span class="t-year">2017</span>
-            <span class="t-company">FAI</span>
-            <span class="t-role">Software Engineer</span>
-            <div class="t-icon"></div>
-          </div>
-          <div class="t-body">
-            <div class="t-body-inner">
-              <div>
-                <p class="t-desc">
-                  Quatro projetos em contextos radicalmente diferentes: manutenção preditiva industrial, atualização de firmware para dispositivos, LMS educacional, e CRM pós-venda para fabricante de eletrônicos.
-                </p>
-                <div class="t-tags">
-                  <span class="t-tag">Indústria 4.0</span>
-                  <span class="t-tag">LMS</span>
-                  <span class="t-tag">Desktop</span>
-                  <span class="t-tag">Firmware</span>
-                </div>
-              </div>
-              <div class="t-aside">
-                <div class="t-stat">
-                  <span class="val">4</span>
-                  <span class="lbl">projetos</span>
-                </div>
-                <div class="t-stat">
-                  <span class="val">2<em>a</em></span>
-                  <span class="lbl">duração</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="t-row" data-idx="4">
-          <div class="t-head">
-            <span class="t-year">2015</span>
-            <span class="t-company">Citrox</span>
-            <span class="t-role">Front-End · Web Design</span>
-            <div class="t-icon"></div>
-          </div>
-          <div class="t-body">
-            <div class="t-body-inner">
-              <div>
-                <p class="t-desc">
-                  Onde o olhar para design e experiência se formou. Desenvolvimento de interfaces e identidades digitais. A base visual que complementa o perfil técnico.
-                </p>
-                <div class="t-tags">
-                  <span class="t-tag">Front-End</span>
-                  <span class="t-tag">Web Design</span>
-                  <span class="t-tag">HTML/CSS</span>
-                </div>
-              </div>
-              <div class="t-aside">
-                <div class="t-stat">
-                  <span class="val">1<em>a</em></span>
-                  <span class="lbl">duração</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- SKILLS -->
-  <section id="skills">
-    <div class="section-inner">
-      <div class="section-label">Competências</div>
-      <div class="skills-grid reveal">
-        <div class="sk-cell">
-          <div class="sk-name">Arquitetura de Sistemas</div>
-          <div class="sk-desc">Sistemas distribuídos, escalabilidade e observabilidade. Do zero ao alto volume transacional.</div>
-        </div>
-        <div class="sk-cell">
-          <div class="sk-name">Mobile · Flutter</div>
-          <div class="sk-desc">Desenvolvimento cross-platform iOS e Android, incluindo integrações com Apple Pay e Google Pay.</div>
-        </div>
-        <div class="sk-cell">
-          <div class="sk-name">AI Aplicado</div>
-          <div class="sk-desc">Machine learning e LLMs em produção. MBA USP em Data Science. Foco em eficiência e resultado tangível.</div>
-        </div>
-        <div class="sk-cell">
-          <div class="sk-name">Liderança Técnica</div>
-          <div class="sk-desc">Founding engineer, staff, tech lead. Decisões que moldam produto e negócio a longo prazo.</div>
-        </div>
-        <div class="sk-cell">
-          <div class="sk-name">DevOps & Operações</div>
-          <div class="sk-desc">CI/CD, Docker, Jenkins, Ansible. Responsável direto por estabilidade em produção.</div>
-        </div>
-        <div class="sk-cell">
-          <div class="sk-name">IoT & Automação</div>
-          <div class="sk-desc">Soluções de ponta a ponta para ambientes físicos — industriais, agropecuários e domésticos.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-</div>
-
-<!-- IDENTITY STRIP -->
-<div class="identity-strip">
-  <div class="wrap">
-    <p class="identity-quote reveal">
-      "A mesma dedicação de cuidar de uma lavoura de café — <em>paciência, ciclo longo, resultado que aparece no tempo certo.</em>"
-    </p>
-    <p class="identity-sub reveal" style="transition-delay:.1s">Produtor de café especial · Borda da Mata, MG</p>
-  </div>
-</div>
-
-<!-- AWARDS -->
-<div class="wrap">
-  <section id="awards">
-    <div class="section-inner">
-      <div class="section-label">Reconhecimentos</div>
-      <div class="awards-list">
-        <div class="award">
-          <span class="award-name">Startup Weekend Inatel</span>
-          <span class="award-info">Santa Rita do Sapucaí · 2014</span>
-          <span class="award-place">2° lugar</span>
-        </div>
-        <div class="award">
-          <span class="award-name">Prêmio Municipal de Inovação</span>
-          <span class="award-info">Vale da Eletrônica · MG</span>
-          <span class="award-place">Vencedor</span>
-        </div>
-        <div class="award">
-          <span class="award-name">Maratona de Programação</span>
-          <span class="award-info">FAI · Santa Rita do Sapucaí</span>
-          <span class="award-place">1° lugar</span>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-inner">
-      <div class="contact-head reveal">
-        Vamos<br><span>conversar?</span>
-      </div>
-      <div class="contact-links reveal" style="transition-delay:.1s">
-        <a href="mailto:diegodifreitas@gmail.com" class="contact-link">diegodifreitas@gmail.com</a>
-        <a href="https://linkedin.com/in/diegodulval" target="_blank" class="contact-link">linkedin.com/in/diegodulval</a>
-      </div>
-    </div>
-  </section>
-</div>
-
-<footer>
-  <span>© 2025 Diego Dulval</span>
-  <span>Borda da Mata · Minas Gerais · Brasil</span>
-</footer>
-
-<script>
-// ── REVEAL ──────────────────────────────────────────
-const obs = new IntersectionObserver(entries => {
-  entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
-  });
-}, { threshold: 0.1, rootMargin: '0px 0px -32px 0px' });
-
-document.querySelectorAll('.reveal, .award').forEach(el => obs.observe(el));
-
-document.querySelectorAll('.award').forEach((el, i) => {
-  el.style.transitionDelay = (i * .08) + 's';
-});
-
-// ── ACCORDION ───────────────────────────────────────
-document.querySelectorAll('.t-row').forEach(row => {
-  row.addEventListener('click', () => {
-    const isOpen = row.classList.contains('open');
-    // close all
-    document.querySelectorAll('.t-row').forEach(r => {
-      r.classList.remove('open');
-      r.querySelector('.t-body').style.maxHeight = '0';
-    });
-    // open clicked if it was closed
-    if (!isOpen) {
-      row.classList.add('open');
-      const body = row.querySelector('.t-body');
-      body.style.maxHeight = body.scrollHeight + 'px';
+  <script>
+    // Modal
+    function openModal() {
+      document.getElementById('modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
     }
-  });
-});
+    function closeModal() {
+      document.getElementById('modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    function closeModalOverlay(e) {
+      if (e.target === e.currentTarget) closeModal();
+    }
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
 
-// ── SMOOTH SCROLL ───────────────────────────────────
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const t = document.querySelector(a.getAttribute('href'));
-    if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth' }); }
-  });
-});
-</script>
+    function sendMessage(e) {
+      e.preventDefault();
+      var nome = e.target.nome.value;
+      var email = e.target.email.value;
+      var msg = e.target.mensagem.value;
+      window.location.href = 'mailto:diegodifreitas@gmail.com'
+        + '?subject=' + encodeURIComponent('Contato via site — ' + nome)
+        + '&body=' + encodeURIComponent(msg + '\n\nDe: ' + nome + ' <' + email + '>');
+      closeModal();
+    }
+
+    // Scroll animations
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08, rootMargin: '0px 0px -32px 0px' });
+
+    document.querySelectorAll('.animate').forEach(function(el) {
+      observer.observe(el);
+    });
+
+    // Hero video — revela texto no último segundo, freeze natural no final (sem loop)
+    var heroVideo = document.getElementById('hero-video');
+    var heroContent = document.getElementById('hero-content');
+    var heroRevealed = false;
+
+    function revealHero() {
+      if (!heroRevealed) {
+        heroRevealed = true;
+        heroContent.classList.add('revealed');
+      }
+    }
+
+    heroVideo.addEventListener('timeupdate', function() {
+      if (heroVideo.duration && heroVideo.currentTime >= heroVideo.duration - 1) {
+        revealHero();
+      }
+    });
+
+    heroVideo.addEventListener('error', revealHero);
+    setTimeout(revealHero, 7000); // fallback caso autoplay não funcione
+
+    // Hero bottom fade — aparece ao scrollar
+    var heroSection = document.getElementById('hero');
+    window.addEventListener('scroll', function() {
+      if (window.scrollY > 40) {
+        heroSection.classList.add('scrolled');
+      } else {
+        heroSection.classList.remove('scrolled');
+      }
+    }, { passive: true });
+
+    // Parallax — todas as seções .parallax-inner
+    var parallaxItems = document.querySelectorAll('.parallax-inner');
+    if (parallaxItems.length) {
+      window.addEventListener('scroll', function() {
+        parallaxItems.forEach(function(inner) {
+          var rect = inner.parentElement.getBoundingClientRect();
+          if (rect.top < window.innerHeight && rect.bottom > 0) {
+            var progress = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+            inner.style.transform = 'translateY(' + ((progress - 0.5) * -25) + '%)';
+          }
+        });
+      }, { passive: true });
+    }
+
+    // Theme toggle
+    var themeToggle = document.getElementById('theme-toggle');
+    var savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark');
+      themeToggle.textContent = '☀';
+    }
+    themeToggle.addEventListener('click', function() {
+      document.body.classList.toggle('dark');
+      var isDark = document.body.classList.contains('dark');
+      themeToggle.textContent = isDark ? '☀' : '☾';
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+    });
+
+    // ─── Mouse tracking + interactive line parallax ───────────
+    var _tx = 0.5, _ty = 0.5, _mx = 0.5, _my = 0.5;
+    var _cg  = document.querySelectorAll('.cg');
+    var _ss  = document.querySelectorAll('.sec-svg');
+    var _cgl = document.getElementById('cursor-glow');
+    var _hc  = document.getElementById('hud-cursor');
+
+    document.addEventListener('mousemove', function(e) {
+      _tx = e.clientX / window.innerWidth;
+      _ty = e.clientY / window.innerHeight;
+      if (_cgl) {
+        _cgl.style.left = e.clientX + 'px';
+        _cgl.style.top  = e.clientY + 'px';
+      }
+      if (_hc) {
+        _hc.style.left = e.clientX + 'px';
+        _hc.style.top  = e.clientY + 'px';
+      }
+    }, { passive: true });
+
+    (function tick() {
+      _mx += (_tx - _mx) * 0.07;
+      _my += (_ty - _my) * 0.07;
+
+      // Hero contour groups — layered depths for 3D feel
+      var depths = [1.0, 0.60, 0.40, 1.30, 0.32, 0.75];
+      var hdx = (_mx - 0.5) * 54;
+      var hdy = (_my - 0.5) * 28;
+      _cg.forEach(function(g, i) {
+        var d = depths[i] || 1;
+        g.style.transform = 'translate(' + (hdx * d).toFixed(1) + 'px,' + (hdy * d).toFixed(1) + 'px)';
+      });
+
+      // Section SVGs — subtle ambient parallax
+      var sdx = (_mx - 0.5) * 22;
+      var sdy = (_my - 0.5) * 13;
+      _ss.forEach(function(s, i) {
+        var d = i % 2 === 0 ? 0.55 : 0.38;
+        s.style.transform = 'translate(' + (sdx * d).toFixed(1) + 'px,' + (sdy * d).toFixed(1) + 'px)';
+      });
+
+      requestAnimationFrame(tick);
+    }());
+
+    // ─── Drone Hunt ──────────────────────────────────────────────
+    (function() {
+      var MAX   = 2;    // max drones na tela ao mesmo tempo
+      var last  = 0;
+      var DELTA = 700;  // scroll (px) entre spawns
+      var kills = 0;
+
+      var killsEl  = document.getElementById('duck-kills');
+      var killsCnt = document.getElementById('duck-kills-count');
+
+      // Drone body SVG — grid 5px, 17×9 (sem cabo/caixa)
+      function makeDrone() {
+        var N = '#2d3560';
+        var R = '#8fa0bb';
+        var L = '#cdd5ea';
+        function r(cx,cy,cw,ch,f,cls) {
+          return '<rect x="'+(cx*5)+'" y="'+(cy*5)
+            +'" width="'+(cw*5)+'" height="'+(ch*5)
+            +'" fill="'+f+'"'+(cls?' class="'+cls+'"':'')+'/>';
+        }
+        return (
+          '<svg class="duck-svg" viewBox="0 0 85 45" xmlns="http://www.w3.org/2000/svg" width="80" height="42">'
+          + r(0,0,3,2,R,'drone-rotor') + r(14,0,3,2,R,'drone-rotor')
+          + r(0,7,3,2,R,'drone-rotor') + r(14,7,3,2,R,'drone-rotor')
+          + r(3,2,1,1,N) + r(13,2,1,1,N)
+          + r(3,6,1,1,N) + r(13,6,1,1,N)
+          + r(3,3,10,1,N) + r(4,4,8,1,N) + r(3,5,10,1,N)
+          + r(7,4,2,1,L)
+          + '</svg>'
+        );
+      }
+
+      // Queijo pixel art — grid 5px, 6×5
+      // Cunha de queijo suíço com furos
+      function makeCheese() {
+        var C = '#f5d500';  // amarelo queijo
+        var H = '#c87a00';  // furos/sombra
+        function r(cx,cy,cw,ch,f) {
+          return '<rect x="'+(cx*5)+'" y="'+(cy*5)
+            +'" width="'+(cw*5)+'" height="'+(ch*5)+'" fill="'+f+'"/>';
+        }
+        return (
+          '<svg class="cheese-svg" viewBox="0 0 30 25" xmlns="http://www.w3.org/2000/svg" width="34" height="28">'
+          + r(1,0,4,1,C)                    // topo (ligeiramente menor — cunha)
+          + r(0,1,6,1,C) + r(3,1,1,1,H)    // row 1 + furo direita
+          + r(0,2,6,1,C) + r(2,2,1,1,H)    // row 2 + furo esquerda
+          + r(0,3,6,1,C) + r(4,3,1,1,H)    // row 3 + furo centro-direita
+          + r(0,4,6,1,C)                    // base sólida
+          + '</svg>'
+        );
+      }
+
+      function shoot(d, cheeseEl) {
+        if (d.classList.contains('duck--hit')) return;
+
+        // Queijo cai independentemente
+        var cr = cheeseEl.getBoundingClientRect();
+        var fc = document.createElement('div');
+        fc.className = 'falling-cheese';
+        fc.innerHTML = makeCheese();
+        fc.style.left = cr.left + 'px';
+        fc.style.top  = cr.top  + 'px';
+        document.body.appendChild(fc);
+        setTimeout(function() { if (fc.parentNode) fc.parentNode.removeChild(fc); }, 2200);
+
+        // Esconde queijo original
+        cheeseEl.style.visibility = 'hidden';
+
+        // Drone tomba
+        var rect = d.getBoundingClientRect();
+        d.style.left      = rect.left + 'px';
+        d.style.top       = rect.top  + 'px';
+        d.style.animation = 'none';
+        void d.offsetWidth;
+        d.classList.add('duck--hit');
+        kills++;
+        killsCnt.textContent = kills;
+        if (kills === 1) killsEl.classList.add('visible');
+        setTimeout(function() { if (d.parentNode) d.parentNode.removeChild(d); }, 1500);
+      }
+
+      function spawn() {
+        if (document.querySelectorAll('.duck:not(.duck--hit)').length >= MAX) return;
+
+        var d = document.createElement('div');
+        d.className = 'duck';
+        if (Math.random() > 0.5) d.classList.add('duck--rtl');
+        d.style.top               = (60 + Math.random() * (window.innerHeight * 0.55)) + 'px';
+        d.style.animationDuration = (5 + Math.random() * 5) + 's';
+
+        var inner = document.createElement('div');
+        inner.className = 'duck-inner';
+
+        // Corpo do drone
+        var bodyDiv = document.createElement('div');
+        bodyDiv.innerHTML = makeDrone();
+
+        // Cabo + queijo
+        var cableWrap = document.createElement('div');
+        cableWrap.className = 'drone-cable-wrap';
+        var cable = document.createElement('div');
+        cable.className = 'drone-cable';
+        var cheeseDiv = document.createElement('div');
+        cheeseDiv.className = 'drone-cheese';
+        cheeseDiv.innerHTML = makeCheese();
+        cableWrap.appendChild(cable);
+        cableWrap.appendChild(cheeseDiv);
+
+        inner.appendChild(bodyDiv);
+        inner.appendChild(cableWrap);
+        inner.addEventListener('click', function(e) {
+          e.stopPropagation();
+          shoot(d, cheeseDiv);
+        });
+
+        d.appendChild(inner);
+        document.body.appendChild(d);
+        d.addEventListener('animationend', function() {
+          if (!d.classList.contains('duck--hit') && d.parentNode) d.parentNode.removeChild(d);
+        });
+      }
+
+      // Scroll trigger — mais esparso
+      window.addEventListener('scroll', function() {
+        var sy = window.scrollY;
+        if (sy - last > DELTA) {
+          last = sy;
+          if (Math.random() > 0.55) spawn();  // 45% de chance
+        }
+      }, { passive: true });
+
+      // Timer trigger — bem mais lento
+      function timerSpawn() {
+        spawn();
+        setTimeout(timerSpawn, 15000 + Math.random() * 15000);  // 15-30s
+      }
+      setTimeout(timerSpawn, 7000);
+    }());
+
+    // ─── Hero Loader ──────────────────────────────────────────────
+    (function() {
+      var loader = document.getElementById('hero-loader');
+      var video  = document.getElementById('hero-video');
+      if (!loader) return;
+
+      var dismissed = false;
+      function dismiss() {
+        if (dismissed) return;
+        dismissed = true;
+        setTimeout(function() {
+          loader.classList.add('fade-out');
+          setTimeout(function() {
+            if (loader.parentNode) loader.parentNode.removeChild(loader);
+          }, 750);
+        }, 1500);
+      }
+
+      if (video) {
+        video.addEventListener('canplaythrough', dismiss);
+        video.addEventListener('loadeddata', dismiss);
+        if (video.readyState >= 3) dismiss();
+      }
+      setTimeout(dismiss, 9000); // fallback absoluto
+    }());
+  </script>
+
 </body>
 </html>
