@@ -1,0 +1,76 @@
+---
+const services = [
+  {
+    title: 'Arquitetura de Sistemas',
+    desc: 'Da fundação ao produto em escala — microserviços, serverless, GCP e decisões de arquitetura que resistem ao crescimento real.',
+  },
+  {
+    title: 'FinTech & Pagamentos',
+    desc: 'Pix, cartão de crédito e débito, wallets, open banking e BaaS — com a confiabilidade de quem fez isso em produção.',
+  },
+  {
+    title: 'AI Engineering',
+    desc: 'LLMs, Vertex AI e modelos de ML integrados ao produto. Não só prova de conceito — em produção, com pipeline real.',
+  },
+  {
+    title: 'Mobile',
+    desc: 'Flutter, iOS e Android. Apps cross-platform que chegam na loja — com qualidade de produto, não só de código.',
+  },
+  {
+    title: 'Consultoria Técnica',
+    desc: 'Tech lead externo ou revisão de arquitetura para founders e times que precisam de alguém que já construiu do zero.',
+  },
+  {
+    title: 'Data & Observabilidade',
+    desc: 'BigQuery, Amplitude, on-call e métricas que guiam backlog e roadmap — não só dashboards bonitos.',
+  },
+];
+---
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">O que faço</span>
+    <div class="services gap-grid">
+      {services.map((s) => (
+        <div class="service-cell">
+          <h3 class="service-title">{s.title}</h3>
+          <p class="service-desc">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.services {
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin-top: var(--sp-4);
+}
+
+.service-cell {
+  padding: var(--sp-4) var(--sp-4) var(--sp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+
+.service-title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.service-desc {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+@media (max-width: 768px) {
+  .services {
+    grid-template-columns: 1fr;
+  }
+}
+</style>

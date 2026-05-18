@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sobre — Dulval</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    if (localStorage.getItem('theme') === 'dark') document.body && document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #fafaf9; --surface: #ffffff; --surface-dim: #f4f4f2;
+      --text-primary: #0d0d0c; --text-secondary: #525250; --text-muted: #9a9a96;
+      --border: #e8e8e4; --font: 'DM Sans', system-ui, sans-serif;
+      --fs-xs: 11px; --fs-sm: 13px; --fs-md: 15px; --fs-lg: 18px; --fs-xl: 24px; --fs-2xl: 36px;
+      --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px; --sp-5: 48px; --sp-6: 64px; --sp-7: 72px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+    }
+    body {
+      background: var(--bg); color: var(--text-primary); font-family: var(--font);
+      -webkit-font-smoothing: antialiased; padding-top: 88px; display: block;
+    }
+    body.dark {
+      --bg: #0b0d13; --surface: #12141d; --surface-dim: #16181f;
+      --text-primary: #e2e0db; --text-secondary: #7a7c88; --text-muted: #484a56; --border: #1c1e2c;
+    }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+    .page-header {
+      padding: var(--sp-6) 0 var(--sp-5);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-2);
+    }
+    .page-title {
+      font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.022em; line-height: 1.2;
+    }
+
+    .about-layout {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: var(--sp-7);
+      padding: var(--sp-6) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .about-bio p {
+      font-size: var(--fs-md); color: var(--text-secondary); line-height: 1.7;
+      margin-bottom: var(--sp-3);
+    }
+    .about-bio p:last-child { margin-bottom: 0; }
+
+    .about-aside { display: flex; flex-direction: column; gap: var(--sp-4); }
+    .tag-section { display: flex; flex-direction: column; gap: var(--sp-2); }
+    .tag-label {
+      font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.1em;
+      text-transform: uppercase; color: var(--text-muted);
+    }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+    .tag {
+      font-size: var(--fs-xs); padding: 4px 10px;
+      border: 1px solid var(--border); border-radius: 100px;
+      color: var(--text-secondary); background: var(--surface);
+    }
+
+    @media (max-width: 680px) {
+      .about-layout { grid-template-columns: 1fr; gap: var(--sp-4); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <p class="page-eyebrow">Quem sou</p>
+      <h1 class="page-title">Sobre</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="about-layout">
+
+      <div class="about-bio">
+        <p>Senior Software Engineer com 12+ anos construindo e escalando produtos digitais. Atuei como founding engineer e staff engineer, liderando decisões técnicas críticas e definindo fundações arquiteturais de longo prazo.</p>
+        <p>Sólida base em arquitetura, sistemas distribuídos e integrações complexas. Experiência real levando produtos do 0→1, com foco em performance, confiabilidade e simplicidade operacional.</p>
+        <p>Nos últimos anos, venho aplicando machine learning e IA em produtos reais — com foco em eficiência e impacto tangível no negócio, além do hype.</p>
+        <p>Perfil híbrido que combina execução e estratégia. Confortável entre código, arquitetura e produto — e confortável também saindo da cidade para cuidar de uma lavoura de café.</p>
+      </div>
+
+      <div class="about-aside">
+        <div class="tag-section">
+          <span class="tag-label">foco</span>
+          <div class="tag-row">
+            <span class="tag">Founding Team</span>
+            <span class="tag">AI Engineering</span>
+            <span class="tag">0 → 1</span>
+            <span class="tag">Startups</span>
+            <span class="tag">FinTech</span>
+          </div>
+        </div>
+        <div class="tag-section">
+          <span class="tag-label">stack</span>
+          <div class="tag-row">
+            <span class="tag">Go</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">Dart / Flutter</span>
+            <span class="tag">React</span>
+            <span class="tag">GCP</span>
+          </div>
+        </div>
+        <div class="tag-section">
+          <span class="tag-label">fora do teclado</span>
+          <div class="tag-row">
+            <span class="tag">Café de montanha</span>
+            <span class="tag">Piloto de drone</span>
+            <span class="tag">Caminho da Fé</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer data-component></footer>
+  <div data-dock></div>
+  <script src="assets/js/shell.js"></script>
+</body>
+</html>

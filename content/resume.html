@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diego Dulval — Currículo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --text-primary:   #111110;
+      --text-secondary: #5c5c59;
+      --text-muted:     #9b9b97;
+      --border:         #e5e5e2;
+      --font-sans: 'Inter', system-ui, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { font-size: 15px; }
+
+    body {
+      font-family: var(--font-sans);
+      color: var(--text-primary);
+      background: #fff;
+      -webkit-font-smoothing: antialiased;
+      line-height: 1.6;
+    }
+
+    .page {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 56px 60px;
+    }
+
+    /* ─── Header ─── */
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 32px;
+    }
+
+    .header-left h1 {
+      font-size: 30px;
+      font-weight: 600;
+      letter-spacing: -0.025em;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .header-left .title {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    .header-right {
+      text-align: right;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .header-right a,
+    .header-right span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+
+    /* ─── Resumo ─── */
+
+    .summary {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.75;
+      padding-bottom: 28px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 28px;
+    }
+
+    /* ─── Section ─── */
+
+    .section {
+      margin-bottom: 28px;
+    }
+
+    .section-title {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 16px;
+    }
+
+    /* ─── Experience ─── */
+
+    .exp-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 20px;
+      padding-bottom: 18px;
+      margin-bottom: 18px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .exp-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    .exp-period {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--text-muted);
+      padding-top: 2px;
+      line-height: 1.5;
+    }
+
+    .exp-company {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 2px;
+    }
+
+    .exp-role {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+    }
+
+    .exp-desc {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .exp-desc ul {
+      padding-left: 16px;
+    }
+
+    .exp-desc li {
+      margin-bottom: 3px;
+    }
+
+    /* ─── Two-column footer ─── */
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-section-title {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .tag {
+      font-size: 11px;
+      color: var(--text-secondary);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      padding: 2px 7px;
+    }
+
+    .info-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .info-list li {
+      font-size: 12.5px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    .info-list li strong {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* ─── Print ─── */
+
+    @media print {
+      html { font-size: 13px; }
+
+      body { background: #fff; }
+
+      .page {
+        padding: 32px 40px;
+        max-width: 100%;
+      }
+
+      a { color: inherit; }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="header-left">
+      <h1>Diego Dulval</h1>
+      <p class="title">Senior Software Engineer · Founding Engineer · AI Engineering</p>
+    </div>
+    <div class="header-right">
+      <span>Borda da Mata, MG — Brasil</span>
+      <a href="mailto:diegodifreitas@gmail.com">diegodifreitas@gmail.com</a>
+      <a href="https://linkedin.com/in/diegodulval">linkedin.com/in/diegodulval</a>
+      <a href="https://github.com/diegodulval">github.com/diegodulval</a>
+      <a href="https://dulval.com">dulval.com</a>
+    </div>
+  </header>
+
+  <!-- Resumo -->
+  <p class="summary">
+    Senior Software Engineer com 12+ anos de experiência construindo e escalando produtos digitais. Sólida base em arquitetura, sistemas distribuídos e integrações complexas. Experiência prática levando produtos do 0→1 e escalando com foco em performance, confiabilidade e simplicidade operacional. Atuei como founding engineer e em nível staff, liderando decisões técnicas críticas e definindo fundações arquiteturais de longo prazo. Nos últimos anos venho aplicando machine learning e IA em produtos reais — com foco em eficiência e impacto tangível no negócio, além do hype. Perfil híbrido que combina execução e estratégia: confortável entre código, arquitetura e produto.
+  </p>
+
+  <!-- Experiência -->
+  <div class="section">
+    <p class="section-title">Experiência</p>
+
+    <div class="exp-item">
+      <div class="exp-period">jan/2022 — fev/2026<br>4 anos 2 meses</div>
+      <div class="exp-content">
+        <p class="exp-company">Noh — Plataforma Financeira</p>
+        <p class="exp-role">Founding Staff Software Engineer</p>
+        <div class="exp-desc">
+          <ul>
+            <li>Construiu a plataforma do 0→1, atingindo +60M de TPV mensal</li>
+            <li>Liderou a arquitetura do sistema com foco em escalabilidade, confiabilidade e observabilidade</li>
+            <li>Responsável pelo backend, mobile (Flutter) e integrações Apple Pay / Google Pay</li>
+            <li>Desenvolveu backoffice e ferramentas operacionais para suporte em escala</li>
+            <li>Atuou como on-call e colaborou diretamente com produto e negócio</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">ago/2019 — jan/2022<br>2 anos 5 meses</div>
+      <div class="exp-content">
+        <p class="exp-company">Avenue Code</p>
+        <p class="exp-role">Tech Lead · AI Engineer · Senior Software Engineer</p>
+        <div class="exp-desc">
+          <ul>
+            <li>Liderança técnica de times em projetos para clientes Fortune 100 (healthcare, FinTech, automotive, retail)</li>
+            <li>Atuação como AI Engineer em projetos de IA aplicada — geração automatizada de landing pages e sistemas financeiros (GuiaBolso)</li>
+            <li>Clientes em EUA, Brasil, Canadá e Europa</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">2018 — 2019</div>
+      <div class="exp-content">
+        <p class="exp-company">Aurora Soluções Tecnológicas</p>
+        <p class="exp-role">CTO</p>
+        <div class="exp-desc">
+          <ul>
+            <li>CTO — responsável pelas decisões de arquitetura, tecnologia e infraestrutura</li>
+            <li>Projetos de IoT, Big Data e Automação Industrial</li>
+            <li>Consultoria em desenvolvimento de software, design e prototipação</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">fev/2017 — dez/2018<br>1 ano 11 meses</div>
+      <div class="exp-content">
+        <p class="exp-company">FAI / NPDI</p>
+        <p class="exp-role">Software Engineer</p>
+        <div class="exp-desc">
+          <ul>
+            <li>Pesquisa aplicada — especificação, projeto e construção de software web e mobile</li>
+            <li>Stack: ReactJS, AngularJS, Java Spring, PostgreSQL, Docker, Jenkins</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">ago/2016 — jan/2017</div>
+      <div class="exp-content">
+        <p class="exp-company">Inatel / ICC</p>
+        <p class="exp-role">Software Developer Intern</p>
+        <div class="exp-desc">
+          <ul>
+            <li>Plataforma .NET para controle de linha de produção, pré-venda e suporte ao cliente</li>
+            <li>Stack: C#, NHibernate, MVC, SQL, Bootstrap — metodologia Scrum</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="exp-item">
+      <div class="exp-period">2012 — 2016</div>
+      <div class="exp-content">
+        <p class="exp-company">Origem — Design · 3D · Front-end</p>
+        <p class="exp-role">Citrox · Agência Opte · BluMonkey · FAI</p>
+        <div class="exp-desc">
+          <ul>
+            <li>Hotsites HTML5, email marketing, material gráfico e identidade visual</li>
+            <li>Jogos mobile 3D: modelagem, rigging, animação low-poly (iOS/Android/Windows)</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer grid: Stack + Formação / Prêmios -->
+  <div class="footer-grid">
+
+    <div>
+      <p class="footer-section-title">Stack</p>
+      <div class="tag-list">
+        <span class="tag">Python</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Dart / Flutter</span>
+        <span class="tag">React</span>
+        <span class="tag">Node.js</span>
+        <span class="tag">Java Spring</span>
+        <span class="tag">PostgreSQL</span>
+        <span class="tag">Docker</span>
+        <span class="tag">Machine Learning</span>
+        <span class="tag">Deep Learning</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Big Data</span>
+        <span class="tag">REST APIs</span>
+        <span class="tag">Apple Pay · Google Pay</span>
+      </div>
+    </div>
+
+    <div>
+      <p class="footer-section-title">Formação & Reconhecimentos</p>
+      <ul class="info-list">
+        <li><strong>MBA em Data Science, IA e Analytics</strong> — USP/Esalq (em andamento)<br>ML, Deep Learning, NLP, Python, Big Data · 360h · EaD</li>
+        <li><strong>Bacharel em Sistemas de Informação</strong> — FAI (2014–2017)</li>
+        <li><strong>Técnico em Informática</strong> — Col. Tec. Dr. Delfim Moreira (2012–2014)</li>
+      </ul>
+      <br>
+      <p class="footer-section-title">Prêmios</p>
+      <ul class="info-list">
+        <li>2º lugar — Startup Weekend Inatel 2014</li>
+        <li>1º lugar — Maratona de Programação da FAI</li>
+        <li>Prêmio Municipal de Inovação — Santa Rita do Sapucaí</li>
+      </ul>
+      <br>
+      <p class="footer-section-title">Idiomas</p>
+      <ul class="info-list">
+        <li>Português — Nativo</li>
+        <li>Inglês — Intermediário</li>
+        <li>Espanhol — Intermediário</li>
+      </ul>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,79 @@
+---
+---
+<section class="section cta-outer">
+  <div class="container">
+    <div class="cta-block">
+      <div class="cta-content">
+        <span class="eyebrow">Vamos trabalhar</span>
+        <h2 class="cta-title">Tem um produto para construir ou um sistema para evoluir?</h2>
+        <p class="cta-body">
+          Do zero ou uma revisão de arquitetura — estou disponível
+          para uma conversa direta.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <a href="mailto:diego@dulval.com" class="btn btn-primary">Conversar</a>
+        <a
+          href="https://linkedin.com/in/diegodulval"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn btn-ghost"
+        >
+          LinkedIn
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.cta-outer {
+  border-bottom: none;
+}
+
+.cta-block {
+  background: var(--surface-dim);
+  border-radius: var(--radius-md);
+  padding: var(--sp-7) var(--sp-6);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+
+.cta-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  margin-top: var(--sp-2);
+  margin-bottom: var(--sp-3);
+}
+
+.cta-body {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  flex-shrink: 0;
+}
+
+@media (max-width: 768px) {
+  .cta-block {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--sp-5);
+  }
+
+  .cta-actions {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+</style>

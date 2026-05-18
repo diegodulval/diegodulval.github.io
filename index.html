@@ -464,9 +464,17 @@
     </svg>
   </div>
 
+  <!-- Mobile dock nav popup -->
+  <div class="dock-mobile-nav" id="dock-mobile-nav" aria-hidden="true">
+    <a href="#sobre" class="dock-mobile-link">sobre</a>
+    <a href="#projetos" class="dock-mobile-link">projetos</a>
+    <a href="#experiencia" class="dock-mobile-link">trajetória</a>
+    <a href="#contato" class="dock-mobile-link">contato</a>
+  </div>
+
   <!-- Dock flutuante -->
   <div class="dock">
-    <a href="index.html" class="dock-logo" aria-label="Dulval — início">
+    <a href="index.html" class="dock-logo" id="dock-logo-btn" aria-label="Dulval — início">
       <img src="assets/logo.png" class="dock-logo-img" alt="">
     </a>
     <div class="dock-sep"></div>
@@ -785,6 +793,35 @@
         setTimeout(timerSpawn, 15000 + Math.random() * 15000);  // 15-30s
       }
       setTimeout(timerSpawn, 7000);
+    }());
+
+    // ─── Mobile dock logo → nav toggle ───────────────────────────
+    (function() {
+      var logoBtn  = document.getElementById('dock-logo-btn');
+      var mobileNav = document.getElementById('dock-mobile-nav');
+      if (!logoBtn || !mobileNav) return;
+
+      logoBtn.addEventListener('click', function(e) {
+        if (window.innerWidth > 700) return;
+        e.preventDefault();
+        var isOpen = mobileNav.classList.toggle('open');
+        mobileNav.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      });
+
+      mobileNav.querySelectorAll('a').forEach(function(a) {
+        a.addEventListener('click', function() {
+          mobileNav.classList.remove('open');
+          mobileNav.setAttribute('aria-hidden', 'true');
+        });
+      });
+
+      document.addEventListener('click', function(e) {
+        if (window.innerWidth > 700) return;
+        if (!e.target.closest('.dock') && !e.target.closest('#dock-mobile-nav')) {
+          mobileNav.classList.remove('open');
+          mobileNav.setAttribute('aria-hidden', 'true');
+        }
+      });
     }());
 
     // ─── Hero Loader ──────────────────────────────────────────────

@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trajetória — Dulval</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    if (localStorage.getItem('theme') === 'dark') document.body && document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #fafaf9; --surface: #ffffff; --surface-dim: #f4f4f2;
+      --text-primary: #0d0d0c; --text-secondary: #525250; --text-muted: #9a9a96;
+      --border: #e8e8e4; --font: 'DM Sans', system-ui, sans-serif;
+      --fs-xs: 11px; --fs-sm: 13px; --fs-md: 15px; --fs-lg: 18px; --fs-xl: 24px; --fs-2xl: 36px;
+      --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px; --sp-5: 48px; --sp-6: 64px; --sp-7: 72px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+    }
+    body {
+      background: var(--bg); color: var(--text-primary); font-family: var(--font);
+      -webkit-font-smoothing: antialiased; padding-top: 88px; display: block;
+    }
+    body.dark {
+      --bg: #0b0d13; --surface: #12141d; --surface-dim: #16181f;
+      --text-primary: #e2e0db; --text-secondary: #7a7c88; --text-muted: #484a56; --border: #1c1e2c;
+    }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+    /* Chart hero */
+    .traj-hero {
+      position: relative;
+      overflow: hidden;
+      background: #07090e;
+      margin-bottom: 0;
+    }
+    .traj-hero video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%; object-fit: cover; opacity: 0.18;
+    }
+    .traj-chart {
+      position: relative; z-index: 2;
+      display: block; width: 100%; height: auto;
+      padding: 32px 0 12px;
+    }
+
+    /* Page header */
+    .page-header {
+      padding: var(--sp-6) 0 var(--sp-5);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-2);
+    }
+    .page-title {
+      font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.022em; line-height: 1.2;
+    }
+
+    /* Timeline */
+    .timeline {
+      padding: var(--sp-6) 0 var(--sp-7);
+      display: flex;
+      flex-direction: column;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: var(--sp-5);
+      padding: var(--sp-4) 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+
+    .timeline-period {
+      font-size: var(--fs-xs); color: var(--text-muted);
+      font-weight: 500; padding-top: 3px; line-height: 1.5;
+    }
+    .timeline-content { display: flex; flex-direction: column; gap: 6px; }
+
+    .timeline-company {
+      font-size: var(--fs-lg); font-weight: 700; letter-spacing: -0.015em;
+    }
+    .timeline-role {
+      font-size: var(--fs-sm); color: var(--text-muted); font-weight: 500;
+    }
+    .timeline-desc {
+      font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65;
+      margin-top: 4px;
+    }
+    .timeline-link {
+      font-size: var(--fs-xs); color: var(--text-muted); margin-top: 6px;
+      transition: color 0.15s;
+    }
+    .timeline-link:hover { color: var(--text-primary); }
+
+    @media (max-width: 560px) {
+      .timeline-item { grid-template-columns: 1fr; gap: var(--sp-2); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Chart visual -->
+  <div class="traj-hero">
+    <video src="assets/web/intro.mp4" autoplay muted playsinline preload="auto" aria-hidden="true" onended="this.pause()"></video>
+    <svg class="traj-chart" viewBox="0 0 1200 260" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+
+      <text x="55" y="31" font-family="'DM Sans', system-ui, sans-serif" font-size="11" font-weight="600" fill="rgba(255,255,255,0.28)" letter-spacing="4">TRAJETÓRIA · 2012 — 2026</text>
+      <text x="1145" y="31" text-anchor="end" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="600" fill="rgba(59,127,255,0.60)" letter-spacing="3">ATUAL</text>
+
+      <line x1="50" y1="215" x2="1150" y2="215" stroke="rgba(255,255,255,0.14)" stroke-width="1"/>
+
+      <line x1="55"   y1="215" x2="55"   y2="223" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+      <text x="55"   y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.30)">2012</text>
+
+      <line x1="207"  y1="215" x2="207"  y2="220" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <text x="207"  y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.18)">2014</text>
+
+      <line x1="360"  y1="215" x2="360"  y2="220" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <text x="360"  y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.18)">2016</text>
+
+      <line x1="513"  y1="215" x2="513"  y2="220" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <text x="513"  y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.18)">2018</text>
+
+      <line x1="666"  y1="215" x2="666"  y2="220" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <text x="666"  y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.18)">2020</text>
+
+      <line x1="820"  y1="215" x2="820"  y2="223" stroke="rgba(255,255,255,0.28)" stroke-width="1"/>
+      <text x="820"  y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.30)">2022</text>
+
+      <line x1="973"  y1="215" x2="973"  y2="220" stroke="rgba(255,255,255,0.12)" stroke-width="1"/>
+      <text x="973"  y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(255,255,255,0.18)">2024</text>
+
+      <line x1="1140" y1="215" x2="1140" y2="223" stroke="rgba(59,127,255,0.50)" stroke-width="1"/>
+      <text x="1140" y="237" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" fill="rgba(59,127,255,0.60)">2026</text>
+
+      <!-- Origem  2012–2015 -->
+      <rect x="55"  y="197" width="268" height="18" fill="rgba(255,255,255,0.05)"/>
+      <line x1="55"  y1="197" x2="323"  y2="197" stroke="rgba(255,255,255,0.16)" stroke-width="0.5"/>
+      <text x="58"  y="210" font-family="'DM Sans', system-ui, sans-serif" font-size="9" font-weight="600" fill="rgba(255,255,255,0.38)" letter-spacing="2">ORIGEM</text>
+
+      <!-- Citrox  jun/2015–ago/2016 -->
+      <rect x="325" y="187" width="88"  height="28" fill="rgba(255,255,255,0.07)"/>
+      <line x1="325" y1="187" x2="413"  y2="187" stroke="rgba(255,255,255,0.20)" stroke-width="0.5"/>
+      <text x="328" y="200" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.48)" letter-spacing="1">CITROX</text>
+      <text x="328" y="211" font-family="'DM Sans', system-ui, sans-serif" font-size="6.5" fill="rgba(255,255,255,0.26)">front-end</text>
+
+      <!-- Inatel  ago/2016–jan/2017 -->
+      <rect x="415" y="187" width="30"  height="28" fill="rgba(255,255,255,0.07)"/>
+      <line x1="415" y1="187" x2="445"  y2="187" stroke="rgba(255,255,255,0.20)" stroke-width="0.5"/>
+      <text x="430" y="179" text-anchor="middle" font-family="'DM Sans', system-ui, sans-serif" font-size="8" font-weight="600" fill="rgba(255,255,255,0.38)">ICC</text>
+      <line x1="430" y1="181" x2="430"  y2="187" stroke="rgba(255,255,255,0.15)" stroke-width="0.5"/>
+
+      <!-- FAI  fev/2017–dez/2018 -->
+      <rect x="447" y="165" width="136" height="50" fill="rgba(255,255,255,0.08)"/>
+      <line x1="447" y1="165" x2="583"  y2="165" stroke="rgba(255,255,255,0.24)" stroke-width="0.5"/>
+      <text x="450" y="179" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.56)" letter-spacing="1">FAI · NPDI</text>
+      <text x="450" y="191" font-family="'DM Sans', system-ui, sans-serif" font-size="7" fill="rgba(255,255,255,0.30)">software eng.</text>
+
+      <!-- Aurora  2018–2019 -->
+      <rect x="585" y="141" width="58"  height="74" fill="rgba(255,255,255,0.09)"/>
+      <line x1="585" y1="141" x2="643"  y2="141" stroke="rgba(255,255,255,0.28)" stroke-width="0.5"/>
+      <text x="588" y="156" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.60)" letter-spacing="1">AURORA</text>
+      <text x="588" y="168" font-family="'DM Sans', system-ui, sans-serif" font-size="7" fill="rgba(255,255,255,0.34)">CTO</text>
+
+      <!-- Avenue Code  ago/2019–jan/2022 -->
+      <rect x="645" y="115" width="175" height="100" fill="rgba(255,255,255,0.10)"/>
+      <line x1="645" y1="115" x2="820"  y2="115" stroke="rgba(255,255,255,0.32)" stroke-width="0.5"/>
+      <text x="648" y="130" font-family="'DM Sans', system-ui, sans-serif" font-size="10" font-weight="700" fill="rgba(255,255,255,0.70)" letter-spacing="1">AVENUE CODE</text>
+      <text x="648" y="143" font-family="'DM Sans', system-ui, sans-serif" font-size="7" fill="rgba(255,255,255,0.40)">tech lead · AI eng.</text>
+      <text x="648" y="154" font-family="'DM Sans', system-ui, sans-serif" font-size="6.5" fill="rgba(255,255,255,0.24)">fortune 100</text>
+
+      <!-- Noh  jan/2022–fev/2026 — destaque -->
+      <rect x="822" y="67"  width="318" height="148" fill="rgba(59,127,255,0.10)"/>
+      <line x1="822" y1="67"  x2="1140" y2="67"  stroke="rgba(59,127,255,0.80)" stroke-width="1"/>
+      <line x1="822" y1="67"  x2="822"  y2="215" stroke="rgba(59,127,255,0.22)" stroke-width="0.5"/>
+      <text x="832" y="93"  font-family="'DM Sans', system-ui, sans-serif" font-size="20" font-weight="800" fill="rgba(255,255,255,0.92)" letter-spacing="6">NOH</text>
+      <text x="832" y="107" font-family="'DM Sans', system-ui, sans-serif" font-size="7.5" fill="rgba(160,205,255,0.70)">founding staff · 4 anos</text>
+      <text x="832" y="120" font-family="'DM Sans', system-ui, sans-serif" font-size="7"   fill="rgba(59,127,255,0.88)">+60M TPV mensal</text>
+
+      <polyline points="1140,212 1150,215 1140,218" fill="none" stroke="rgba(59,127,255,0.50)" stroke-width="1"/>
+    </svg>
+  </div>
+
+  <!-- Timeline -->
+  <div class="container">
+    <div class="page-header">
+      <p class="page-eyebrow">Carreira</p>
+      <h1 class="page-title">Trajetória</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="timeline">
+
+      <div class="timeline-item">
+        <div class="timeline-period">jan/2022 — fev/2026</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">Noh</h2>
+          <p class="timeline-role">Founding Staff Software Engineer</p>
+          <p class="timeline-desc">Plataforma financeira construída do zero para casais. Arquitetura, backend em Go, Flutter mobile, integrações com carteiras digitais, BaaS, antifraude e sistemas de pagamento — Pix, débito e crédito. Construção de ferramentas de backoffice e atuação em on-call com observabilidade ativa.</p>
+          <a href="https://noh.com.br" target="_blank" rel="noopener" class="timeline-link">noh.com.br ↗</a>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">ago/2019 — jan/2022</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">Avenue Code</h2>
+          <p class="timeline-role">Tech Lead · AI Engineer · Senior Software Engineer</p>
+          <p class="timeline-desc">Liderança técnica de times distribuídos e atuação como AI engineer em projetos de IA aplicada — geração automatizada de landing pages e plataforma de gestão financeira (GuiaBolso). Clientes Fortune 100 nos setores de Healthcare, FinTech, Automotive e Retail.</p>
+          <a href="https://avenuecode.com" target="_blank" rel="noopener" class="timeline-link">avenuecode.com ↗</a>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2018 — 2019</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">Aurora Soluções</h2>
+          <p class="timeline-role">CTO</p>
+          <p class="timeline-desc">Consultoria e desenvolvimento de produtos próprios em IoT, finanças pessoais e automação industrial. Responsável por decisões de arquitetura, tecnologia e infraestrutura. Ciclos curtos, entrega contínua e sensibilidade de produto.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">fev/2017 — dez/2018</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">FAI / NPDI</h2>
+          <p class="timeline-role">Software Engineer</p>
+          <p class="timeline-desc">Pesquisa aplicada no Núcleo de Desenvolvimento e Inovação da FAI. Especificação de requisitos, projeto e construção de software web e mobile. Stack: ReactJS, AngularJS, Java Spring, PostgreSQL, Hibernate, Docker, Jenkins.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">ago/2016 — jan/2017</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">Inatel / ICC</h2>
+          <p class="timeline-role">Software Developer</p>
+          <p class="timeline-desc">Plataforma web corporativa em .NET para controle de linha de produção, pré-venda, pós-venda e suporte ao cliente. Integração com ERP Benner. Metodologia Scrum. Stack: C#, NHibernate, MVC, SQL, jQuery, Razor.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">jun/2015 — ago/2016</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">Citrox</h2>
+          <p class="timeline-role">Web Designer & Front-End Developer</p>
+          <p class="timeline-desc">Hotsites HTML5, email marketing, peças para redes sociais e materiais gráficos para empresa de segurança eletrônica. Ferramentas: Photoshop, Illustrator, CorelDraw, 3ds Max, Blender.</p>
+        </div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-period">2012 — 2015</div>
+        <div class="timeline-content">
+          <h2 class="timeline-company">Origem</h2>
+          <p class="timeline-role">Design · 3D · Programação</p>
+          <p class="timeline-desc">BluMonkey Games (jogos mobile 3D para iOS e Android), Agência Opte (design e marca para múltiplos clientes), FAI (programação, identidade visual, modelagem 3D).</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <footer data-component></footer>
+  <div data-dock></div>
+  <script src="assets/js/shell.js"></script>
+</body>
+</html>

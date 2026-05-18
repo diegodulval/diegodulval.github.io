@@ -1,0 +1,115 @@
+---
+const cards = [
+  {
+    title: 'Frontend',
+    desc: 'React, Redux, TypeScript, AngularJS — interfaces com sensibilidade de design e atenção a produto',
+    gradient: 'linear-gradient(150deg, #0d1117 0%, #192133 100%)',
+    overlay: 'linear-gradient(to top, rgba(13,17,23,0.9) 0%, rgba(13,17,23,0.3) 100%)',
+  },
+  {
+    title: 'Backend',
+    desc: 'Go, Node.js, Java Spring, Python — serverless, GCP, Firebase e APIs confiáveis em produção',
+    gradient: 'linear-gradient(150deg, #0a1a0d 0%, #163320 100%)',
+    overlay: 'linear-gradient(to top, rgba(10,26,13,0.9) 0%, rgba(10,26,13,0.3) 100%)',
+  },
+  {
+    title: 'Mobile',
+    desc: 'Flutter, Dart, iOS, Android, React Native, Kotlin — apps cross-platform com qualidade de produto',
+    gradient: 'linear-gradient(150deg, #150d1a 0%, #2a1833 100%)',
+    overlay: 'linear-gradient(to top, rgba(21,13,26,0.9) 0%, rgba(21,13,26,0.3) 100%)',
+  },
+  {
+    title: 'FinTech & AI',
+    desc: 'Pix, cartão, wallets, open banking, BaaS · LLMs, Vertex AI, ML pipelines em produção real',
+    gradient: 'linear-gradient(150deg, #0d1a17 0%, #0a2e22 100%)',
+    overlay: 'linear-gradient(to top, rgba(13,26,23,0.9) 0%, rgba(13,26,23,0.3) 100%)',
+  },
+];
+---
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Stack</span>
+    <div class="eco-grid">
+      {cards.map((c) => (
+        <div class="eco-card" style={`background: ${c.gradient};`}>
+          <div class="eco-overlay" style={`background: ${c.overlay};`}></div>
+          <div class="eco-content">
+            <h3 class="eco-title">{c.title}</h3>
+            <p class="eco-desc">{c.desc}</p>
+            <div class="eco-arrow">→</div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.eco-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+
+.eco-card {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  height: 240px;
+  transition: transform 0.2s;
+  cursor: default;
+}
+
+.eco-card:hover {
+  transform: translateY(-2px);
+}
+
+.eco-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.eco-content {
+  position: relative;
+  z-index: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: var(--sp-3);
+}
+
+.eco-title {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-1);
+}
+
+.eco-desc {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  margin-bottom: var(--sp-2);
+}
+
+.eco-arrow {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+@media (max-width: 768px) {
+  .eco-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+</style>

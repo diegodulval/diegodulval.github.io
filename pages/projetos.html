@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projetos — Dulval</title>
+  <link rel="icon" href="assets/logo.png" type="image/png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script>
+    if (localStorage.getItem('theme') === 'dark') document.body && document.body.classList.add('dark');
+    document.addEventListener('DOMContentLoaded', function() {
+      if (localStorage.getItem('theme') === 'dark') document.body.classList.add('dark');
+    });
+  </script>
+  <style>
+    :root {
+      --bg: #fafaf9; --surface: #ffffff; --surface-dim: #f4f4f2;
+      --text-primary: #0d0d0c; --text-secondary: #525250; --text-muted: #9a9a96;
+      --border: #e8e8e4; --font: 'DM Sans', system-ui, sans-serif;
+      --fs-xs: 11px; --fs-sm: 13px; --fs-md: 15px; --fs-lg: 18px; --fs-xl: 24px; --fs-2xl: 36px;
+      --sp-1: 8px; --sp-2: 16px; --sp-3: 24px; --sp-4: 32px; --sp-5: 48px; --sp-6: 64px; --sp-7: 72px;
+      --radius-sm: 8px; --radius-md: 12px; --radius-lg: 16px;
+    }
+    body {
+      background: var(--bg); color: var(--text-primary); font-family: var(--font);
+      -webkit-font-smoothing: antialiased; padding-top: 88px; display: block;
+    }
+    body.dark {
+      --bg: #0b0d13; --surface: #12141d; --surface-dim: #16181f;
+      --text-primary: #e2e0db; --text-secondary: #7a7c88; --text-muted: #484a56; --border: #1c1e2c;
+    }
+    .container { max-width: 960px; margin: 0 auto; padding: 0 var(--sp-5); }
+
+    .page-header {
+      padding: var(--sp-6) 0 var(--sp-5);
+      border-bottom: 1px solid var(--border);
+    }
+    .page-eyebrow {
+      font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.12em;
+      text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-2);
+    }
+    .page-title {
+      font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.022em; line-height: 1.2;
+    }
+
+    .proj-stack {
+      padding: var(--sp-5) 0 var(--sp-7);
+      display: flex;
+      flex-direction: column;
+      gap: var(--sp-2);
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: 1fr 220px;
+      gap: var(--sp-5);
+      align-items: center;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: var(--sp-4) var(--sp-5);
+      position: sticky;
+      top: 112px;
+      transform-origin: top center;
+      transition: background 0.15s;
+      text-decoration: none;
+      color: inherit;
+    }
+    .project-card:hover { background: var(--surface-dim); }
+
+    .proj-type {
+      font-size: var(--fs-xs); font-weight: 500; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--text-muted);
+      display: block; margin-bottom: var(--sp-2);
+    }
+    .proj-name {
+      font-size: 28px; font-weight: 700; letter-spacing: -0.02em;
+      line-height: 1.15; margin-bottom: var(--sp-2);
+    }
+    .proj-desc {
+      font-size: var(--fs-sm); color: var(--text-secondary);
+      line-height: 1.6; margin-bottom: var(--sp-3);
+    }
+    .proj-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .proj-tag {
+      font-size: var(--fs-xs); padding: 3px 9px;
+      border: 1px solid var(--border); border-radius: 100px;
+      color: var(--text-muted); background: var(--surface-dim);
+    }
+
+    .proj-visual {
+      height: 140px;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      background: var(--surface-dim);
+      flex-shrink: 0;
+    }
+    .proj-visual img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      filter: grayscale(30%); opacity: 0.9; transition: opacity 0.2s;
+    }
+    .project-card:hover .proj-visual img { opacity: 1; filter: none; }
+
+    .proj-cta {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: var(--fs-xs); font-weight: 500;
+      color: var(--text-muted); margin-top: var(--sp-1);
+      transition: color 0.15s;
+    }
+    .project-card:hover .proj-cta { color: var(--text-primary); }
+
+    @media (max-width: 640px) {
+      .project-card { grid-template-columns: 1fr; }
+      .proj-visual { height: 180px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="page-header">
+      <p class="page-eyebrow">Trabalhos</p>
+      <h1 class="page-title">Projetos</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="proj-stack" id="proj-stack">
+
+      <a href="projetos/noh.html" class="project-card">
+        <div class="proj-text">
+          <span class="proj-type">FinTech · jan/2022 – fev/2026</span>
+          <h2 class="proj-name">Noh</h2>
+          <p class="proj-desc">Founding staff engineer da plataforma financeira para casais. Arquitetura 0→1, +60M de TPV mensal, Apple Pay, Google Pay e Pix. Atuação em backend, mobile Flutter, backoffice e on-call.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Go</span>
+            <span class="proj-tag">Flutter</span>
+            <span class="proj-tag">GCP</span>
+            <span class="proj-tag">Firebase</span>
+            <span class="proj-tag">FinTech</span>
+          </div>
+          <span class="proj-cta">ver projeto →</span>
+        </div>
+        <div class="proj-visual">
+          <img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy">
+        </div>
+      </a>
+
+      <a href="projetos/avenue-code.html" class="project-card">
+        <div class="proj-text">
+          <span class="proj-type">Consultoria · Tech Lead · ago/2019 – jan/2022</span>
+          <h2 class="proj-name">Avenue Code</h2>
+          <p class="proj-desc">Tech lead e AI engineer em projetos para clientes Fortune 100. FinTech (GuiaBolso), Healthcare, Automotive e Retail. Integração de modelos de ML em produção e liderança de times distribuídos.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Python</span>
+            <span class="proj-tag">React</span>
+            <span class="proj-tag">GCP</span>
+            <span class="proj-tag">Vertex AI</span>
+          </div>
+          <span class="proj-cta">ver projeto →</span>
+        </div>
+        <div class="proj-visual">
+          <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy">
+        </div>
+      </a>
+
+      <a href="projetos/aurora.html" class="project-card">
+        <div class="proj-text">
+          <span class="proj-type">Consultoria · CTO · 2018 – 2019</span>
+          <h2 class="proj-name">Aurora</h2>
+          <p class="proj-desc">Consultoria e desenvolvimento de produtos próprios. IoT, finança pessoal e automação industrial. Ciclos curtos, decisões de arquitetura, infraestrutura e entrega contínua.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">NodeJS</span>
+            <span class="proj-tag">React Native</span>
+            <span class="proj-tag">Java</span>
+            <span class="proj-tag">AWS</span>
+            <span class="proj-tag">MongoDB</span>
+          </div>
+          <span class="proj-cta">ver projeto →</span>
+        </div>
+        <div class="proj-visual">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy">
+        </div>
+      </a>
+
+      <a href="projetos/fai-npdi.html" class="project-card">
+        <div class="proj-text">
+          <span class="proj-type">Pesquisa Aplicada · fev/2017 – dez/2018</span>
+          <h2 class="proj-name">FAI / NPDI</h2>
+          <p class="proj-desc">Software engineer no Núcleo de Desenvolvimento e Inovação da FAI. Plataformas industriais, educacionais e de gestão, do levantamento de requisitos ao deploy.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">ReactJS</span>
+            <span class="proj-tag">Java Spring</span>
+            <span class="proj-tag">PostgreSQL</span>
+            <span class="proj-tag">Docker</span>
+          </div>
+          <span class="proj-cta">ver projeto →</span>
+        </div>
+        <div class="proj-visual">
+          <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy">
+        </div>
+      </a>
+
+      <a href="projetos/inatel.html" class="project-card">
+        <div class="proj-text">
+          <span class="proj-type">.NET · ago/2016 – jan/2017</span>
+          <h2 class="proj-name">Inatel / ICC</h2>
+          <p class="proj-desc">Plataforma corporativa para controle de linha de produção e suporte ao cliente em empresa do setor eletroeletrônico. Metodologia Scrum, integração com ERP Benner.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">C#</span>
+            <span class="proj-tag">NHibernate</span>
+            <span class="proj-tag">SQL</span>
+            <span class="proj-tag">.NET MVC</span>
+          </div>
+          <span class="proj-cta">ver projeto →</span>
+        </div>
+        <div class="proj-visual">
+          <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy">
+        </div>
+      </a>
+
+      <a href="projetos/blumonkey.html" class="project-card">
+        <div class="proj-text">
+          <span class="proj-type">Games · 2013</span>
+          <h2 class="proj-name">BluMonkey Games</h2>
+          <p class="proj-desc">Estúdio independente de jogos mobile. Modelagem 3D, design de personagens e publicação de títulos para iOS, Android e Windows Phone.</p>
+          <div class="proj-tags">
+            <span class="proj-tag">Blender</span>
+            <span class="proj-tag">Unity</span>
+            <span class="proj-tag">iOS</span>
+            <span class="proj-tag">Android</span>
+          </div>
+          <span class="proj-cta">ver projeto →</span>
+        </div>
+        <div class="proj-visual">
+          <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=700&q=75" alt="" loading="lazy">
+        </div>
+      </a>
+
+    </div>
+  </div>
+
+  <footer data-component></footer>
+  <div data-dock></div>
+  <script src="assets/js/shell.js"></script>
+  <script>
+  (function () {
+    var stack = document.getElementById('proj-stack');
+    if (!stack) return;
+    var cards = Array.from(stack.querySelectorAll('.project-card'));
+    var STICKY_TOP = 112;
+
+    cards.forEach(function (card, i) {
+      card.style.zIndex = 60 + i + 1;
+    });
+
+    function tick() {
+      cards.forEach(function (card, i) {
+        if (i >= cards.length - 1) return;
+        var rect = card.getBoundingClientRect();
+        var nextRect = cards[i + 1].getBoundingClientRect();
+        if (rect.top > STICKY_TOP + 2) {
+          card.style.transform = '';
+          return;
+        }
+        var progress = Math.max(0, Math.min(1,
+          (window.innerHeight - nextRect.top) / (window.innerHeight - STICKY_TOP)
+        ));
+        var scale = 1 - progress * 0.05;
+        var ty = -progress * 7;
+        card.style.transform = 'scale(' + scale.toFixed(4) + ') translateY(' + ty.toFixed(2) + 'px)';
+      });
+    }
+
+    window.addEventListener('scroll', tick, { passive: true });
+    tick();
+  }());
+  </script>
+</body>
+</html>
