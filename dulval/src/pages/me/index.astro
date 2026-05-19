@@ -30,29 +30,11 @@ const ecoLinks = [
   description="Founding Staff Engineer. Arquiteto de sistemas, especialista em FinTech e AI Engineering. Do zero ao produto, em escala real."
 >
   <Nav />
-  <Hero />
-  <Metrics />
+  <CTA />
   <Services />
+  <Hero />
   <Projects />
 
-  <!-- NOW PAGE -->
-  <section class="section">
-    <div class="container">
-      <span class="eyebrow">Now · maio 2026</span>
-      <h2 class="section-title">O que estou construindo</h2>
-      <div class="now-grid">
-        {nowItems.map((item) => (
-          <div class="now-card">
-            <div class="now-card-header">
-              <h3 class="now-name">{item.label}</h3>
-              <span class={`now-badge now-badge--${item.status.replace(' ', '-')}`}>{item.status}</span>
-            </div>
-            <p class="now-desc">{item.desc}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
 
   <!-- ECO LINKS -->
   <section class="section">
@@ -71,7 +53,7 @@ const ecoLinks = [
     </div>
   </section>
 
-  <CTA />
+
   <Footer />
 </Layout>
 

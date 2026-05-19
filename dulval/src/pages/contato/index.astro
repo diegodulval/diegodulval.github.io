@@ -1,0 +1,239 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Contato — Dulval"
+  description="Entre em contato com Diego Dulval — consultoria técnica, founding engineer e AI engineering."
+>
+  <Nav />
+
+  <div class="container">
+    <div class="page-header">
+      <p class="page-eyebrow">Fale comigo</p>
+      <h1 class="page-title">Contato</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="contact-intro">
+
+      <div class="contact-left">
+        <h2 class="contact-headline">Vamos construir<br />algo real.</h2>
+        <p class="contact-body">Founding engineer com trajetória que vai do design à arquitetura de sistemas financeiros em escala. Transito entre produto, backend, mobile e IA — e coloco a mão na massa. Se você tem um desafio interessante, quer contratar ou quer só trocar ideia sobre tecnologia, me manda uma mensagem.</p>
+        <span class="contact-avail">
+          <span class="contact-avail-dot"></span>
+          Disponível · Borda da Mata, MG · Brasil
+        </span>
+      </div>
+
+      <div class="contact-right">
+        <div>
+          <span class="contact-right-label">canais diretos</span>
+          <div class="contact-links">
+            <a href="mailto:diegodifreitas@gmail.com" class="contact-link">
+              <span class="contact-type">email</span>
+              <span class="contact-value">diegodifreitas@gmail.com</span>
+              <span class="contact-arrow">→</span>
+            </a>
+            <a href="https://linkedin.com/in/diegodulval" target="_blank" rel="noopener" class="contact-link">
+              <span class="contact-type">linkedin</span>
+              <span class="contact-value">linkedin.com/in/diegodulval</span>
+              <span class="contact-arrow">→</span>
+            </a>
+            <a href="https://github.com/diegodulval" target="_blank" rel="noopener" class="contact-link">
+              <span class="contact-type">github</span>
+              <span class="contact-value">github.com/diegodulval</span>
+              <span class="contact-arrow">→</span>
+            </a>
+          </div>
+        </div>
+        <div>
+          <span class="contact-right-label">aberto a</span>
+          <div class="open-tags">
+            <span class="tag">Consultoria técnica</span>
+            <span class="tag">Founding engineer</span>
+            <span class="tag">Tech lead</span>
+            <span class="tag">AI engineering</span>
+            <span class="tag">FinTech</span>
+            <span class="tag">Full-time</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="contact-services">
+      <div class="service-card">
+        <span class="service-num">01</span>
+        <h3 class="service-title">Consultoria Técnica</h3>
+        <p class="service-desc">Arquitetura de sistemas, revisão de stack, escala e confiabilidade. Do whiteboard ao deploy em produção.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">02</span>
+        <h3 class="service-title">Produto do Zero</h3>
+        <p class="service-desc">Founding engineer com experiência 0→1 real. MVP, integrações de pagamento, backoffice e go-to-market técnico.</p>
+      </div>
+      <div class="service-card">
+        <span class="service-num">03</span>
+        <h3 class="service-title">AI Engineering</h3>
+        <p class="service-desc">Integração de modelos, pipelines inteligentes e produtos com IA aplicada — sensibilidade de produto, não só de infra.</p>
+      </div>
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+.page-header {
+  padding: var(--sp-6) 0 var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+.page-eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+.page-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+}
+
+.contact-intro {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  gap: var(--sp-7);
+  padding: var(--sp-6) 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.contact-headline {
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin-bottom: var(--sp-4);
+}
+.contact-body {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--sp-4);
+}
+.contact-avail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+}
+.contact-avail-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #22c55e;
+  flex-shrink: 0;
+}
+
+.contact-right { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+.contact-right-label {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+.contact-links { display: flex; flex-direction: column; gap: 2px; }
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--sp-2) var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface);
+  transition: background 0.15s;
+  text-decoration: none;
+  gap: var(--sp-3);
+}
+.contact-link:hover { background: var(--surface-dim); }
+
+.contact-type {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  flex-shrink: 0;
+  width: 52px;
+}
+.contact-value {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  flex: 1;
+}
+.contact-arrow { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.open-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: var(--fs-xs);
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  background: var(--surface);
+}
+
+.contact-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  margin: var(--sp-6) 0 var(--sp-7);
+}
+.service-card {
+  background: var(--surface);
+  padding: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+}
+.service-num {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+}
+.service-title {
+  font-size: var(--fs-lg);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+.service-desc {
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 4px;
+}
+
+@media (max-width: 680px) {
+  .contact-intro { grid-template-columns: 1fr; gap: var(--sp-5); }
+  .contact-services { grid-template-columns: 1fr; }
+}
+</style>

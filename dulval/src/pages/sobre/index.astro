@@ -1,0 +1,125 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Sobre — Dulval"
+  description="Senior Software Engineer com 12+ anos construindo e escalando produtos digitais."
+>
+  <Nav />
+
+  <div class="container">
+    <div class="page-header">
+      <p class="page-eyebrow">Quem sou</p>
+      <h1 class="page-title">Sobre</h1>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="about-layout">
+
+      <div class="about-bio">
+        <p>Senior Software Engineer com 12+ anos construindo e escalando produtos digitais. Atuei como founding engineer e staff engineer, liderando decisões técnicas críticas e definindo fundações arquiteturais de longo prazo.</p>
+        <p>Sólida base em arquitetura, sistemas distribuídos e integrações complexas. Experiência real levando produtos do 0→1, com foco em performance, confiabilidade e simplicidade operacional.</p>
+        <p>Nos últimos anos, venho aplicando machine learning e IA em produtos reais — com foco em eficiência e impacto tangível no negócio, além do hype.</p>
+        <p>Perfil híbrido que combina execução e estratégia. Confortável entre código, arquitetura e produto — e confortável também saindo da cidade para cuidar de uma lavoura de café.</p>
+      </div>
+
+      <div class="about-aside">
+        <div class="tag-section">
+          <span class="tag-label">foco</span>
+          <div class="tag-row">
+            <span class="tag">Founding Team</span>
+            <span class="tag">AI Engineering</span>
+            <span class="tag">0 → 1</span>
+            <span class="tag">Startups</span>
+            <span class="tag">FinTech</span>
+          </div>
+        </div>
+        <div class="tag-section">
+          <span class="tag-label">stack</span>
+          <div class="tag-row">
+            <span class="tag">Go</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Python</span>
+            <span class="tag">Dart / Flutter</span>
+            <span class="tag">React</span>
+            <span class="tag">GCP</span>
+          </div>
+        </div>
+        <div class="tag-section">
+          <span class="tag-label">fora do teclado</span>
+          <div class="tag-row">
+            <span class="tag">Café de montanha</span>
+            <span class="tag">Piloto de drone</span>
+            <span class="tag">Caminho da Fé</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <Footer />
+</Layout>
+
+<style>
+.page-header {
+  padding: var(--sp-6) 0 var(--sp-5);
+  border-bottom: 1px solid var(--border);
+}
+.page-eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+.page-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.022em;
+  line-height: 1.2;
+}
+
+.about-layout {
+  display: grid;
+  grid-template-columns: 1fr 260px;
+  gap: var(--sp-7);
+  padding: var(--sp-6) 0;
+  border-bottom: 1px solid var(--border);
+}
+.about-bio p {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: var(--sp-3);
+}
+.about-bio p:last-child { margin-bottom: 0; }
+
+.about-aside { display: flex; flex-direction: column; gap: var(--sp-4); }
+.tag-section { display: flex; flex-direction: column; gap: var(--sp-2); }
+.tag-label {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.tag-row { display: flex; flex-wrap: wrap; gap: 6px; }
+.tag {
+  font-size: var(--fs-xs);
+  padding: 4px 10px;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-secondary);
+  background: var(--surface);
+}
+
+@media (max-width: 680px) {
+  .about-layout { grid-template-columns: 1fr; gap: var(--sp-4); }
+}
+</style>

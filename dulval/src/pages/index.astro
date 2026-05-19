@@ -72,22 +72,6 @@ const portals = [
   </div>
 </nav>
 
-<!-- HERO -->
-<section class="hub-hero">
-  <div class="container">
-    <span class="eyebrow">Dulval Group · Vale da Eletrônica, MG</span>
-    <h1 class="hub-hero-title">Um ecossistema construído<br>do zero ao impacto real.</h1>
-    <p class="hub-hero-body">
-      Tecnologia, café de altitude, IA para o campo, educação e laboratório —
-      tudo conectado por uma visão: construir com propósito e escalar com inteligência.
-    </p>
-    <div class="hub-hero-actions">
-      <a href="/me" class="btn btn-primary">Conheça o founder</a>
-      <a href="/conecta" class="btn btn-ghost">Trabalhar juntos →</a>
-    </div>
-  </div>
-</section>
-
 <!-- PORTALS -->
 <section class="section">
   <div class="container">
@@ -109,42 +93,11 @@ const portals = [
   </div>
 </section>
 
-<!-- ABOUT -->
-<section class="section">
-  <div class="container about-grid">
-    <div class="about-label">
-      <span class="eyebrow">Quem é o Dulval</span>
-    </div>
-    <div class="about-body">
-      <p class="about-text">
-        Diego Dulval é engenheiro de software, founder e entusiasta de sistemas complexos.
-        Nasceu no Vale da Eletrônica, em Minas Gerais, e construiu sua trajetória entre
-        startups de alto crescimento, fintechs e agroindústria.
-      </p>
-      <p class="about-text">
-        Founding Staff Engineer na Noh, levou uma plataforma de pagamentos do zero a +R$60M
-        em TPV mensal. Ao lado disso, cultiva café especial na fazenda da família e aplica IA
-        para transformar a cadeia produtiva do agro.
-      </p>
-      <a href="/me" class="btn btn-ghost" style="margin-top: var(--sp-3);">Trajetória completa →</a>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="hub-cta section">
-  <div class="container">
-    <p class="hub-cta-eyebrow">Founder técnico disponível para projetos</p>
-    <h2 class="hub-cta-title">Construir junto?</h2>
-    <a href="/me" class="btn btn-primary">me.dulval.com →</a>
-  </div>
-</section>
-
 <!-- FOOTER -->
 <footer class="footer">
   <div class="container footer-inner">
     <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
-    <p class="footer-copy">feito com amor &amp; claude.code &nbsp;·&nbsp; © dulval 2026</p>
+    <p class="footer-copy">feito com<del> amor </del>mak claude © Dulval 2026</p>
     <a href="https://instagram.com/diegodulval" target="_blank" rel="noopener noreferrer" class="footer-ig" aria-label="Instagram">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
         <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
@@ -181,41 +134,7 @@ const portals = [
   font-size: var(--fs-sm);
   color: var(--text-muted);
 }
-.hub-nav-cta {
-  margin-left: auto;
-  font-size: var(--fs-sm);
-  color: var(--text-secondary);
-  transition: color 0.15s;
-}
-.hub-nav-cta:hover { color: var(--text-primary); }
-
-/* ── Hero ── */
-.hub-hero {
-  padding: var(--sp-7) 0 var(--sp-6);
-  border-bottom: 1px solid var(--border);
-}
-.hub-hero-title {
-  font-size: var(--fs-hero);
-  font-weight: 700;
-  letter-spacing: -0.028em;
-  line-height: 1.06;
-  margin: var(--sp-3) 0 var(--sp-4);
-  max-width: 700px;
-}
-.hub-hero-body {
-  font-size: var(--fs-lg);
-  color: var(--text-secondary);
-  max-width: 520px;
-  margin-bottom: var(--sp-5);
-  line-height: 1.65;
-}
-.hub-hero-actions {
-  display: flex;
-  gap: var(--sp-2);
-  flex-wrap: wrap;
-}
-
-/* ── Portals Grid ── */
+── Portals Grid ── */
 .portals-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -226,40 +145,43 @@ const portals = [
   border-radius: var(--radius-lg);
   overflow: hidden;
   text-decoration: none;
-  padding: var(--sp-4) var(--sp-3) var(--sp-3);
+  padding: var(--sp-6) var(--sp-5) var(--sp-5);
   display: flex;
   flex-direction: column;
-  min-height: 200px;
+  min-height: 260px;
   transition: transform 0.2s, box-shadow 0.2s;
   border: 1px solid rgba(255,255,255,0.05);
+}
+.portal-card:nth-child(n+2) {
+  margin-top: var(--sp-4);
 }
 .portal-card:hover {
   transform: translateY(-3px);
   box-shadow: 0 16px 48px rgba(0,0,0,0.22);
 }
 .portal-tag {
-  font-size: var(--fs-xs);
+  font-size: var(--fs-sm);
   font-weight: 600;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--p-accent, rgba(255,255,255,0.4));
   margin-bottom: auto;
 }
 .portal-name {
-  font-size: var(--fs-xl);
-  font-weight: 600;
+  font-size: 28px;
+  font-weight: 700;
   color: #ffffff;
-  letter-spacing: -0.02em;
-  margin: var(--sp-3) 0 var(--sp-1);
+  letter-spacing: -0.025em;
+  margin: var(--sp-4) 0 var(--sp-2);
 }
 .portal-desc {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-md);
   color: rgba(255,255,255,0.45);
-  line-height: 1.6;
-  margin-bottom: var(--sp-3);
+  line-height: 1.65;
+  margin-bottom: var(--sp-4);
 }
 .portal-arrow {
-  font-size: var(--fs-sm);
+  font-size: var(--fs-md);
   color: rgba(255,255,255,0.25);
   align-self: flex-end;
   transition: color 0.15s;
@@ -315,8 +237,8 @@ const portals = [
 .footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
 .footer-logo :global(svg) { width: 22px; height: auto; }
 .footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
-.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; white-space: nowrap; }
-.footer-ig { display: flex; align-items: center; justify-self: end; color: var(--text-muted); opacity: 0.5; transition: opacity 0.2s; }
+.footer-copy { font-size: var(--fs-xs); color: var(--text-primary); text-align: center; white-space: nowrap; }
+.footer-ig { display: flex; align-items: center; justify-self: end; color: var(--text-primary); opacity: 0.5; transition: opacity 0.2s; }
 .footer-ig:hover { opacity: 1; }
 
 /* ── Responsive ── */
