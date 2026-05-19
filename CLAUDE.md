@@ -147,6 +147,36 @@ Ver [PERFIL.md](./PERFIL.md) para o perfil completo.
 
 
 
+## Seção Ecossistema — Eco Cards
+
+> 4 cards em fundo escuro com gradiente temático por categoria. Representam os domínios de atuação do Diego.
+
+### Card 1 — FinTech & Pagamentos
+- **Ícone:** cartão / wallet
+- **Título:** FinTech & Pagamentos
+- **Desc:** Arquitetura de plataformas financeiras: Pix, cartão de crédito/débito, wallets, Open Banking, BaaS e integrações com processadoras. Experiência real em produto de pagamentos em escala.
+- **Gradiente:** tons de verde escuro / esmeralda
+
+### Card 2 — AI Engineering
+- **Ícone:** cérebro / circuito
+- **Título:** AI Engineering
+- **Desc:** Integração e deploy de modelos de ML/LLM em produção. Projetos com Vertex AI, GCP, Python e pipelines de dados para AdTech e FinTech em contexto global (EUA, Europa).
+- **Gradiente:** tons de violeta / índigo escuro
+
+### Card 3 — Arquitetura & Produto
+- **Ícone:** estrutura / layers
+- **Título:** Arquitetura & Produto
+- **Desc:** Construção de sistemas 0→1: backend, mobile (Flutter/iOS/Android), serverless, observabilidade e on-call. Da definição do backlog ao deploy em produção.
+- **Gradiente:** tons de azul petróleo / slate escuro
+
+### Card 4 — Consultoria Global
+- **Ícone:** globo / network
+- **Título:** Consultoria Global
+- **Desc:** Atuação em projetos de healthcare, AdTech, automotive e retail em equipes distribuídas (Brasil, EUA, Polônia, Europa). Tech Lead e engenharia sênior para empresas americanas via Avenue Code.
+- **Gradiente:** tons de âmbar / bronze escuro
+
+---
+
 ## Design System
 
 > Referências visuais: portfólio de engenheiro com sidebar lateral + hero com vídeo fullscreen

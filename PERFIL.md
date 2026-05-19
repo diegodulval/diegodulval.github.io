@@ -12,7 +12,7 @@
 
 ## Resumo
 
-Founding Staff Software Engineer com trajetória que vai de design gráfico e 3D até arquitetura de sistemas financeiros em escala. Construiu a plataforma Noh do zero, atingindo +60M de TPV mensal. Perfil híbrido: transita entre arquitetura de sistemas, mobile, integrações de pagamento, AI engineering e consultoria — com sensibilidade visual herdada do design.
+Founding Staff Software Engineer com trajetória que vai de design gráfico e 3D até arquitetura de sistemas financeiros em escala. Construiu a plataforma Noh do zero, levando-a a operar em escala real de pagamentos. Perfil híbrido: transita entre arquitetura de sistemas, mobile, integrações de pagamento, AI engineering e consultoria — com sensibilidade visual herdada do design.
 
 
 ## Prêmios & Reconhecimentos
