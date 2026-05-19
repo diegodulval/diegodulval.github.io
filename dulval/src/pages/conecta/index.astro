@@ -1,0 +1,366 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import logoRaw from '../../assets/dd-logo.svg?raw';
+
+const steps = [
+  {
+    n: '01',
+    title: 'Diagnóstico',
+    desc: 'Uma conversa direta sobre o seu negócio: onde estão os gargalos, quais tarefas drenam tempo e onde a IA pode gerar valor imediato.',
+  },
+  {
+    n: '02',
+    title: 'Construção',
+    desc: 'Desenvolvo o agente ou sistema sob medida — integrado às suas ferramentas, do jeito que o seu time já trabalha.',
+  },
+  {
+    n: '03',
+    title: 'Entrega & Evolução',
+    desc: 'Você assume o controle. Continuo disponível para iterar, melhorar e escalar conforme o uso real.',
+  },
+];
+
+const services = [
+  {
+    dor: 'Meu time perde horas em tarefas repetitivas',
+    solucao: 'Agentes de automação',
+    desc: 'Workflows inteligentes que executam tarefas operacionais sem intervenção humana — triagem de e-mails, relatórios, integrações entre sistemas.',
+  },
+  {
+    dor: 'Preciso analisar dados, mas não tenho equipe de dados',
+    solucao: 'BI com linguagem natural',
+    desc: 'Dashboards e consultas em linguagem natural. Pergunte em português, receba a análise na hora — sem SQL, sem analista.',
+  },
+  {
+    dor: 'Atendimento manual não escala',
+    solucao: 'Atendimento com IA',
+    desc: 'Agentes de conversação treinados no seu negócio, integrados ao WhatsApp, site ou CRM — disponíveis 24h com qualidade consistente.',
+  },
+  {
+    dor: 'Meu time não sabe usar IA de verdade',
+    solucao: 'Workshop e implantação',
+    desc: 'Formação prática para equipes + implantação de ferramentas de IA no fluxo de trabalho existente. Resultado em dias, não meses.',
+  },
+];
+---
+
+<Layout
+  title="conecta.dulval — IA que resolve problemas reais"
+  description="Automação, agentes de IA e sistemas inteligentes para negócios. Construídos por um engenheiro que já rodou produção — direto com você."
+>
+
+<style is:global>
+  body { padding-top: 0; }
+  :root { --accent: #0ea5e9; }
+</style>
+
+<!-- NAV -->
+<nav class="portal-nav">
+  <div class="container portal-nav-inner">
+    <a href="/" class="portal-logo" set:html={logoRaw} />
+    <span class="portal-nav-name">conecta.dulval</span>
+    <a href="https://dulval.com" class="portal-nav-back">← ecossistema</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="portal-hero">
+  <div class="container">
+    <span class="eyebrow" style="color: var(--accent);">Conecta · IA para negócios</span>
+    <h1 class="portal-hero-title">IA que resolve.<br>Não que impressiona.</h1>
+    <p class="portal-hero-body">
+      Construo agentes e sistemas de inteligência artificial que atacam problemas reais do seu negócio —
+      automação, análise, atendimento. Sem buzzword, sem promessa vazia.
+    </p>
+    <div class="portal-hero-actions">
+      <a href="#contato" class="btn btn-primary" style="background: var(--accent); color: #fff;">Fale comigo</a>
+      <a href="#servicos" class="btn btn-ghost">Ver serviços ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Como funciona</span>
+    <h2 class="s-title">Três passos, resultado real</h2>
+    <div class="steps-grid">
+      {steps.map((s) => (
+        <div class="step-card">
+          <span class="step-n" style="color: var(--accent);">{s.n}</span>
+          <h3 class="step-title">{s.title}</h3>
+          <p class="step-desc">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- SERVIÇOS -->
+<section class="section" id="servicos">
+  <div class="container">
+    <span class="eyebrow">Serviços</span>
+    <h2 class="s-title">Você tem a dor. Eu tenho a solução.</h2>
+    <div class="services-grid">
+      {services.map((s) => (
+        <div class="service-card">
+          <p class="service-dor">"{s.dor}"</p>
+          <h3 class="service-sol">{s.solucao}</h3>
+          <p class="service-desc">{s.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- DIFERENCIAL -->
+<section class="section diferencial">
+  <div class="container diferencial-inner">
+    <div>
+      <span class="eyebrow">Diferencial</span>
+      <h2 class="s-title" style="max-width: 480px;">Você fala direto comigo.</h2>
+      <p class="dif-body">
+        Sem equipe de vendas, sem gerente de conta, sem processo de onboarding infinito.
+        Você fala com o engenheiro que vai construir o sistema — e isso muda tudo.
+      </p>
+      <p class="dif-body">
+        Já operei sistemas em produção com milhões de transações. Sei a diferença entre um demo
+        bonito e algo que aguenta o mundo real.
+      </p>
+    </div>
+    <div class="dif-stats">
+      <div class="dif-stat">
+        <span class="dif-stat-n">+60M</span>
+        <span class="dif-stat-l">TPV mensal (Noh)</span>
+      </div>
+      <div class="dif-stat">
+        <span class="dif-stat-n">10+</span>
+        <span class="dif-stat-l">anos de engenharia</span>
+      </div>
+      <div class="dif-stat">
+        <span class="dif-stat-n">0</span>
+        <span class="dif-stat-l">intermediários</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="section" id="contato">
+  <div class="container">
+    <span class="eyebrow">Contato</span>
+    <h2 class="s-title">Vamos conversar.</h2>
+    <p class="contact-sub">Conta o desafio. Respondo em até 24h.</p>
+    <form class="contact-form" action="mailto:diego@dulval.com" method="get" enctype="text/plain">
+      <div class="form-row">
+        <input type="text" name="name" placeholder="Seu nome" class="form-input" required />
+        <input type="email" name="email" placeholder="E-mail" class="form-input" required />
+      </div>
+      <textarea name="body" placeholder="Descreva o desafio do seu negócio..." class="form-textarea" rows="5" required></textarea>
+      <button type="submit" class="btn btn-primary" style="background: var(--accent);">Enviar →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
+    <p class="footer-copy">conecta.dulval.com &nbsp;·&nbsp; © dulval 2026</p>
+    <a href="/me" class="footer-back">me.dulval →</a>
+  </div>
+</footer>
+
+</Layout>
+
+<style>
+/* ── Nav ── */
+.portal-nav {
+  height: 64px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+.portal-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.portal-logo { display: flex; align-items: center; line-height: 0; }
+.portal-logo :global(svg) { width: 22px; height: auto; }
+.portal-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.portal-nav-name {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.portal-nav-back {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+.portal-nav-back:hover { color: var(--text-primary); }
+
+/* ── Hero ── */
+.portal-hero {
+  padding: var(--sp-7) 0 var(--sp-6);
+  border-bottom: 1px solid var(--border);
+}
+.portal-hero-title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin: var(--sp-3) 0 var(--sp-4);
+  max-width: 620px;
+}
+.portal-hero-body {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 500px;
+  margin-bottom: var(--sp-5);
+  line-height: 1.65;
+}
+.portal-hero-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+/* ── Section title ── */
+.s-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: var(--sp-2) 0 var(--sp-4);
+}
+
+/* ── Steps ── */
+.steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-2);
+}
+.step-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.step-n {
+  font-size: var(--fs-sm);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: var(--sp-3);
+}
+.step-title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  margin-bottom: var(--sp-2);
+}
+.step-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
+
+/* ── Services ── */
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+}
+.service-card {
+  background: var(--surface);
+  padding: var(--sp-4);
+}
+.service-dor {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  font-style: italic;
+  margin-bottom: var(--sp-2);
+  line-height: 1.5;
+}
+.service-sol {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  color: var(--accent);
+  margin-bottom: var(--sp-2);
+}
+.service-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
+
+/* ── Diferencial ── */
+.diferencial { background: var(--surface-dim); }
+.diferencial-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-6);
+  align-items: center;
+}
+.dif-body {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: var(--sp-3);
+  max-width: 480px;
+}
+.dif-stats {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  text-align: right;
+}
+.dif-stat-n {
+  display: block;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+.dif-stat-l {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ── Form ── */
+.contact-sub { color: var(--text-secondary); margin-bottom: var(--sp-4); }
+.contact-form { display: flex; flex-direction: column; gap: var(--sp-2); max-width: 640px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
+.form-input, .form-textarea {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-sm);
+  padding: 12px var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+  resize: vertical;
+}
+.form-input:focus, .form-textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+
+/* ── Footer ── */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-3) 0; }
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 48px;
+}
+.footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
+.footer-logo :global(svg) { width: 20px; height: auto; }
+.footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; }
+.footer-back { justify-self: end; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.footer-back:hover { color: var(--text-primary); }
+
+@media (max-width: 768px) {
+  .steps-grid { grid-template-columns: 1fr; }
+  .services-grid { grid-template-columns: 1fr; }
+  .diferencial-inner { grid-template-columns: 1fr; }
+  .dif-stats { flex-direction: row; text-align: left; }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>

@@ -1,0 +1,393 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import logoRaw from '../../assets/dd-logo.svg?raw';
+
+const posts = [
+  {
+    titulo: 'Do zero ao R$60M: o que aprendi construindo uma FinTech como Founding Engineer',
+    data: 'Abr 2026',
+    tag: 'Engenharia · FinTech',
+    tempo: '12 min',
+    destaque: true,
+  },
+  {
+    titulo: 'Como estruturei o onboarding de engenharia na Noh',
+    data: 'Mar 2026',
+    tag: 'Cultura · Engenharia',
+    tempo: '8 min',
+    destaque: false,
+  },
+  {
+    titulo: 'Flutter em produção financeira: lições de 3 anos',
+    data: 'Fev 2026',
+    tag: 'Mobile · Flutter',
+    tempo: '10 min',
+    destaque: false,
+  },
+  {
+    titulo: 'IA aplicada ao agro: oportunidades que ninguém está olhando',
+    data: 'Jan 2026',
+    tag: 'AI · AgriTech',
+    tempo: '7 min',
+    destaque: false,
+  },
+];
+
+const palestras = [
+  {
+    titulo: 'Founding Engineer: o papel que ninguém te ensina',
+    contexto: 'Startups early-stage, times de engenharia',
+    desc: 'O que é ser o primeiro engenheiro de uma startup, como tomar decisões de arquitetura sob pressão e construir equipe enquanto ainda escreve código.',
+  },
+  {
+    titulo: 'IA aplicada a negócios reais: desmistificando o hype',
+    contexto: 'Empresas, eventos corporativos',
+    desc: 'A distância entre o chatbot de demo e um sistema de IA em produção. O que funciona, o que não funciona e como começar com o pé direito.',
+  },
+  {
+    titulo: 'Do campo ao produto: tecnologia para o agronegócio',
+    contexto: 'Agro, inovação, cooperativas',
+    desc: 'Como ferramentas de IA e visão computacional estão transformando o processamento de café especial — com case real da fazenda Dulval.',
+  },
+  {
+    titulo: 'Construir em público: por que mostrar o processo importa',
+    contexto: 'Empreendedores, criadores, devs',
+    desc: 'A filosofia por trás do labs.dulval — como construir em público cria accountability, audiência e uma cultura de aprendizado.',
+  },
+];
+
+const tags = ['Engenharia', 'FinTech', 'AI', 'Flutter', 'Mobile', 'Go', 'AgriTech', 'Produto', 'Cultura', 'Carreira'];
+---
+
+<Layout
+  title="edu.dulval — Conteúdo, palestras e aprendizados"
+  description="Textos sobre engenharia, FinTech, AI e empreendedorismo. Palestras disponíveis. Newsletter quinzenal."
+>
+
+<style is:global>
+  body { padding-top: 0; }
+  :root { --accent: #fb923c; }
+</style>
+
+<!-- NAV -->
+<nav class="portal-nav">
+  <div class="container portal-nav-inner">
+    <a href="/" class="portal-logo" set:html={logoRaw} />
+    <span class="portal-nav-name">edu.dulval</span>
+    <a href="https://dulval.com" class="portal-nav-back">← ecossistema</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="edu-hero">
+  <div class="container">
+    <span class="eyebrow" style="color: var(--accent);">Conteúdo · Palestras · Newsletter</span>
+    <h1 class="edu-hero-title">O que aprendi<br>construindo em escala.</h1>
+    <p class="edu-hero-body">
+      10+ anos de engenharia, FinTech, AI e empreendedorismo —
+      documentados aqui para quem está construindo algo que importa.
+    </p>
+    <div class="edu-hero-actions">
+      <a href="#newsletter" class="btn btn-primary" style="background: var(--accent);">Assinar newsletter</a>
+      <a href="#posts" class="btn btn-ghost">Ler artigos ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- POSTS EM DESTAQUE -->
+<section class="section" id="posts">
+  <div class="container">
+    <span class="eyebrow">Posts em destaque</span>
+    <h2 class="s-title">Conteúdo com profundidade.</h2>
+    <div class="posts-grid">
+      {posts.map((p) => (
+        <article class={`post-card ${p.destaque ? 'post-card--destaque' : ''}`}>
+          <div class="post-meta">
+            <span class="post-tag">{p.tag}</span>
+            <span class="post-tempo">{p.tempo}</span>
+          </div>
+          <h3 class="post-titulo">{p.titulo}</h3>
+          <div class="post-footer">
+            <span class="post-data">{p.data}</span>
+            <a href="#" class="post-link" style="color: var(--accent);">Ler →</a>
+          </div>
+        </article>
+      ))}
+    </div>
+    <a href="#arquivo" class="btn btn-ghost" style="margin-top: var(--sp-4);">Ver arquivo completo →</a>
+  </div>
+</section>
+
+<!-- PALESTRAS -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Palestras</span>
+    <h2 class="s-title">Disponível para palestrar.</h2>
+    <p class="palestras-sub">
+      Eventos, conferências, universidades e empresas. Fale comigo para disponibilidade.
+    </p>
+    <div class="palestras-grid">
+      {palestras.map((p) => (
+        <div class="palestra-card">
+          <span class="palestra-contexto">{p.contexto}</span>
+          <h3 class="palestra-titulo">{p.titulo}</h3>
+          <p class="palestra-desc">{p.desc}</p>
+        </div>
+      ))}
+    </div>
+    <a href="mailto:edu@dulval.com" class="btn btn-primary" style="margin-top: var(--sp-4); background: var(--accent);">Convidar para palestrar →</a>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="section newsletter-section" id="newsletter">
+  <div class="container newsletter-inner">
+    <div class="newsletter-copy">
+      <span class="eyebrow" style="color: var(--accent);">Newsletter</span>
+      <h2 class="s-title">Quinzenal. Sem ruído.</h2>
+      <p class="newsletter-body">
+        O que estou construindo, lendo, pensando e aprendendo —
+        em formato de carta, com profundidade real.
+        Sem pauta de SEO, sem encher linguiça.
+      </p>
+      <ul class="newsletter-promessas">
+        <li>✓ Quinzenal — não vai entupir sua caixa</li>
+        <li>✓ Textos que não estão no blog</li>
+        <li>✓ Atualizações dos projetos do labs</li>
+        <li>✓ Cancele com um clique</li>
+      </ul>
+    </div>
+    <form class="newsletter-form" action="mailto:edu@dulval.com" method="get" enctype="text/plain">
+      <input type="text" name="nome" placeholder="Seu nome" class="form-input" />
+      <input type="email" name="email" placeholder="Seu melhor e-mail" class="form-input" required />
+      <button type="submit" class="btn btn-primary" style="background: var(--accent);">Assinar →</button>
+      <p class="newsletter-disclaimer">Nenhum spam. Unsubscribe a qualquer momento.</p>
+    </form>
+  </div>
+</section>
+
+<!-- ARQUIVO -->
+<section class="section arquivo-section" id="arquivo">
+  <div class="container arquivo-inner">
+    <div>
+      <span class="eyebrow">Arquivo</span>
+      <h2 class="s-title">Tudo que já foi escrito.</h2>
+      <p class="arquivo-body">
+        Uma coleção de textos, notas e reflexões sobre engenharia, produto, AI e empreendedorismo.
+      </p>
+      <div class="tags-wrap">
+        {tags.map((t) => (
+          <a href="#" class="tag-pill">{t}</a>
+        ))}
+      </div>
+    </div>
+    <div class="arquivo-stats">
+      <div class="arquivo-stat">
+        <span class="arquivo-n">42</span>
+        <span class="arquivo-l">artigos publicados</span>
+      </div>
+      <div class="arquivo-stat">
+        <span class="arquivo-n">2.400</span>
+        <span class="arquivo-l">assinantes na newsletter</span>
+      </div>
+      <div class="arquivo-stat">
+        <span class="arquivo-n">8</span>
+        <span class="arquivo-l">palestras em 2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
+    <p class="footer-copy">edu.dulval.com &nbsp;·&nbsp; © dulval 2026</p>
+    <a href="/me" class="footer-back">me.dulval →</a>
+  </div>
+</footer>
+
+</Layout>
+
+<style>
+.portal-nav { height: 64px; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+.portal-nav-inner { display: flex; align-items: center; gap: var(--sp-3); }
+.portal-logo { display: flex; align-items: center; line-height: 0; }
+.portal-logo :global(svg) { width: 22px; height: auto; }
+.portal-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.portal-nav-name { font-size: var(--fs-sm); font-weight: 600; }
+.portal-nav-back { margin-left: auto; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.portal-nav-back:hover { color: var(--text-primary); }
+
+.edu-hero {
+  padding: var(--sp-7) 0 var(--sp-6);
+  border-bottom: 1px solid var(--border);
+}
+.edu-hero-title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin: var(--sp-3) 0 var(--sp-4);
+  max-width: 580px;
+}
+.edu-hero-body {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 500px;
+  line-height: 1.65;
+  margin-bottom: var(--sp-5);
+}
+.edu-hero-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+.s-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: var(--sp-2) 0 var(--sp-4);
+}
+
+/* ── Posts ── */
+.posts-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--sp-2);
+}
+.post-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2);
+  transition: border-color 0.15s;
+}
+.post-card:hover { border-color: var(--accent); }
+.post-card--destaque {
+  grid-column: 1 / -1;
+  background: var(--surface-dim);
+}
+.post-meta { display: flex; align-items: center; justify-content: space-between; }
+.post-tag {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.post-tempo { font-size: var(--fs-xs); color: var(--text-muted); }
+.post-titulo {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.35;
+  flex: 1;
+}
+.post-card--destaque .post-titulo { font-size: var(--fs-xl); }
+.post-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+.post-data { font-size: var(--fs-xs); color: var(--text-muted); }
+.post-link { font-size: var(--fs-sm); font-weight: 500; text-decoration: none; }
+
+/* ── Palestras ── */
+.palestras-sub { color: var(--text-secondary); margin-bottom: var(--sp-4); }
+.palestras-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+}
+.palestra-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s;
+}
+.palestra-card:hover { border-color: var(--accent); }
+.palestra-contexto {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+.palestra-titulo {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: 1.4;
+  margin-bottom: var(--sp-2);
+}
+.palestra-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
+
+/* ── Newsletter ── */
+.newsletter-section { background: var(--surface-dim); }
+.newsletter-inner {
+  display: grid;
+  grid-template-columns: 1fr 400px;
+  gap: var(--sp-6);
+  align-items: center;
+}
+.newsletter-body { color: var(--text-secondary); line-height: 1.75; margin-bottom: var(--sp-3); }
+.newsletter-promessas {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.newsletter-promessas li { font-size: var(--fs-sm); color: var(--text-secondary); }
+.newsletter-form { display: flex; flex-direction: column; gap: var(--sp-2); }
+.form-input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-sm);
+  padding: 12px var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+}
+.form-input:focus { outline: none; border-color: var(--accent); }
+.newsletter-disclaimer { font-size: var(--fs-xs); color: var(--text-muted); }
+
+/* ── Arquivo ── */
+.arquivo-inner {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--sp-6);
+  align-items: center;
+}
+.arquivo-body { color: var(--text-secondary); margin-bottom: var(--sp-4); }
+.tags-wrap { display: flex; flex-wrap: wrap; gap: var(--sp-1); }
+.tag-pill {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  padding: 6px 14px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  text-decoration: none;
+  transition: border-color 0.15s, color 0.15s;
+}
+.tag-pill:hover { border-color: var(--accent); color: var(--accent); }
+.arquivo-stats { display: flex; flex-direction: column; gap: var(--sp-4); text-align: right; }
+.arquivo-n { display: block; font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.03em; color: var(--accent); }
+.arquivo-l { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.footer { border-top: 1px solid var(--border); padding: var(--sp-3) 0; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 48px; }
+.footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
+.footer-logo :global(svg) { width: 20px; height: auto; }
+.footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; }
+.footer-back { justify-self: end; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.footer-back:hover { color: var(--text-primary); }
+
+@media (max-width: 860px) {
+  .posts-grid { grid-template-columns: 1fr; }
+  .post-card--destaque { grid-column: 1; }
+  .palestras-grid { grid-template-columns: 1fr; }
+  .newsletter-inner { grid-template-columns: 1fr; }
+  .arquivo-inner { grid-template-columns: 1fr; }
+  .arquivo-stats { flex-direction: row; text-align: left; }
+}
+</style>

@@ -1,0 +1,350 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import logoRaw from '../../assets/dd-logo.svg?raw';
+
+const dores = [
+  {
+    icon: '⏱',
+    titulo: 'Classificação manual lenta e inconsistente',
+    desc: 'Operadores treinados por anos ainda cometem erros de lote para lote. A subjetividade compromete a rastreabilidade.',
+  },
+  {
+    icon: '📊',
+    titulo: 'Sem dados de processo em tempo real',
+    desc: 'Decisões críticas de secagem e beneficiamento são tomadas no feeling, sem histórico comparável.',
+  },
+  {
+    icon: '🔗',
+    titulo: 'Rastreabilidade incompleta para exportação',
+    desc: 'Compradores internacionais exigem proveniência detalhada. Sem isso, o café especial vira commodity.',
+  },
+  {
+    icon: '🌡',
+    titulo: 'Perdas por secagem inadequada',
+    desc: 'Umidade fora do ponto ideal causa re-fermentação, mofo e depreciação do lote inteiro.',
+  },
+];
+
+const produtos = [
+  {
+    nome: 'DiMata',
+    tagline: 'Classificação visual por IA',
+    desc: 'Sistema de visão computacional que classifica grãos em tempo real — defeitos, maturação, uniformidade. Mesma precisão 24 horas por dia, sem fadiga humana.',
+    status: 'Beta',
+    acoes: ['Redução de 60% no tempo de classificação', 'Rastreabilidade por lote e sub-lote', 'API de integração com ERPs'],
+  },
+  {
+    nome: 'PriMata',
+    tagline: 'Monitoramento inteligente de secagem',
+    desc: 'Sensores + IA que monitoram temperatura, umidade e curva de secagem em tempo real, com alertas proativos e sugestões de correção.',
+    status: 'Em desenvolvimento',
+    acoes: ['Dashboard em tempo real', 'Alertas via WhatsApp', 'Histórico comparativo de safras'],
+  },
+];
+---
+
+<Layout
+  title="agro.dulval — IA para processadores de café especial"
+  description="DiMata e PriMata: ferramentas de IA para classificação e monitoramento no beneficiamento de café. Desenvolvidas por quem planta o próprio café."
+>
+
+<style is:global>
+  body { padding-top: 0; }
+  :root { --accent: #22c55e; }
+</style>
+
+<!-- NAV -->
+<nav class="portal-nav">
+  <div class="container portal-nav-inner">
+    <a href="/" class="portal-logo" set:html={logoRaw} />
+    <span class="portal-nav-name">agro.dulval</span>
+    <a href="https://dulval.com" class="portal-nav-back">← ecossistema</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="agro-hero">
+  <div class="container">
+    <span class="eyebrow" style="color: var(--accent);">IA · Agroindústria · Café especial</span>
+    <h1 class="agro-hero-title">O campo merece<br>tecnologia de verdade.</h1>
+    <p class="agro-hero-body">
+      Ferramentas de inteligência artificial desenvolvidas para processadores de café especial —
+      por alguém que planta, colhe e processa o próprio café a 1.200 metros de altitude.
+    </p>
+    <div class="agro-hero-meta">
+      <div class="hero-stat">
+        <span class="hero-stat-n" style="color: var(--accent);">+40%</span>
+        <span class="hero-stat-l">de eficiência em classificação</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n" style="color: var(--accent);">0</span>
+        <span class="hero-stat-l">perda por falta de monitoramento</span>
+      </div>
+      <div class="hero-stat">
+        <span class="hero-stat-n" style="color: var(--accent);">100%</span>
+        <span class="hero-stat-l">rastreabilidade por lote</span>
+      </div>
+    </div>
+    <div style="margin-top: var(--sp-5); display: flex; gap: var(--sp-2);">
+      <a href="#diagnostico" class="btn btn-primary" style="background: var(--accent); color: #fff;">Quero um diagnóstico</a>
+      <a href="#produtos" class="btn btn-ghost">Ver DiMata e PriMata ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- DORES -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">O problema</span>
+    <h2 class="s-title">O processamento de café ainda é artesanal.<br>Os erros têm preço.</h2>
+    <div class="dores-grid">
+      {dores.map((d) => (
+        <div class="dor-card">
+          <span class="dor-icon">{d.icon}</span>
+          <h3 class="dor-titulo">{d.titulo}</h3>
+          <p class="dor-desc">{d.desc}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="section" id="produtos">
+  <div class="container">
+    <span class="eyebrow">As soluções</span>
+    <h2 class="s-title">DiMata e PriMata.</h2>
+    <div class="produtos-grid">
+      {produtos.map((p) => (
+        <div class="produto-card">
+          <div class="produto-header">
+            <div>
+              <h3 class="produto-nome">{p.nome}</h3>
+              <p class="produto-tagline">{p.tagline}</p>
+            </div>
+            <span class={`produto-badge ${p.status === 'Beta' ? 'badge-beta' : 'badge-dev'}`}>{p.status}</span>
+          </div>
+          <p class="produto-desc">{p.desc}</p>
+          <ul class="produto-acoes">
+            {p.acoes.map((a) => <li>{a}</li>)}
+          </ul>
+          <a href="#diagnostico" class="btn btn-ghost produto-cta">Saber mais →</a>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CASE -->
+<section class="section case-section">
+  <div class="container case-inner">
+    <div class="case-label">
+      <span class="eyebrow">Case</span>
+    </div>
+    <div class="case-body">
+      <h2 class="s-title">A fazenda que testou antes de vender.</h2>
+      <p class="case-text">
+        DiMata e PriMata nasceram da necessidade real da Fazenda Dulval.
+        Antes de oferecer para outros processadores, a solução rodou por duas safras na nossa própria produção —
+        enfrentando as condições reais do campo mineiro: calor, umidade, variação de lotes.
+      </p>
+      <p class="case-text">
+        Resultado: redução de 40% no tempo de classificação, zero perdas por ponto de secagem
+        e rastreabilidade completa para o primeiro lote de exportação.
+      </p>
+      <div class="case-stats">
+        <div class="case-stat">
+          <span class="case-n">2</span>
+          <span class="case-l">safras em produção</span>
+        </div>
+        <div class="case-stat">
+          <span class="case-n">40%</span>
+          <span class="case-l">redução de tempo</span>
+        </div>
+        <div class="case-stat">
+          <span class="case-n">1°</span>
+          <span class="case-l">lote exportado com rastreabilidade</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA DIAGNÓSTICO -->
+<section class="section" id="diagnostico">
+  <div class="container">
+    <span class="eyebrow">Próximo passo</span>
+    <h2 class="s-title">Diagnóstico gratuito<br>do seu processamento.</h2>
+    <p class="diag-sub">
+      Mapeio os gargalos da sua operação e mostro onde IA gera mais valor — sem custo, sem compromisso.
+    </p>
+    <form class="diag-form" action="mailto:agro@dulval.com" method="get" enctype="text/plain">
+      <div class="form-row">
+        <input type="text" name="nome" placeholder="Nome / Fazenda" class="form-input" required />
+        <input type="email" name="email" placeholder="E-mail" class="form-input" required />
+      </div>
+      <select name="volume" class="form-input">
+        <option value="">Volume de processamento / safra</option>
+        <option>Até 100 sacas</option>
+        <option>100–500 sacas</option>
+        <option>500–2.000 sacas</option>
+        <option>Acima de 2.000 sacas</option>
+      </select>
+      <button type="submit" class="btn btn-primary" style="background: var(--accent);">Solicitar diagnóstico →</button>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
+    <p class="footer-copy">agro.dulval.com &nbsp;·&nbsp; © dulval 2026</p>
+    <a href="/me" class="footer-back">me.dulval →</a>
+  </div>
+</footer>
+
+</Layout>
+
+<style>
+.portal-nav { height: 64px; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+.portal-nav-inner { display: flex; align-items: center; gap: var(--sp-3); }
+.portal-logo { display: flex; align-items: center; line-height: 0; }
+.portal-logo :global(svg) { width: 22px; height: auto; }
+.portal-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.portal-nav-name { font-size: var(--fs-sm); font-weight: 600; }
+.portal-nav-back { margin-left: auto; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.portal-nav-back:hover { color: var(--text-primary); }
+
+.agro-hero {
+  padding: var(--sp-7) 0 var(--sp-6);
+  border-bottom: 1px solid var(--border);
+}
+.agro-hero-title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin: var(--sp-3) 0 var(--sp-4);
+  max-width: 600px;
+}
+.agro-hero-body {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: var(--sp-5);
+}
+.agro-hero-meta {
+  display: flex;
+  gap: var(--sp-6);
+  padding: var(--sp-4) 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.hero-stat-n { display: block; font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.03em; }
+.hero-stat-l { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.s-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: var(--sp-2) 0 var(--sp-4);
+}
+
+.dores-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+}
+.dor-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-dim);
+}
+.dor-icon { font-size: 24px; display: block; margin-bottom: var(--sp-2); }
+.dor-titulo { font-size: var(--fs-md); font-weight: 600; margin-bottom: var(--sp-1); }
+.dor-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
+
+.produtos-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-3); }
+.produto-card {
+  padding: var(--sp-5);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  transition: border-color 0.15s;
+}
+.produto-card:hover { border-color: var(--accent); }
+.produto-header { display: flex; align-items: flex-start; justify-content: space-between; }
+.produto-nome { font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.03em; }
+.produto-tagline { font-size: var(--fs-sm); color: var(--text-muted); margin-top: 4px; }
+.produto-badge {
+  font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 4px 12px; border-radius: var(--radius-pill);
+}
+.badge-beta { background: rgba(34,197,94,0.12); color: #22c55e; }
+.badge-dev { background: rgba(168,139,250,0.12); color: #a78bfa; }
+.produto-desc { font-size: var(--fs-md); color: var(--text-secondary); line-height: 1.7; flex: 1; }
+.produto-acoes {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.produto-acoes li {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  padding-left: var(--sp-2);
+  position: relative;
+}
+.produto-acoes li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 11px;
+}
+.produto-cta { align-self: flex-start; }
+
+.case-section { background: var(--surface-dim); }
+.case-inner { display: grid; grid-template-columns: 160px 1fr; gap: var(--sp-6); }
+.case-text { color: var(--text-secondary); line-height: 1.75; margin-bottom: var(--sp-3); }
+.case-stats { display: flex; gap: var(--sp-5); margin-top: var(--sp-4); padding-top: var(--sp-4); border-top: 1px solid var(--border); }
+.case-n { display: block; font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.03em; color: var(--accent); }
+.case-l { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.diag-sub { color: var(--text-secondary); margin-bottom: var(--sp-4); }
+.diag-form { display: flex; flex-direction: column; gap: var(--sp-2); max-width: 560px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-2); }
+.form-input, select.form-input {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-sm);
+  padding: 12px var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  color: var(--text-primary);
+  transition: border-color 0.15s;
+  -webkit-appearance: none;
+}
+.form-input:focus, select.form-input:focus { outline: none; border-color: var(--accent); }
+
+.footer { border-top: 1px solid var(--border); padding: var(--sp-3) 0; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 48px; }
+.footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
+.footer-logo :global(svg) { width: 20px; height: auto; }
+.footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; }
+.footer-back { justify-self: end; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.footer-back:hover { color: var(--text-primary); }
+
+@media (max-width: 768px) {
+  .dores-grid, .produtos-grid { grid-template-columns: 1fr; }
+  .case-inner { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .agro-hero-meta { flex-wrap: wrap; gap: var(--sp-4); }
+  .form-row { grid-template-columns: 1fr; }
+}
+</style>

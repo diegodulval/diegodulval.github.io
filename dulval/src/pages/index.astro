@@ -1,21 +1,331 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Hero from '../components/Hero.astro';
-import Metrics from '../components/Metrics.astro';
-import Services from '../components/Services.astro';
-import Projects from '../components/Projects.astro';
-import EcoCards from '../components/EcoCards.astro';
-import CTA from '../components/CTA.astro';
-import Footer from '../components/Footer.astro';
+import logoRaw from '../assets/dd-logo.svg?raw';
+
+const portals = [
+  {
+    name: 'me',
+    label: 'Founder técnico',
+    desc: 'Trajetória, stack e frentes ativas do engenheiro por trás do grupo.',
+    accent: '#3b82f6',
+    grad: 'linear-gradient(150deg, #080d1a 0%, #0d1833 100%)',
+    href: '/me',
+  },
+  {
+    name: 'conecta',
+    label: 'Serviço de IA',
+    desc: 'Automação, agentes de IA e sistemas inteligentes para o seu negócio.',
+    accent: '#0ea5e9',
+    grad: 'linear-gradient(150deg, #030d17 0%, #071e2e 100%)',
+    href: '/conecta',
+  },
+  {
+    name: 'café',
+    label: 'Café de altitude',
+    desc: 'Grãos especiais cultivados na fazenda da família no Sul de Minas.',
+    accent: '#c2955a',
+    grad: 'linear-gradient(150deg, #180e04 0%, #2a1808 100%)',
+    href: '/cafe',
+  },
+  {
+    name: 'agro',
+    label: 'IA para agroindústria',
+    desc: 'DiMata e PriMata — ferramentas de IA para processadores de café.',
+    accent: '#22c55e',
+    grad: 'linear-gradient(150deg, #030f07 0%, #081e0e 100%)',
+    href: '/agro',
+  },
+  {
+    name: 'labs',
+    label: 'Laboratório',
+    desc: 'Experimentos em progresso, roadmap público e projetos no graveyard.',
+    accent: '#a78bfa',
+    grad: 'linear-gradient(150deg, #0a0717 0%, #160d2c 100%)',
+    href: '/labs',
+  },
+  {
+    name: 'edu',
+    label: 'Conteúdo',
+    desc: 'Textos, palestras, newsletter e arquivo de aprendizados.',
+    accent: '#fb923c',
+    grad: 'linear-gradient(150deg, #180900 0%, #2c1200 100%)',
+    href: '/edu',
+  },
+];
 ---
-<Layout>
-  <Nav />
-  <Hero />
-  <Metrics />
-  <Services />
-  <Projects />
-  <EcoCards />
-  <CTA />
-  <Footer />
+
+<Layout
+  title="Dulval — Ecossistema"
+  description="Tecnologia, café de altitude, IA para o agro, laboratório e educação — um ecossistema construído do zero ao impacto real."
+>
+
+<style is:global>
+  body { padding-top: 0; }
+</style>
+
+<!-- NAV -->
+<nav class="hub-nav">
+  <div class="container hub-nav-inner">
+    <a href="/" class="hub-logo" set:html={logoRaw} />
+    <span class="hub-nav-name">dulval.com</span>
+    <a href="/me" class="hub-nav-cta">me.dulval.com →</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hub-hero">
+  <div class="container">
+    <span class="eyebrow">Dulval Group · Vale da Eletrônica, MG</span>
+    <h1 class="hub-hero-title">Um ecossistema construído<br>do zero ao impacto real.</h1>
+    <p class="hub-hero-body">
+      Tecnologia, café de altitude, IA para o campo, educação e laboratório —
+      tudo conectado por uma visão: construir com propósito e escalar com inteligência.
+    </p>
+    <div class="hub-hero-actions">
+      <a href="/me" class="btn btn-primary">Conheça o founder</a>
+      <a href="/conecta" class="btn btn-ghost">Trabalhar juntos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- PORTALS -->
+<section class="section">
+  <div class="container">
+    <span class="eyebrow">Os portais</span>
+    <div class="portals-grid">
+      {portals.map((p) => (
+        <a
+          href={p.href}
+          class="portal-card"
+          style={`background: ${p.grad}; --p-accent: ${p.accent};`}
+        >
+          <span class="portal-tag">{p.label}</span>
+          <h2 class="portal-name">{p.name}.dulval</h2>
+          <p class="portal-desc">{p.desc}</p>
+          <span class="portal-arrow">→</span>
+        </a>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <div class="container about-grid">
+    <div class="about-label">
+      <span class="eyebrow">Quem é o Dulval</span>
+    </div>
+    <div class="about-body">
+      <p class="about-text">
+        Diego Dulval é engenheiro de software, founder e entusiasta de sistemas complexos.
+        Nasceu no Vale da Eletrônica, em Minas Gerais, e construiu sua trajetória entre
+        startups de alto crescimento, fintechs e agroindústria.
+      </p>
+      <p class="about-text">
+        Founding Staff Engineer na Noh, levou uma plataforma de pagamentos do zero a +R$60M
+        em TPV mensal. Ao lado disso, cultiva café especial na fazenda da família e aplica IA
+        para transformar a cadeia produtiva do agro.
+      </p>
+      <a href="/me" class="btn btn-ghost" style="margin-top: var(--sp-3);">Trajetória completa →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="hub-cta section">
+  <div class="container">
+    <p class="hub-cta-eyebrow">Founder técnico disponível para projetos</p>
+    <h2 class="hub-cta-title">Construir junto?</h2>
+    <a href="/me" class="btn btn-primary">me.dulval.com →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
+    <p class="footer-copy">feito com amor &amp; claude.code &nbsp;·&nbsp; © dulval 2026</p>
+    <a href="https://instagram.com/diegodulval" target="_blank" rel="noopener noreferrer" class="footer-ig" aria-label="Instagram">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+        <circle cx="12" cy="12" r="4.5"/>
+        <circle cx="17.5" cy="6.5" r="0.5" fill="currentColor" stroke="none"/>
+      </svg>
+    </a>
+  </div>
+</footer>
+
 </Layout>
+
+<style>
+/* ── Nav ── */
+.hub-nav {
+  height: 72px;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+}
+.hub-nav-inner {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+.hub-logo {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+.hub-logo :global(svg) { width: 24px; height: auto; }
+.hub-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.hub-nav-name {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.hub-nav-cta {
+  margin-left: auto;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  transition: color 0.15s;
+}
+.hub-nav-cta:hover { color: var(--text-primary); }
+
+/* ── Hero ── */
+.hub-hero {
+  padding: var(--sp-7) 0 var(--sp-6);
+  border-bottom: 1px solid var(--border);
+}
+.hub-hero-title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin: var(--sp-3) 0 var(--sp-4);
+  max-width: 700px;
+}
+.hub-hero-body {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 520px;
+  margin-bottom: var(--sp-5);
+  line-height: 1.65;
+}
+.hub-hero-actions {
+  display: flex;
+  gap: var(--sp-2);
+  flex-wrap: wrap;
+}
+
+/* ── Portals Grid ── */
+.portals-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+.portal-card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  text-decoration: none;
+  padding: var(--sp-4) var(--sp-3) var(--sp-3);
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+  transition: transform 0.2s, box-shadow 0.2s;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.portal-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 48px rgba(0,0,0,0.22);
+}
+.portal-tag {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--p-accent, rgba(255,255,255,0.4));
+  margin-bottom: auto;
+}
+.portal-name {
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  margin: var(--sp-3) 0 var(--sp-1);
+}
+.portal-desc {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.45);
+  line-height: 1.6;
+  margin-bottom: var(--sp-3);
+}
+.portal-arrow {
+  font-size: var(--fs-sm);
+  color: rgba(255,255,255,0.25);
+  align-self: flex-end;
+  transition: color 0.15s;
+}
+.portal-card:hover .portal-arrow {
+  color: var(--p-accent, rgba(255,255,255,0.6));
+}
+
+/* ── About ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: var(--sp-6);
+  align-items: start;
+}
+.about-text {
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-3);
+  line-height: 1.75;
+}
+
+/* ── CTA ── */
+.hub-cta {
+  text-align: center;
+  background: var(--surface-dim);
+}
+.hub-cta-eyebrow {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: var(--sp-2);
+}
+.hub-cta-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--sp-4);
+}
+
+/* ── Footer ── */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: var(--sp-3) 0;
+}
+.footer-inner {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  min-height: 48px;
+}
+.footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
+.footer-logo :global(svg) { width: 22px; height: auto; }
+.footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; white-space: nowrap; }
+.footer-ig { display: flex; align-items: center; justify-self: end; color: var(--text-muted); opacity: 0.5; transition: opacity 0.2s; }
+.footer-ig:hover { opacity: 1; }
+
+/* ── Responsive ── */
+@media (max-width: 860px) {
+  .portals-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .portals-grid { grid-template-columns: 1fr; }
+  .about-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
+  .hub-hero-title { font-size: clamp(32px, 8vw, 52px); }
+}
+</style>

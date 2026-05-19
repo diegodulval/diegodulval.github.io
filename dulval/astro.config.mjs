@@ -2,7 +2,7 @@
 import { defineConfig } from 'astro/config';
 
 export default defineConfig({
-  site: 'https://me.dulval.com',
+  site: 'https://dulval.com',
   output: 'static',
   outDir: 'dist',
 });

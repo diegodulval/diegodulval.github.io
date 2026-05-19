@@ -1,0 +1,335 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import logoRaw from '../../assets/dd-logo.svg?raw';
+
+const produtos = [
+  {
+    nome: 'Natural Cereja',
+    origem: 'Fazenda Dulval · 1.200m',
+    notas: 'Chocolate amargo, frutas vermelhas, caramelo',
+    processo: 'Natural',
+    pontuacao: '87',
+  },
+  {
+    nome: 'Honey Amarelo',
+    origem: 'Fazenda Dulval · 1.150m',
+    notas: 'Mel, damasco, nozes, final longo',
+    processo: 'Honey',
+    pontuacao: '85',
+  },
+  {
+    nome: 'Blend Altitude',
+    origem: 'Sul de Minas · 1.100–1.250m',
+    notas: 'Equilibrado, achocolatado, para o dia a dia',
+    processo: 'Lavado',
+    pontuacao: '82',
+  },
+];
+---
+
+<Layout
+  title="café.dulval — Café de altitude, origem Sul de Minas"
+  description="Café de altitude cultivado na fazenda da família no Sul de Minas. Grãos especiais, colhidos na hora certa, torrados com cuidado."
+>
+
+<style is:global>
+  body { padding-top: 0; }
+  :root { --accent: #c2955a; }
+</style>
+
+<!-- NAV -->
+<nav class="portal-nav">
+  <div class="container portal-nav-inner">
+    <a href="/" class="portal-logo" set:html={logoRaw} />
+    <span class="portal-nav-name">café.dulval</span>
+    <a href="https://dulval.com" class="portal-nav-back">← ecossistema</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="cafe-hero">
+  <div class="container">
+    <span class="eyebrow" style="color: var(--accent);">Sul de Minas · 1.200m de altitude</span>
+    <h1 class="cafe-hero-title">O café que a terra<br>e o tempo criam.</h1>
+    <p class="cafe-hero-body">
+      Cultivado na fazenda da família, colhido no ponto certo, processado com atenção.
+      Café especial com origem rastreável, do pé à xícara.
+    </p>
+    <div class="cafe-hero-actions">
+      <a href="#produtos" class="btn btn-primary" style="background: var(--accent); color: #fff;">Ver produtos</a>
+      <a href="#clube" class="btn btn-ghost">Assinar clube ↓</a>
+    </div>
+  </div>
+</section>
+
+<!-- STORY -->
+<section class="section">
+  <div class="container story-grid">
+    <div class="story-label">
+      <span class="eyebrow">A fazenda</span>
+    </div>
+    <div class="story-body">
+      <h2 class="story-title">Quatro gerações no Sul de Minas.</h2>
+      <p class="story-text">
+        A fazenda Dulval fica na região do Vale da Eletrônica, encravada nos contrafortes da Serra da Mantiqueira,
+        a mais de 1.200 metros de altitude. O clima frio, as chuvas concentradas e o solo vulcânico são a assinatura
+        de cada grão que sai daqui.
+      </p>
+      <p class="story-text">
+        A colheita é seletiva — cereja por cereja, no ponto. O processamento acontece na própria fazenda,
+        com controle de cada lote. O resultado é um café que conta de onde veio.
+      </p>
+      <div class="story-stats">
+        <div class="story-stat">
+          <span class="story-stat-n">1.200m</span>
+          <span class="story-stat-l">altitude</span>
+        </div>
+        <div class="story-stat">
+          <span class="story-stat-n">4</span>
+          <span class="story-stat-l">gerações na terra</span>
+        </div>
+        <div class="story-stat">
+          <span class="story-stat-n">100%</span>
+          <span class="story-stat-l">colheita seletiva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUTOS -->
+<section class="section" id="produtos">
+  <div class="container">
+    <span class="eyebrow">Linha de produtos</span>
+    <h2 class="s-title">Grãos com identidade.</h2>
+    <div class="produtos-grid">
+      {produtos.map((p) => (
+        <div class="produto-card">
+          <div class="produto-top">
+            <div>
+              <h3 class="produto-nome">{p.nome}</h3>
+              <p class="produto-origem">{p.origem}</p>
+            </div>
+            <div class="produto-score">
+              <span class="produto-score-n">{p.pontuacao}</span>
+              <span class="produto-score-l">pts</span>
+            </div>
+          </div>
+          <p class="produto-notas">{p.notas}</p>
+          <div class="produto-footer">
+            <span class="produto-processo">{p.processo}</span>
+            <a href="#" class="btn btn-ghost produto-btn" style="--border-hover: var(--accent);">Comprar →</a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- CLUBE -->
+<section class="section clube-section" id="clube">
+  <div class="container clube-inner">
+    <div class="clube-copy">
+      <span class="eyebrow" style="color: var(--accent);">Clube de assinatura</span>
+      <h2 class="s-title">Receba na porta.<br>Todo mês.</h2>
+      <p class="clube-body">
+        Assine e receba um lote selecionado direto da fazenda — com ficha do lote,
+        notas de torra e receita de preparo. Cancele quando quiser.
+      </p>
+      <ul class="clube-beneficios">
+        <li>✓ Café freshly roasted (torrado na semana da entrega)</li>
+        <li>✓ Ficha completa de origem e processo</li>
+        <li>✓ Frete incluso para todo o Brasil</li>
+        <li>✓ Desconto em compras avulsas</li>
+      </ul>
+      <a href="mailto:cafe@dulval.com" class="btn btn-primary" style="background: var(--accent);">Quero assinar →</a>
+    </div>
+    <div class="clube-planos">
+      <div class="plano-card plano-destaque">
+        <span class="plano-tag">Mais popular</span>
+        <h3 class="plano-nome">250g · mensal</h3>
+        <p class="plano-preco"><span class="plano-valor">R$62</span>/mês</p>
+        <p class="plano-desc">Para o apreciador que quer qualidade sem comprometer o mês.</p>
+      </div>
+      <div class="plano-card">
+        <h3 class="plano-nome">500g · mensal</h3>
+        <p class="plano-preco"><span class="plano-valor">R$108</span>/mês</p>
+        <p class="plano-desc">Para quem bebe muito café ou divide com alguém que merece.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container footer-inner">
+    <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
+    <p class="footer-copy">café.dulval.com &nbsp;·&nbsp; © dulval 2026</p>
+    <a href="/me" class="footer-back">me.dulval →</a>
+  </div>
+</footer>
+
+</Layout>
+
+<style>
+/* ── Nav ── */
+.portal-nav { height: 64px; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
+.portal-nav-inner { display: flex; align-items: center; gap: var(--sp-3); }
+.portal-logo { display: flex; align-items: center; line-height: 0; }
+.portal-logo :global(svg) { width: 22px; height: auto; }
+.portal-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.portal-nav-name { font-size: var(--fs-sm); font-weight: 600; color: var(--text-primary); }
+.portal-nav-back { margin-left: auto; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.portal-nav-back:hover { color: var(--text-primary); }
+
+/* ── Hero ── */
+.cafe-hero {
+  padding: var(--sp-7) 0 var(--sp-6);
+  border-bottom: 1px solid var(--border);
+}
+.cafe-hero-title {
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  letter-spacing: -0.028em;
+  line-height: 1.06;
+  margin: var(--sp-3) 0 var(--sp-4);
+  max-width: 600px;
+}
+.cafe-hero-body {
+  font-size: var(--fs-lg);
+  color: var(--text-secondary);
+  max-width: 480px;
+  margin-bottom: var(--sp-5);
+  line-height: 1.65;
+}
+.cafe-hero-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+/* ── Story ── */
+.story-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: var(--sp-6);
+}
+.story-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin-bottom: var(--sp-4);
+}
+.story-text {
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: var(--sp-3);
+}
+.story-stats {
+  display: flex;
+  gap: var(--sp-5);
+  margin-top: var(--sp-4);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--border);
+}
+.story-stat-n {
+  display: block;
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--accent);
+}
+.story-stat-l { font-size: var(--fs-xs); color: var(--text-muted); }
+
+/* ── Section title ── */
+.s-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: var(--sp-2) 0 var(--sp-4);
+}
+
+/* ── Produtos ── */
+.produtos-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-2);
+}
+.produto-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  transition: border-color 0.15s;
+}
+.produto-card:hover { border-color: var(--accent); }
+.produto-top { display: flex; align-items: flex-start; justify-content: space-between; }
+.produto-nome { font-size: var(--fs-lg); font-weight: 600; letter-spacing: -0.015em; }
+.produto-origem { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 4px; }
+.produto-score { text-align: right; }
+.produto-score-n { font-size: var(--fs-xl); font-weight: 700; color: var(--accent); display: block; }
+.produto-score-l { font-size: var(--fs-xs); color: var(--text-muted); }
+.produto-notas { font-size: var(--fs-sm); color: var(--text-secondary); font-style: italic; flex: 1; }
+.produto-footer { display: flex; align-items: center; justify-content: space-between; }
+.produto-processo {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.produto-btn { font-size: var(--fs-xs) !important; padding: 8px 16px !important; }
+
+/* ── Clube ── */
+.clube-section { background: var(--surface-dim); }
+.clube-inner {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: var(--sp-6);
+  align-items: start;
+}
+.clube-body { color: var(--text-secondary); line-height: 1.75; margin-bottom: var(--sp-4); }
+.clube-beneficios {
+  list-style: none;
+  margin-bottom: var(--sp-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-1);
+}
+.clube-beneficios li { font-size: var(--fs-sm); color: var(--text-secondary); }
+.clube-planos { display: flex; flex-direction: column; gap: var(--sp-2); }
+.plano-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface);
+}
+.plano-destaque { border-color: var(--accent); }
+.plano-tag {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  display: block;
+  margin-bottom: var(--sp-2);
+}
+.plano-nome { font-size: var(--fs-lg); font-weight: 600; }
+.plano-preco { margin: var(--sp-1) 0 var(--sp-2); }
+.plano-valor { font-size: var(--fs-2xl); font-weight: 700; letter-spacing: -0.03em; }
+.plano-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.6; }
+
+/* ── Footer ── */
+.footer { border-top: 1px solid var(--border); padding: var(--sp-3) 0; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 48px; }
+.footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
+.footer-logo :global(svg) { width: 20px; height: auto; }
+.footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
+.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; }
+.footer-back { justify-self: end; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.footer-back:hover { color: var(--text-primary); }
+
+@media (max-width: 860px) {
+  .produtos-grid { grid-template-columns: 1fr; }
+  .clube-inner { grid-template-columns: 1fr; }
+  .story-grid { grid-template-columns: 1fr; gap: var(--sp-3); }
+}
+</style>

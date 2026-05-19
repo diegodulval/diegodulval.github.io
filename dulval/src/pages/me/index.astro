@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Hero from '../../components/Hero.astro';
+import Metrics from '../../components/Metrics.astro';
+import Services from '../../components/Services.astro';
+import Projects from '../../components/Projects.astro';
+import CTA from '../../components/CTA.astro';
+import Footer from '../../components/Footer.astro';
+import logoRaw from '../../assets/dd-logo.svg?raw';
+
+const nowItems = [
+  { label: 'Noh', desc: 'Building the payment infra — cartão, Pix, wallets, BaaS.', status: 'ativo' },
+  { label: 'Conecta', desc: 'Automatizando fluxos de negócio com agentes de IA.', status: 'ativo' },
+  { label: 'Café Dulval', desc: 'Estruturando a linha de produtos e e-commerce.', status: 'em breve' },
+  { label: 'DiMata / PriMata', desc: 'IA aplicada ao processamento de café especial.', status: 'beta' },
+];
+
+const ecoLinks = [
+  { name: 'conecta', label: 'IA para negócios', href: '/conecta', accent: '#0ea5e9' },
+  { name: 'café', label: 'Café de altitude', href: '/cafe', accent: '#c2955a' },
+  { name: 'agro', label: 'IA para o campo', href: '/agro', accent: '#22c55e' },
+  { name: 'labs', label: 'Laboratório', href: '/labs', accent: '#a78bfa' },
+  { name: 'edu', label: 'Conteúdo', href: '/edu', accent: '#fb923c' },
+];
+---
+
+<Layout
+  title="me.dulval — Diego Dulval, Founding Engineer"
+  description="Founding Staff Engineer. Arquiteto de sistemas, especialista em FinTech e AI Engineering. Do zero ao produto, em escala real."
+>
+  <Nav />
+  <Hero />
+  <Metrics />
+  <Services />
+  <Projects />
+
+  <!-- NOW PAGE -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Now · maio 2026</span>
+      <h2 class="section-title">O que estou construindo</h2>
+      <div class="now-grid">
+        {nowItems.map((item) => (
+          <div class="now-card">
+            <div class="now-card-header">
+              <h3 class="now-name">{item.label}</h3>
+              <span class={`now-badge now-badge--${item.status.replace(' ', '-')}`}>{item.status}</span>
+            </div>
+            <p class="now-desc">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ECO LINKS -->
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Ecossistema</span>
+      <h2 class="section-title">Mais do que código</h2>
+      <div class="eco-links-grid">
+        {ecoLinks.map((e) => (
+          <a href={e.href} class="eco-link-card" style={`--el-accent: ${e.accent};`}>
+            <span class="eco-link-name">{e.name}.dulval</span>
+            <span class="eco-link-label">{e.label}</span>
+            <span class="eco-link-arrow">→</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+  <Footer />
+</Layout>
+
+<style>
+.section-title {
+  font-size: var(--fs-2xl);
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: var(--sp-2) 0 var(--sp-4);
+}
+
+/* ── Now ── */
+.now-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--sp-2);
+}
+.now-card {
+  padding: var(--sp-4);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-dim);
+}
+.now-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--sp-2);
+}
+.now-name {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+.now-badge {
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: var(--radius-pill);
+}
+.now-badge--ativo {
+  background: rgba(34,197,94,0.12);
+  color: #22c55e;
+}
+.now-badge--beta {
+  background: rgba(168,139,250,0.12);
+  color: #a78bfa;
+}
+.now-badge--em-breve {
+  background: rgba(251,146,60,0.12);
+  color: #fb923c;
+}
+.now-desc {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ── Eco Links ── */
+.eco-links-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--sp-2);
+  margin-top: var(--sp-4);
+}
+.eco-link-card {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  padding: 12px var(--sp-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  text-decoration: none;
+  transition: border-color 0.15s, background 0.15s;
+}
+.eco-link-card:hover {
+  border-color: var(--el-accent, var(--text-muted));
+  background: var(--surface-dim);
+}
+.eco-link-name {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.eco-link-label {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+.eco-link-arrow {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+.eco-link-card:hover .eco-link-arrow {
+  color: var(--el-accent, var(--text-primary));
+}
+
+@media (max-width: 600px) {
+  .now-grid { grid-template-columns: 1fr; }
+}
+</style>
