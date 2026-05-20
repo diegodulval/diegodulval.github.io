@@ -64,18 +64,45 @@ const services = [
 </nav>
 
 <!-- HERO -->
-<section class="portal-hero">
-  <div class="container">
+<section class="c-hero">
+  <div class="c-hero-grid" aria-hidden="true"></div>
+  <div class="container c-hero-inner">
+
     <span class="eyebrow" style="color: var(--accent);">Conecta · IA para negócios</span>
-    <h1 class="portal-hero-title">IA que resolve.<br>Não que impressiona.</h1>
-    <p class="portal-hero-body">
-      Construo agentes e sistemas de inteligência artificial que atacam problemas reais do seu negócio —
-      automação, análise, atendimento. Sem buzzword, sem promessa vazia.
-    </p>
-    <div class="portal-hero-actions">
-      <a href="#contato" class="btn btn-primary" style="background: var(--accent); color: #fff;">Fale comigo</a>
-      <a href="#servicos" class="btn btn-ghost">Ver serviços ↓</a>
+    <h1 class="c-hero-title">
+      Resolvo os<br>
+      <span class="tw-line">
+        <span id="tw" class="tw-word" aria-live="polite"></span><span class="tw-cursor" aria-hidden="true">|</span>
+      </span><br>
+      do seu negócio.
+    </h1>
+
+    <div class="capture-card">
+      <span class="brk tl"></span>
+      <span class="brk tr"></span>
+      <span class="brk bl"></span>
+      <span class="brk br"></span>
+
+      <p class="capture-q">Qual é a sua dor hoje?</p>
+      <div class="pills">
+        <button class="pill" data-area="Automação">Automação</button>
+        <button class="pill" data-area="Análise de dados">Análise de dados</button>
+        <button class="pill" data-area="Atendimento">Atendimento</button>
+        <button class="pill" data-area="Integrações">Integrações</button>
+        <button class="pill" data-area="Tecnologia">Tecnologia</button>
+        <button class="pill" data-area="Produção">Produção</button>
+        <button class="pill" data-area="Produto">Produto</button>
+        <button class="pill" data-area="Serviço">Serviço</button>
+        <button class="pill active" data-area="Outros">Outros</button>
+      </div>
+
+      <textarea id="prob-input" class="capture-ta" placeholder="Descreve o problema com mais detalhes — área, contexto, o que já tentou..." rows="4"></textarea>
+      <button class="capture-send" id="send-btn">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar no WhatsApp
+      </button>
     </div>
+
   </div>
 </section>
 
@@ -113,35 +140,62 @@ const services = [
   </div>
 </section>
 
-<!-- DIFERENCIAL -->
-<section class="section diferencial">
-  <div class="container diferencial-inner">
-    <div>
-      <span class="eyebrow">Diferencial</span>
-      <h2 class="s-title" style="max-width: 480px;">Você fala direto comigo.</h2>
-      <p class="dif-body">
-        Sem equipe de vendas, sem gerente de conta, sem processo de onboarding infinito.
-        Você fala com o engenheiro que vai construir o sistema — e isso muda tudo.
-      </p>
-      <p class="dif-body">
-        Já operei sistemas em produção com milhões de transações. Sei a diferença entre um demo
-        bonito e algo que aguenta o mundo real.
-      </p>
-    </div>
-    <div class="dif-stats">
-      <div class="dif-stat">
-        <span class="dif-stat-n">+60M</span>
-        <span class="dif-stat-l">TPV mensal (Noh)</span>
-      </div>
-      <div class="dif-stat">
-        <span class="dif-stat-n">10+</span>
-        <span class="dif-stat-l">anos de engenharia</span>
-      </div>
-      <div class="dif-stat">
-        <span class="dif-stat-n">0</span>
-        <span class="dif-stat-l">intermediários</span>
-      </div>
-    </div>
+<!-- FAQ -->
+<section class="section" id="faq">
+  <div class="container">
+    <span class="eyebrow">Perguntas frequentes</span>
+    <h2 class="s-title">Antes de falar comigo.</h2>
+    <dl class="faq-list">
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <dt>Vou precisar trocar de sistema?</dt>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <dd class="faq-a">Não. O agente ou a automação é construída em volta do que você já usa — seja ERP, planilha, CRM ou qualquer outra ferramenta. A ideia é encaixar, não substituir.</dd>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <dt>Quanto custa?</dt>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <dd class="faq-a">Depende do escopo. Projetos pontuais partem de R$ 5.000. Sistemas mais complexos com agentes e integrações ficam na faixa de R$ 15.000–40.000. Os valores são fechados depois de entender o problema — sem surpresa no meio do caminho.</dd>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <dt>E se parar de funcionar?</dt>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <dd class="faq-a">Você fala direto comigo — sem fila de suporte, sem ticket. Para projetos com retainer mensal, o acordo inclui SLA de resposta e correção. Para projetos avulsos, entrego documentação completa e você tem autonomia total sobre o que foi construído.</dd>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <dt>Minha equipe precisa ser técnica?</dt>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <dd class="faq-a">Não. Entrego sistemas que o time usa sem precisar entender o que está por baixo. Se quiser, incluo uma sessão de capacitação prática — mas o objetivo é que funcione sem depender de ninguém técnico no seu lado.</dd>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <dt>Onde ficam os meus dados?</dt>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <dd class="faq-a">Você escolhe. Posso usar a infraestrutura que você já tem, ou montar em cloud (GCP, AWS) com acesso e controle total seu. Nenhum dado fica em sistemas meus — você é o dono.</dd>
+      </details>
+
+      <details class="faq-item">
+        <summary class="faq-q">
+          <dt>Como começa?</dt>
+          <span class="faq-icon" aria-hidden="true">+</span>
+        </summary>
+        <dd class="faq-a">Com uma conversa. Você conta o desafio, eu avalio se consigo resolver e proponho o caminho — sem processo de vendas, sem gerente de conta. Você fala com o engenheiro que vai construir o sistema desde o primeiro contato.</dd>
+      </details>
+
+    </dl>
   </div>
 </section>
 
@@ -170,6 +224,49 @@ const services = [
     <a href="/me" class="footer-back">me.dulval →</a>
   </div>
 </footer>
+
+<script>
+// ── Typewriter ──
+const words = ['gargalos', 'retrabalho', 'dados parados', 'atendimento manual'];
+let wi = 0, ci = 0, deleting = false;
+const twEl = document.getElementById('tw')!;
+
+function tick() {
+  const word = words[wi];
+  if (!deleting) {
+    twEl.textContent = word.slice(0, ci + 1);
+    ci++;
+    if (ci === word.length) { deleting = true; setTimeout(tick, 2200); return; }
+  } else {
+    twEl.textContent = word.slice(0, ci - 1);
+    ci--;
+    if (ci === 0) { deleting = false; wi = (wi + 1) % words.length; }
+  }
+  setTimeout(tick, deleting ? 50 : 95);
+}
+tick();
+
+// ── Form ──
+let selectedArea = 'Outros';
+
+document.querySelectorAll<HTMLButtonElement>('.pill').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.pill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    selectedArea = btn.dataset.area ?? 'Outros';
+  });
+});
+
+document.getElementById('send-btn')!.addEventListener('click', () => {
+  const problem = (document.getElementById('prob-input') as HTMLTextAreaElement).value.trim();
+  // ← substituir pelo seu número com DDI: 5535XXXXXXXXX
+  const phone = '5535997660281';
+  const msg = encodeURIComponent(
+    `Olá Diego, vim do conecta.dulval.com.\n\nÁrea: ${selectedArea}\nProblema: ${problem || '(não especificado)'}`
+  );
+  window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
+});
+</script>
 
 </Layout>
 
@@ -203,26 +300,141 @@ const services = [
 .portal-nav-back:hover { color: var(--text-primary); }
 
 /* ── Hero ── */
-.portal-hero {
-  padding: var(--sp-7) 0 var(--sp-6);
+.c-hero {
+  position: relative;
+  padding: var(--sp-7) 0 var(--sp-7);
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
-.portal-hero-title {
+.c-hero-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(var(--border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.6;
+  pointer-events: none;
+}
+.c-hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative;
+}
+.c-hero-title {
   font-size: var(--fs-hero);
   font-weight: 700;
   letter-spacing: -0.028em;
-  line-height: 1.06;
+  line-height: 1.08;
   margin: var(--sp-3) 0 var(--sp-4);
-  max-width: 620px;
 }
-.portal-hero-body {
-  font-size: var(--fs-lg);
+.tw-line {
+  color: var(--accent);
+  display: inline-block;
+  min-height: 1.1em;
+}
+.tw-cursor {
+  display: inline-block;
+  color: var(--accent);
+  animation: blink 0.75s step-end infinite;
+  margin-left: 1px;
+}
+@keyframes blink { 50% { opacity: 0; } }
+.c-hero-body {
+  font-size: var(--fs-md);
   color: var(--text-secondary);
-  max-width: 500px;
+  line-height: 1.7;
+  max-width: 560px;
   margin-bottom: var(--sp-5);
-  line-height: 1.65;
 }
-.portal-hero-actions { display: flex; gap: var(--sp-2); flex-wrap: wrap; }
+
+/* ── Capture card ── */
+.capture-card {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: var(--sp-5) var(--sp-6);
+  width: 100%;
+  box-shadow: 0 4px 32px rgba(0,0,0,0.06);
+}
+.brk {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  border-color: var(--accent);
+  border-style: solid;
+}
+.brk.tl { top: -1px; left: -1px; border-width: 2px 0 0 2px; border-radius: 2px 0 0 0; }
+.brk.tr { top: -1px; right: -1px; border-width: 2px 2px 0 0; border-radius: 0 2px 0 0; }
+.brk.bl { bottom: -1px; left: -1px; border-width: 0 0 2px 2px; border-radius: 0 0 0 2px; }
+.brk.br { bottom: -1px; right: -1px; border-width: 0 2px 2px 0; border-radius: 0 0 2px 0; }
+.capture-q {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--sp-3);
+  line-height: 1.4;
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.pill {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-secondary);
+  background: var(--surface-dim);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-pill);
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.pill:hover { border-color: var(--accent); color: var(--accent); }
+.pill.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+.capture-ta {
+  margin-top: var(--sp-4);
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-sm);
+  width: 100%;
+  padding: 10px var(--sp-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: var(--surface-dim);
+  color: var(--text-primary);
+  resize: none;
+  transition: border-color 0.15s;
+  margin-bottom: var(--sp-2);
+  display: block;
+  box-sizing: border-box;
+}
+.capture-ta:focus { outline: none; border-color: var(--accent); }
+.capture-send {
+  font-family: 'DM Sans', sans-serif;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  background: #25D366;
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-pill);
+  padding: 11px 20px;
+  cursor: pointer;
+  transition: opacity 0.15s;
+}
+.capture-send:hover { opacity: 0.88; }
 
 /* ── Section title ── */
 .s-title {
@@ -287,38 +499,53 @@ const services = [
 }
 .service-desc { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
 
-/* ── Diferencial ── */
-.diferencial { background: var(--surface-dim); }
-.diferencial-inner {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: var(--sp-6);
-  align-items: center;
-}
-.dif-body {
-  font-size: var(--fs-md);
-  color: var(--text-secondary);
-  line-height: 1.75;
-  margin-bottom: var(--sp-3);
-  max-width: 480px;
-}
-.dif-stats {
+/* ── FAQ ── */
+.faq-list {
   display: flex;
   flex-direction: column;
+  gap: 0;
+  max-width: 720px;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border);
+}
+.faq-item:first-of-type {
+  border-top: 1px solid var(--border);
+}
+.faq-q {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--sp-4);
-  text-align: right;
-}
-.dif-stat-n {
-  display: block;
-  font-size: var(--fs-2xl);
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  padding: var(--sp-4) 0;
+  cursor: pointer;
+  list-style: none;
+  font-size: var(--fs-md);
+  font-weight: 600;
   color: var(--text-primary);
+  transition: color 0.15s;
 }
-.dif-stat-l {
-  font-size: var(--fs-xs);
+.faq-q::-webkit-details-marker { display: none; }
+.faq-q dt { font-size: inherit; font-weight: inherit; }
+.faq-q:hover { color: var(--accent); }
+.faq-icon {
+  font-size: 20px;
+  font-weight: 300;
   color: var(--text-muted);
-  letter-spacing: 0.05em;
+  flex-shrink: 0;
+  transition: transform 0.2s, color 0.15s;
+  line-height: 1;
+}
+.faq-item[open] .faq-icon {
+  transform: rotate(45deg);
+  color: var(--accent);
+}
+.faq-a {
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  line-height: 1.75;
+  padding-bottom: var(--sp-4);
+  max-width: 640px;
 }
 
 /* ── Form ── */
@@ -357,10 +584,9 @@ const services = [
 .footer-back:hover { color: var(--text-primary); }
 
 @media (max-width: 768px) {
+  .capture-card { padding: var(--sp-4); }
   .steps-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
-  .diferencial-inner { grid-template-columns: 1fr; }
-  .dif-stats { flex-direction: row; text-align: left; }
   .form-row { grid-template-columns: 1fr; }
 }
 </style>

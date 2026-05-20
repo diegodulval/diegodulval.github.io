@@ -2,6 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import logoRaw from '../assets/dd-logo.svg?raw';
 
+const dev = import.meta.env.DEV;
+const portal = (slug: string) => dev ? `/${slug}` : `https://${slug}.dulval.com`;
+
 const portals = [
   {
     name: 'me',
@@ -9,7 +12,7 @@ const portals = [
     desc: 'Trajetória, stack e frentes ativas do engenheiro por trás do grupo.',
     accent: '#3b82f6',
     grad: 'linear-gradient(150deg, #080d1a 0%, #0d1833 100%)',
-    href: '/me',
+    href: portal('me'),
   },
   {
     name: 'conecta',
@@ -17,7 +20,7 @@ const portals = [
     desc: 'Automação, agentes de IA e sistemas inteligentes para o seu negócio.',
     accent: '#0ea5e9',
     grad: 'linear-gradient(150deg, #030d17 0%, #071e2e 100%)',
-    href: '/conecta',
+    href: portal('conecta'),
   },
   {
     name: 'café',
@@ -25,7 +28,7 @@ const portals = [
     desc: 'Grãos especiais cultivados na fazenda da família no Sul de Minas.',
     accent: '#c2955a',
     grad: 'linear-gradient(150deg, #180e04 0%, #2a1808 100%)',
-    href: '/cafe',
+    href: portal('cafe'),
   },
   {
     name: 'agro',
@@ -33,7 +36,7 @@ const portals = [
     desc: 'DiMata e PriMata — ferramentas de IA para processadores de café.',
     accent: '#22c55e',
     grad: 'linear-gradient(150deg, #030f07 0%, #081e0e 100%)',
-    href: '/agro',
+    href: portal('agro'),
   },
   {
     name: 'labs',
@@ -41,7 +44,7 @@ const portals = [
     desc: 'Experimentos em progresso, roadmap público e projetos no graveyard.',
     accent: '#a78bfa',
     grad: 'linear-gradient(150deg, #0a0717 0%, #160d2c 100%)',
-    href: '/labs',
+    href: portal('labs'),
   },
   {
     name: 'edu',
@@ -49,7 +52,7 @@ const portals = [
     desc: 'Textos, palestras, newsletter e arquivo de aprendizados.',
     accent: '#fb923c',
     grad: 'linear-gradient(150deg, #180900 0%, #2c1200 100%)',
-    href: '/edu',
+    href: portal('edu'),
   },
 ];
 ---
@@ -68,7 +71,7 @@ const portals = [
   <div class="container hub-nav-inner">
     <a href="/" class="hub-logo" set:html={logoRaw} />
     <span class="hub-nav-name">dulval.com</span>
-    <a href="/me" class="hub-nav-cta">me.dulval.com →</a>
+    <a href={portal('me')} class="hub-nav-cta">me.dulval.com →</a>
   </div>
 </nav>
 
