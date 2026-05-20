@@ -22,8 +22,6 @@ import videoSrc from '../assets/me.mp4';
 
 <style>
 .hero-wrap {
-  padding-top: var(--sp-4);
-  padding-bottom: var(--sp-5);
   border-bottom: 1px solid var(--border);
   overflow: hidden;
 }
@@ -42,7 +40,7 @@ import videoSrc from '../assets/me.mp4';
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  object-position: center -290px;
 }
 
 .hero-overlay {
@@ -132,6 +130,7 @@ import videoSrc from '../assets/me.mp4';
 </style>
 
 <script>
+  const video = document.querySelector('.hero-video') as HTMLElement;
   const card = document.getElementById('heroCard') as HTMLElement;
   const CONTAINER_MAX = 960;
   const PADDING = 48;
@@ -152,6 +151,15 @@ import videoSrc from '../assets/me.mp4';
     card.style.width = `${currentW}px`;
     card.style.marginLeft = `${margin}px`;
     card.style.borderRadius = `${RADIUS * progress}px`;
+
+// Valores para o object-position
+const VIDEO_START_Y = -290; // Posição inicial (center -290px)
+const VIDEO_END_Y = 0;       // Posição final (center top / 0px)
+    if (video) {
+    // Interpolação linear: quando progress for 0, dá VIDEO_START_Y. Quando for 1, dá VIDEO_END_Y.
+    const currentVideoY = VIDEO_START_Y + (VIDEO_END_Y - VIDEO_START_Y) * progress;
+    video.style.objectPosition = `center ${currentVideoY}px`;
+  }
   }
 
   update();
