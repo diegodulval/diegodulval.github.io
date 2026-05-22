@@ -4,11 +4,20 @@ import logoRaw from '../../assets/dd-logo.svg?raw';
 
 const projetos = [
   {
+    nome: 'Gestor de Projetos',
+    desc: 'Painel pessoal para trackear, repriorizar e distribuir foco igualmente entre projetos paralelos. Rotina semanal automática, log de tarefas e estratégia de time-boxing.',
+    categoria: 'Produtividade · Tool',
+    status: 'ativo',
+    pct: 80,
+    href: '/labs/gestor',
+  },
+  {
     nome: 'DiMata',
     desc: 'Classificação visual de grãos de café por IA. Visão computacional em tempo real para beneficiamento.',
     categoria: 'AgriTech · CV',
     status: 'beta',
     pct: 70,
+    href: null,
   },
   {
     nome: 'PriMata',
@@ -16,6 +25,7 @@ const projetos = [
     categoria: 'AgriTech · IoT',
     status: 'em desenvolvimento',
     pct: 40,
+    href: null,
   },
   {
     nome: 'Conecta Agent',
@@ -23,6 +33,7 @@ const projetos = [
     categoria: 'AI · Infra',
     status: 'ativo',
     pct: 85,
+    href: null,
   },
   {
     nome: 'Café E-commerce',
@@ -30,6 +41,7 @@ const projetos = [
     categoria: 'E-commerce',
     status: 'planejado',
     pct: 10,
+    href: null,
   },
   {
     nome: 'Dulval OS',
@@ -37,6 +49,7 @@ const projetos = [
     categoria: 'Produtividade · AI',
     status: 'experimento',
     pct: 20,
+    href: null,
   },
 ];
 
@@ -107,11 +120,15 @@ const statusMap: Record<string, { color: string; label: string }> = {
     <div class="roadmap-list">
       {projetos.map((p) => {
         const s = statusMap[p.status] ?? { color: '#888', label: p.status };
+        const Tag = p.href ? 'a' : 'div';
         return (
-          <div class="roadmap-item">
+          <Tag
+            class={`roadmap-item${p.href ? ' roadmap-item--link' : ''}`}
+            href={p.href ?? undefined}
+          >
             <div class="roadmap-header">
               <div class="roadmap-info">
-                <h3 class="roadmap-nome">{p.nome}</h3>
+                <h3 class="roadmap-nome">{p.nome}{p.href && <span class="roadmap-arrow"> →</span>}</h3>
                 <span class="roadmap-cat">{p.categoria}</span>
               </div>
               <span
@@ -127,7 +144,7 @@ const statusMap: Record<string, { color: string; label: string }> = {
               ></div>
             </div>
             <span class="roadmap-pct" style={`color: ${s.color};`}>{p.pct}%</span>
-          </div>
+          </Tag>
         );
       })}
     </div>
@@ -254,6 +271,9 @@ const statusMap: Record<string, { color: string; label: string }> = {
   white-space: nowrap;
   align-self: center;
 }
+.roadmap-item--link { cursor: pointer; text-decoration: none; transition: background 0.15s; }
+.roadmap-item--link:hover { background: var(--surface-dim); }
+.roadmap-arrow { color: var(--text-muted); }
 .roadmap-nome { font-size: var(--fs-lg); font-weight: 600; letter-spacing: -0.015em; }
 .roadmap-cat { font-size: var(--fs-xs); color: var(--text-muted); }
 .roadmap-desc { grid-column: 1 / -1; font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.65; }
