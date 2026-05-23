@@ -13,6 +13,20 @@ import logoRaw from '../../../assets/dd-logo.svg?raw';
   :root { --accent: #a78bfa; }
 </style>
 
+<!-- LOGIN GATE -->
+<div id="login-gate">
+  <div class="login-card">
+    <div class="login-logo" set:html={logoRaw} />
+    <p class="login-label">labs.dulval / gestor</p>
+    <form id="login-form" autocomplete="off">
+      <input id="l-user" class="login-field" type="text" placeholder="usuário" autocomplete="off" />
+      <input id="l-pass" class="login-field" type="password" placeholder="senha" autocomplete="off" />
+      <p id="login-error" class="login-error" style="display:none">credenciais inválidas</p>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center;margin-top:4px">entrar →</button>
+    </form>
+  </div>
+</div>
+
 <!-- NAV -->
 <nav class="portal-nav">
   <div class="container portal-nav-inner">
@@ -25,7 +39,7 @@ import logoRaw from '../../../assets/dd-logo.svg?raw';
 <!-- HERO -->
 <section class="labs-hero">
   <div class="container">
-    <span class="eyebrow" style="color: var(--accent);">Foco · Rotina · Repriorização</span>
+    <span class="eyebrow" style="color:var(--accent)">Foco · Rotina · Repriorização</span>
     <h1 class="labs-hero-title">Gestor de<br>projetos paralelos.</h1>
     <p class="labs-hero-body">
       Painel pessoal para trackear progresso, distribuir blocos de foco e repriorizar semanalmente
@@ -35,100 +49,103 @@ import logoRaw from '../../../assets/dd-logo.svg?raw';
 </section>
 
 <!-- APP -->
-<section class="section app-section">
+<section class="app-section">
   <div class="container">
     <div class="app-shell">
 
       <!-- TABS -->
       <div class="tab-bar" role="tablist">
-        <button class="tab active" role="tab" aria-selected="true"  data-tab="projetos"   onclick="switchTab('projetos')">Projetos</button>
-        <button class="tab"        role="tab" aria-selected="false" data-tab="rotina"     onclick="switchTab('rotina')">Rotina</button>
-        <button class="tab"        role="tab" aria-selected="false" data-tab="hoje"       onclick="switchTab('hoje')">Hoje</button>
-        <button class="tab"        role="tab" aria-selected="false" data-tab="estrategia" onclick="switchTab('estrategia')">Estratégia</button>
+        <button class="tab active" role="tab" data-tab="projetos"   onclick="switchTab('projetos')">Projetos</button>
+        <button class="tab"        role="tab" data-tab="rotina"     onclick="switchTab('rotina')">Rotina</button>
+        <button class="tab"        role="tab" data-tab="hoje"       onclick="switchTab('hoje')">Hoje</button>
+        <button class="tab"        role="tab" data-tab="estrategia" onclick="switchTab('estrategia')">Estratégia</button>
       </div>
 
       <!-- VIEW: PROJETOS -->
       <div id="v-projetos" class="view active">
+
         <div class="metrics-row">
-          <div class="metric"><div class="metric-val" id="m-total">0</div><div class="metric-label">projetos ativos</div></div>
-          <div class="metric"><div class="metric-val" id="m-alta">0</div><div class="metric-label">prioridade alta</div></div>
-          <div class="metric"><div class="metric-val" id="m-tasks">0</div><div class="metric-label">tarefas pendentes</div></div>
+          <div class="metric">
+            <div class="metric-val" id="m-total">0</div>
+            <div class="metric-label">projetos ativos</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val" id="m-alta">0</div>
+            <div class="metric-label">prioridade alta</div>
+          </div>
+          <div class="metric">
+            <div class="metric-val" id="m-tasks">0</div>
+            <div class="metric-label">tarefas abertas</div>
+          </div>
         </div>
 
-        <div class="sub-label">seus projetos</div>
+        <div id="tasks-summary"></div>
+
+        <p class="section-eyebrow">Projetos</p>
         <div id="proj-list"></div>
 
-        <div id="add-form" style="display:none" class="form-card">
-          <div class="form-row">
+        <div id="add-form" style="display:none" class="add-project-form">
+          <div class="add-form-fields">
             <input id="f-nome" class="field" placeholder="Nome do projeto" />
-            <select id="f-prio" class="field">
-              <option value="alta">Alta prioridade</option>
+            <select id="f-prio" class="field field-sm">
+              <option value="alta">Alta</option>
               <option value="media" selected>Média</option>
               <option value="baixa">Baixa</option>
               <option value="pausada">Pausada</option>
             </select>
-            <input id="f-prog" class="field" type="number" min="0" max="100" placeholder="% concluído" style="width:130px" />
+            <input id="f-prog" class="field field-sm" type="number" min="0" max="100" placeholder="%" />
           </div>
-          <div class="form-actions">
-            <button class="btn btn-primary" style="background:var(--accent)" onclick="addProject()">salvar</button>
+          <div class="add-form-actions">
+            <button class="btn btn-primary" onclick="addProject()">salvar</button>
             <button class="btn btn-ghost" onclick="document.getElementById('add-form').style.display='none'">cancelar</button>
           </div>
         </div>
 
-        <button class="add-btn" id="add-trigger" onclick="showAddForm()">+ adicionar projeto</button>
+        <button class="add-proj-btn" id="add-trigger" onclick="showAddForm()">+ adicionar projeto</button>
       </div>
 
       <!-- VIEW: ROTINA -->
       <div id="v-rotina" class="view">
-        <p class="view-intro">Distribuição semanal gerada automaticamente. Cada bloco = 1h30 de foco. Alta prioridade recebe 2× mais blocos. Sexta é reservada para revisão.</p>
+        <p class="view-intro">Distribuição semanal automática por peso de prioridade. Cada bloco = 1h30 de foco. Sexta reservada para revisão.</p>
         <div class="rotina-legend">
-          <span class="leg-item leg-alta">Alta</span>
-          <span class="leg-item leg-media">Média</span>
-          <span class="leg-item leg-baixa">Baixa</span>
-          <span class="leg-item leg-revisao">Revisão</span>
+          <span class="leg alta">Alta</span>
+          <span class="leg media">Média</span>
+          <span class="leg baixa">Baixa</span>
+          <span class="leg revisao">Revisão</span>
         </div>
         <div id="rotina-grid"></div>
-        <p class="view-note">Projetos pausados não recebem blocos. Sexta à tarde é sempre reservada para repriorização semanal.</p>
+        <p class="view-note">Projetos pausados não recebem blocos. Sexta à tarde é reservada para repriorização semanal.</p>
       </div>
 
       <!-- VIEW: HOJE -->
       <div id="v-hoje" class="view">
-        <div class="sub-label">tarefas do dia</div>
-        <div id="tasks-list"></div>
-        <div class="form-card" style="margin-top:var(--sp-2)">
-          <div class="form-row">
-            <input id="t-nome" class="field" placeholder="Nova tarefa..." style="flex:2" />
-            <select id="t-proj" class="field">
-              <option value="">Projeto...</option>
-            </select>
-            <button class="btn btn-primary" style="background:var(--accent);white-space:nowrap" onclick="addTask()">+ add</button>
-          </div>
-        </div>
-        <p class="view-note" style="margin-top:var(--sp-3)">Dica: limite 2–3 tarefas por projeto por dia. Consistência > velocidade.</p>
+        <p class="view-intro">Todas as tarefas abertas ordenadas por urgência. Clique no status para avançar.</p>
+        <div id="hoje-list"></div>
+        <p class="view-note">Tarefas são adicionadas dentro de cada projeto, na aba Projetos.</p>
       </div>
 
       <!-- VIEW: ESTRATÉGIA -->
       <div id="v-estrategia" class="view">
         <div class="strategy-list">
-          <div class="strategy-item" style="border-left-color:#a78bfa">
+          <div class="strategy-item" style="--s-color:#a78bfa">
             <h3 class="strategy-title">Time-boxing — blocos de foco</h3>
             <p class="strategy-body">Nunca trabalhe em projetos de forma fragmentada. Reserve blocos de 1h30 por projeto com 15min de intervalo. Isso elimina a troca de contexto e aumenta a qualidade de entrega.</p>
           </div>
-          <div class="strategy-item" style="border-left-color:#22c55e">
+          <div class="strategy-item" style="--s-color:#22c55e">
             <h3 class="strategy-title">Revisão semanal — toda sexta</h3>
             <p class="strategy-body">30 minutos toda sexta: revise o progresso de cada projeto, redistribua os blocos da semana seguinte conforme prioridade atual e anote o próximo passo de cada um.</p>
           </div>
-          <div class="strategy-item" style="border-left-color:#f97316">
+          <div class="strategy-item" style="--s-color:#f97316">
             <h3 class="strategy-title">Regra de repriorização</h3>
             <p class="strategy-body">Se um projeto não avançou por 2 semanas seguidas, muda para "pausado" e o slot é redistribuído. Isso evita projetos-zumbi que consomem energia sem progredir.</p>
           </div>
-          <div class="strategy-item" style="border-left-color:#3b82f6">
+          <div class="strategy-item" style="--s-color:#3b82f6">
             <h3 class="strategy-title">Log de sessão — 2 linhas</h3>
-            <p class="strategy-body">Ao final de cada bloco, escreva: o que foi feito e qual é o próximo passo. Isso elimina o tempo perdido tentando lembrar "onde eu parei" na próxima sessão.</p>
+            <p class="strategy-body">Ao final de cada bloco: o que foi feito e qual é o próximo passo. Isso elimina o tempo perdido tentando lembrar "onde eu parei" na próxima sessão.</p>
           </div>
-          <div class="strategy-item" style="border-left-color:#eab308">
+          <div class="strategy-item" style="--s-color:#eab308">
             <h3 class="strategy-title">Limite de projetos ativos</h3>
-            <p class="strategy-body">No máximo 4 projetos ativos simultaneamente. Os demais ficam em fila de espera. Quando um projeto é concluído ou pausado, o próximo da fila entra. Foco é escasso — trate como recurso.</p>
+            <p class="strategy-body">No máximo 4 projetos ativos simultaneamente. Os demais ficam em fila. Quando um projeto é concluído ou pausado, o próximo da fila entra. Foco é escasso — trate como recurso.</p>
           </div>
         </div>
       </div>
@@ -137,7 +154,6 @@ import logoRaw from '../../../assets/dd-logo.svg?raw';
   </div>
 </section>
 
-<!-- FOOTER -->
 <footer class="footer">
   <div class="container footer-inner">
     <a href="/" class="footer-logo" aria-label="Início" set:html={logoRaw} />
@@ -149,24 +165,144 @@ import logoRaw from '../../../assets/dd-logo.svg?raw';
 </Layout>
 
 <script is:inline>
-// ── State ──────────────────────────────────────────────────────
-const STORAGE_KEY = 'dulval-gestor-v1';
+// ── Auth ────────────────────────────────────────────────────────
+(function () {
+  const SESSION_KEY = 'dulval-gestor-auth';
+  const CREDS = { user: 'dulval', pass: '@labs2026' };
+  const gate  = document.getElementById('login-gate');
+  const form  = document.getElementById('login-form');
+  const err   = document.getElementById('login-error');
 
+  function unlock() {
+    gate.style.opacity = '0';
+    gate.style.pointerEvents = 'none';
+    setTimeout(() => gate.remove(), 280);
+  }
+  if (sessionStorage.getItem(SESSION_KEY) === '1') unlock();
+
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    const u = document.getElementById('l-user').value.trim();
+    const p = document.getElementById('l-pass').value;
+    if (u === CREDS.user && p === CREDS.pass) {
+      sessionStorage.setItem(SESSION_KEY, '1');
+      unlock();
+    } else {
+      err.style.display = 'block';
+      document.getElementById('l-pass').value = '';
+      document.getElementById('l-pass').focus();
+    }
+  });
+}());
+
+// ── Constants ───────────────────────────────────────────────────
+const STORAGE_KEY = 'dulval-gestor-v5';
+
+const PRIO_LABEL  = { alta: 'Alta', media: 'Média', baixa: 'Baixa', pausada: 'Pausada' };
+const PRIO_COLOR  = { alta: '#f97316', media: '#f59e0b', baixa: '#22c55e', pausada: '#9ca3af' };
+const PRIO_BG     = { alta: '#fff7ed', media: '#fffbeb', baixa: '#f0fdf4', pausada: '#f9fafb' };
+const PRIO_WEIGHT = { alta: 3, media: 2, baixa: 1, pausada: 0 };
+
+const TASK_NEXT  = { pendente: 'fazendo', fazendo: 'feita', feita: 'pendente' };
+const TASK_ICON  = { pendente: '○', fazendo: '◑', feita: '●' };
+const TASK_TITLE = {
+  pendente: 'Pendente — clique para iniciar',
+  fazendo:  'Em andamento — clique para concluir',
+  feita:    'Concluída — clique para reabrir',
+};
+
+const DIAS = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'];
+
+// ── Default state ───────────────────────────────────────────────
+function defaultState() {
+  return {
+    version: 3, nextId: 10, nextTaskId: 100,
+    projects: [
+      {
+        id: 3, nome: 'DiMata', prio: 'alta', prog: 70,
+        escopo: 'Plataforma completa para gestão de unidades agroindustriais — controle de insumos, lotes, rastreabilidade e produção em tempo real.',
+        tasks: [
+          { id: 1,  titulo: 'Módulo de rastreabilidade de lotes',     prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-06-30' },
+          { id: 2,  titulo: 'Dashboard de produção em tempo real',     prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-07-15' },
+          { id: 3,  titulo: 'Integração com balanças e sensores IoT',  prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-08-01' },
+          { id: 4,  titulo: 'API de exportação para ERP',              prio: 'baixa', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+        ],
+      },
+      {
+        id: 2, nome: 'PriMata', prio: 'alta', prog: 40,
+        escopo: 'Assistente com IA para produtores rurais — orientações técnicas, alertas de manejo e registro de atividades via WhatsApp.',
+        tasks: [
+          { id: 10, titulo: 'Integração com WhatsApp Business API',    prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-07-31' },
+          { id: 11, titulo: 'Base de conhecimento agrícola para LLM',  prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-08-15' },
+          { id: 12, titulo: 'Módulo de alertas por clima e pragas',    prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 13, titulo: 'Onboarding guiado para o produtor',       prio: 'baixa', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+        ],
+      },
+      {
+        id: 1, nome: 'DiAuto', prio: 'alta', prog: 20,
+        escopo: 'Plataforma operacional conversacional para oficinas mecânicas — fluxos simples, mobile-first, IA aplicada à operação e migração gradual do ERP legado. Novos registros entram no diAuto; histórico permanece no legado para consulta.',
+        tasks: [
+          // Fase 0 — Descoberta
+          { id: 20, titulo: 'Observação operacional: atendimento, recepção e mecânicos',      prio: 'alta',  status: 'fazendo',  criadaEm: '2026-05-23', deadline: '2026-06-06' },
+          { id: 21, titulo: 'Mapa de fluxo: entrada → orçamento → aprovação → entrega',       prio: 'alta',  status: 'fazendo',  criadaEm: '2026-05-23', deadline: '2026-06-06' },
+          { id: 22, titulo: 'Identificar pontos de atrito e gargalos operacionais',            prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-06-06' },
+          { id: 23, titulo: 'Mapear uso real do WhatsApp na operação',                         prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-06-06' },
+          // Fase 1 — Fundação Técnica
+          { id: 24, titulo: 'Setup: Python + PostgreSQL + Docker + Cloudflare',                prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-06-20' },
+          { id: 25, titulo: 'Autenticação, sessão e multiusuário básico',                      prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-06-27' },
+          { id: 26, titulo: 'Estrutura organizacional: oficinas, usuários, permissões',        prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-07-04' },
+          { id: 27, titulo: 'Cadastro base: clientes, veículos, fornecedores',                 prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-07-11' },
+          // Fase 2 — NF de Entrada
+          { id: 28, titulo: 'Importação XML de NF: parsing produtos + impostos',               prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-07-25' },
+          { id: 29, titulo: 'Entrada automática no estoque + contas a pagar',                  prio: 'alta',  status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-08-08' },
+          // IA / WhatsApp
+          { id: 30, titulo: 'Módulo de intents + parser de voz para OS',                       prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-08-22' },
+          { id: 31, titulo: 'Integração WhatsApp: receber XML/áudio e confirmar lançamento',   prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: '2026-09-05' },
+        ],
+      },
+      {
+        id: 4, nome: 'DiBorda', prio: 'baixa', prog: 10,
+        escopo: 'Sistema de chão de fábrica para indústrias de pequeno e médio porte — ordens de produção, apontamentos, rastreabilidade e indicadores OEE.',
+        tasks: [
+          { id: 40, titulo: 'Módulo de Ordens de Produção',            prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 41, titulo: 'Apontamento de produção (web + mobile)',   prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 42, titulo: 'Dashboard OEE em tempo real',             prio: 'baixa', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 43, titulo: 'Módulo de qualidade e não conformidades', prio: 'baixa', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+        ],
+      },
+      {
+        id: 5, nome: 'DiRota', prio: 'baixa', prog: 5,
+        escopo: 'Plataforma de visualização e otimização de rotas para frotas — rastreamento em tempo real, análise de percursos e relatórios de eficiência.',
+        tasks: [
+          { id: 50, titulo: 'Integração com Google Maps / Mapbox',     prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 51, titulo: 'Módulo de rastreamento em tempo real',    prio: 'media', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 52, titulo: 'Relatório de eficiência de rotas',        prio: 'baixa', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+          { id: 53, titulo: 'App mobile para motoristas',              prio: 'baixa', status: 'pendente', criadaEm: '2026-05-23', deadline: null },
+        ],
+      },
+    ],
+  };
+}
+
+// ── State load / save ───────────────────────────────────────────
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) return JSON.parse(raw);
+    // Migrate from v4 — add deadline field to tasks
+    const v4raw = localStorage.getItem('dulval-gestor-v4');
+    if (v4raw) {
+      const v4 = JSON.parse(v4raw);
+      const projects = (v4.projects || []).map(p => ({
+        ...p,
+        tasks: (p.tasks || []).map(t => ({ deadline: null, ...t })),
+      }));
+      const migrated = { ...v4, version: 5, projects };
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(migrated));
+      return migrated;
+    }
   } catch {}
-  return {
-    projects: [
-      { id: 1, nome: 'DiMata', prio: 'alta',   prog: 70 },
-      { id: 2, nome: 'PriMata', prio: 'media',  prog: 40 },
-      { id: 3, nome: 'Conecta Agent', prio: 'alta', prog: 85 },
-      { id: 4, nome: 'Dulval OS', prio: 'baixa', prog: 20 },
-    ],
-    tasks: [],
-    nextId: 10,
-  };
+  return defaultState();
 }
 
 function saveState() {
@@ -175,14 +311,7 @@ function saveState() {
 
 let state = loadState();
 
-// ── Helpers ────────────────────────────────────────────────────
-const PRIO_LABEL  = { alta: 'Alta', media: 'Média', baixa: 'Baixa', pausada: 'Pausada' };
-const PRIO_COLOR  = { alta: '#f97316', media: '#eab308', baixa: '#22c55e', pausada: '#72726f' };
-const PRIO_BG     = { alta: '#fff7ed', media: '#fefce8', baixa: '#f0fdf4', pausada: '#f7f7f5' };
-const PRIO_WEIGHT = { alta: 3, media: 2, baixa: 1, pausada: 0 };
-const DIAS        = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex'];
-
-// ── Tabs ───────────────────────────────────────────────────────
+// ── Tabs ────────────────────────────────────────────────────────
 function switchTab(t) {
   document.querySelectorAll('.tab').forEach(b => {
     b.classList.toggle('active', b.dataset.tab === t);
@@ -191,17 +320,111 @@ function switchTab(t) {
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('v-' + t).classList.add('active');
   if (t === 'rotina') renderRotina();
-  if (t === 'hoje')   { renderTasks(); updateTaskSelect(); }
+  if (t === 'hoje')   renderHoje();
 }
 window.switchTab = switchTab;
 
-// ── Projects ───────────────────────────────────────────────────
+// ── Metrics ─────────────────────────────────────────────────────
+function updateMetrics() {
+  const allTasks = state.projects.flatMap(p => p.tasks || []);
+  const abertas  = allTasks.filter(t => t.status !== 'feita');
+  document.getElementById('m-total').textContent = state.projects.filter(p => p.prio !== 'pausada').length;
+  document.getElementById('m-alta').textContent  = state.projects.filter(p => p.prio === 'alta').length;
+  document.getElementById('m-tasks').textContent = abertas.length;
+}
+
+// ── Deadline helper ──────────────────────────────────────────────
+function deadlineLabel(deadline) {
+  if (!deadline) return null;
+  const today = new Date(); today.setHours(0, 0, 0, 0);
+  const due   = new Date(deadline + 'T00:00:00');
+  const diff  = Math.round((due - today) / 86400000);
+  if (diff < 0)   return { text: `${Math.abs(diff)}d atraso`, color: '#ef4444', weight: 700 };
+  if (diff === 0) return { text: 'hoje',    color: '#f97316', weight: 700 };
+  if (diff === 1) return { text: 'amanhã',  color: '#f59e0b', weight: 600 };
+  if (diff <= 7)  return { text: `${diff}d`, color: '#eab308', weight: 500 };
+  return { text: due.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit' }), color: 'var(--text-muted)', weight: 400 };
+}
+
+// ── Signal board ─────────────────────────────────────────────────
+function renderSummary() {
+  const el = document.getElementById('tasks-summary');
+  if (!el) return;
+
+  const allTasks = state.projects.flatMap(p =>
+    (p.tasks || []).map(t => ({ ...t, projNome: p.nome, projId: p.id, projPrio: p.prio }))
+  );
+
+  if (!allTasks.length) { el.innerHTML = ''; return; }
+
+  const fazendo      = allTasks.filter(t => t.status === 'fazendo');
+  const pendentes    = allTasks.filter(t => t.status === 'pendente');
+  const altaPendente = pendentes.filter(t => t.prio === 'alta');
+  const projSemTask  = state.projects.filter(p => p.prio !== 'pausada' && !(p.tasks && p.tasks.length));
+
+  const proxima = [...pendentes]
+    .filter(t => { const p = state.projects.find(x => x.id === t.projId); return p && p.prio !== 'pausada'; })
+    .sort((a, b) => {
+      const pd = PRIO_WEIGHT[b.prio] - PRIO_WEIGHT[a.prio];
+      return pd !== 0 ? pd : PRIO_WEIGHT[b.projPrio] - PRIO_WEIGHT[a.projPrio];
+    })[0];
+
+  const today    = new Date(); today.setHours(0, 0, 0, 0);
+  const overdue  = allTasks.filter(t => t.status !== 'feita' && t.deadline && new Date(t.deadline + 'T00:00:00') < today);
+  const dueWeek  = allTasks.filter(t => t.status !== 'feita' && t.deadline && (() => {
+    const d = new Date(t.deadline + 'T00:00:00');
+    const diff = Math.round((d - today) / 86400000);
+    return diff >= 0 && diff <= 7;
+  })());
+
+  const alerts = [];
+  if (overdue.length)      alerts.push({ text: `${overdue.length} tarefa${overdue.length > 1 ? 's' : ''} em atraso`, urgent: true });
+  if (dueWeek.length)      alerts.push({ text: `${dueWeek.length} vencendo esta semana`, urgent: false });
+  if (altaPendente.length) alerts.push({ text: `${altaPendente.length} alta prioridade parada${altaPendente.length > 1 ? 's' : ''}`, urgent: false });
+  if (projSemTask.length)  alerts.push({ text: `${projSemTask.length} projeto${projSemTask.length > 1 ? 's' : ''} sem tarefas`, urgent: false });
+  if (fazendo.length > 3)  alerts.push({ text: `${fazendo.length} itens simultâneos — foque`, urgent: false });
+
+  const fazendoHtml = fazendo.length
+    ? fazendo.slice(0, 2).map(t => `
+        <div class="signal-task">
+          <span class="signal-proj-name">${t.projNome}</span>
+          <span class="signal-task-title">${t.titulo}</span>
+        </div>`).join('')
+    : '<span class="signal-empty">nenhuma em andamento</span>';
+
+  const proximaHtml = proxima
+    ? `<div class="signal-task">
+         <span class="signal-proj-name">${proxima.projNome}</span>
+         <span class="signal-task-title">${proxima.titulo}</span>
+       </div>`
+    : '<span class="signal-empty">tudo concluído</span>';
+
+  el.innerHTML = `
+    <div class="signal-board">
+      <div class="signal-col">
+        <span class="signal-eyebrow">⚡ em andamento</span>
+        ${fazendoHtml}
+      </div>
+      <div class="signal-divider"></div>
+      <div class="signal-col signal-col-next">
+        <span class="signal-eyebrow">💡 próxima sugerida</span>
+        ${proximaHtml}
+      </div>
+    </div>
+    ${alerts.length ? `<div class="signal-alerts">${alerts.map(a =>
+      `<span class="signal-alert${a.urgent ? ' signal-alert--urgent' : ''}">⚠ ${a.text}</span>`
+    ).join('')}</div>` : ''}
+  `;
+}
+
+// ── Projects render ──────────────────────────────────────────────
 function renderProjects() {
   const list = document.getElementById('proj-list');
   list.innerHTML = '';
 
-  if (state.projects.length === 0) {
+  if (!state.projects.length) {
     list.innerHTML = '<p class="empty-msg">Nenhum projeto ainda. Adicione abaixo.</p>';
+    updateMetrics(); renderSummary(); return;
   }
 
   state.projects.forEach(p => {
@@ -209,34 +432,76 @@ function renderProjects() {
     const bg    = PRIO_BG[p.prio];
     const div   = document.createElement('div');
     div.className = 'proj-card';
+
     div.innerHTML = `
-      <div class="proj-top">
-        <div>
-          <div class="proj-nome">${p.nome}</div>
-          <span class="proj-badge" style="background:${bg};color:${color}">${PRIO_LABEL[p.prio]}</span>
+      <div class="proj-summary" onclick="toggleDetail(${p.id})">
+        <div class="proj-header">
+          <div class="proj-name-wrap">
+            <span class="proj-nome">${p.nome}</span>
+            <span class="proj-badge" style="color:${color};background:${bg}">${PRIO_LABEL[p.prio]}</span>
+          </div>
+          <div class="proj-actions">
+            <span class="proj-chevron" id="chev-${p.id}">›</span>
+            <button class="icon-btn" onclick="event.stopPropagation();deleteProject(${p.id})" aria-label="Remover">✕</button>
+          </div>
         </div>
-        <button class="del-btn" onclick="deleteProject(${p.id})" aria-label="Remover">✕</button>
+        <div class="proj-prog-row">
+          <div class="prog-track">
+            <div class="prog-fill" style="width:${p.prog}%;background:${color}"></div>
+          </div>
+          <span class="prog-pct" style="color:${color}">${p.prog}%</span>
+        </div>
       </div>
-      <div class="proj-prog-wrap">
-        <div class="proj-prog-track">
-          <div class="proj-prog-fill" style="width:${p.prog}%;background:${color}"></div>
+
+      <div class="proj-detail" id="detail-${p.id}">
+        ${p.escopo ? `
+        <div class="detail-block">
+          <span class="detail-eyebrow">Escopo</span>
+          <p class="detail-body">${p.escopo}</p>
+        </div>` : ''}
+        <div class="detail-block detail-tasks-block">
+          <div class="detail-tasks-header">
+            <span class="detail-eyebrow">Tarefas</span>
+            <span class="detail-count" id="tcount-${p.id}"></span>
+          </div>
+          <div class="task-list" id="tasks-${p.id}"></div>
+          <div class="task-add">
+            <input
+              class="task-input"
+              id="nt-${p.id}"
+              placeholder="Nova tarefa..."
+              onkeydown="if(event.key==='Enter')addTask(${p.id})"
+            />
+            <select class="task-prio" id="np-${p.id}">
+              <option value="alta">Alta</option>
+              <option value="media" selected>Média</option>
+              <option value="baixa">Baixa</option>
+            </select>
+            <input type="date" class="task-date" id="nd-${p.id}" title="Deadline (opcional)" />
+            <button class="task-add-btn" onclick="addTask(${p.id})">+</button>
+          </div>
         </div>
-        <span class="proj-pct" style="color:${color}">${p.prog}%</span>
       </div>
     `;
     list.appendChild(div);
+    renderProjectTasks(p.id);
   });
 
   updateMetrics();
+  renderSummary();
 }
 
-function updateMetrics() {
-  const ativos = state.projects.filter(p => p.prio !== 'pausada');
-  document.getElementById('m-total').textContent = ativos.length;
-  document.getElementById('m-alta').textContent  = state.projects.filter(p => p.prio === 'alta').length;
-  document.getElementById('m-tasks').textContent = state.tasks.filter(t => !t.done).length;
+function toggleDetail(id) {
+  const detail  = document.getElementById('detail-' + id);
+  const chevron = document.getElementById('chev-' + id);
+  if (!detail) return;
+  const isOpen = detail.classList.contains('open');
+  detail.classList.toggle('open', !isOpen);
+  if (chevron) chevron.classList.toggle('rotated', !isOpen);
 }
+window.toggleDetail = toggleDetail;
 
+// ── Project CRUD ─────────────────────────────────────────────────
 function showAddForm() {
   document.getElementById('add-form').style.display = 'block';
   document.getElementById('add-trigger').style.display = 'none';
@@ -249,7 +514,7 @@ function addProject() {
   const prio = document.getElementById('f-prio').value;
   const prog = Math.min(100, Math.max(0, parseInt(document.getElementById('f-prog').value) || 0));
   if (!nome) return;
-  state.projects.push({ id: state.nextId++, nome, prio, prog });
+  state.projects.push({ id: state.nextId++, nome, prio, prog, escopo: '', tasks: [] });
   saveState();
   document.getElementById('add-form').style.display = 'none';
   document.getElementById('add-trigger').style.display = 'block';
@@ -261,14 +526,164 @@ window.addProject = addProject;
 
 function deleteProject(id) {
   state.projects = state.projects.filter(p => p.id !== id);
-  saveState();
-  renderProjects();
+  saveState(); renderProjects();
 }
 window.deleteProject = deleteProject;
 
-// ── Rotina ─────────────────────────────────────────────────────
+// ── Per-project task render ──────────────────────────────────────
+function renderProjectTasks(projId) {
+  const el      = document.getElementById('tasks-' + projId);
+  const countEl = document.getElementById('tcount-' + projId);
+  if (!el) return;
+
+  const proj = state.projects.find(p => p.id === projId);
+  if (!proj) return;
+
+  const tasks  = proj.tasks || [];
+  const abertas = tasks.filter(t => t.status !== 'feita').length;
+
+  if (countEl) countEl.textContent = tasks.length
+    ? `${abertas} aberta${abertas !== 1 ? 's' : ''} · ${tasks.length} total` : '';
+
+  if (!tasks.length) {
+    el.innerHTML = '<p class="task-empty-msg">Nenhuma tarefa ainda.</p>';
+    return;
+  }
+
+  const BY_STATUS = { fazendo: 0, pendente: 1, feita: 2 };
+  const BY_PRIO   = { alta: 0, media: 1, baixa: 2 };
+
+  el.innerHTML = [...tasks]
+    .sort((a, b) => {
+      const sd = BY_STATUS[a.status] - BY_STATUS[b.status];
+      return sd !== 0 ? sd : BY_PRIO[a.prio] - BY_PRIO[b.prio];
+    })
+    .map(t => {
+      const iconColor = t.status === 'fazendo' ? 'var(--accent)'
+                      : t.status === 'feita'   ? 'var(--text-muted)'
+                      : 'var(--text-muted)';
+      const dl = deadlineLabel(t.deadline);
+      return `
+        <div class="task-row ${t.status === 'feita' ? 'is-done' : ''} ${t.status === 'fazendo' ? 'is-active' : ''}">
+          <button
+            class="task-icon-btn"
+            onclick="cycleTaskStatus(${projId}, ${t.id})"
+            title="${TASK_TITLE[t.status]}"
+            style="color:${iconColor}"
+          >${TASK_ICON[t.status]}</button>
+          <span class="task-text">${t.titulo}</span>
+          ${dl ? `<span class="task-deadline" style="color:${dl.color};font-weight:${dl.weight}">${dl.text}</span>` : ''}
+          <span class="prio-dot" style="background:${PRIO_COLOR[t.prio]}" title="${PRIO_LABEL[t.prio]}"></span>
+          <button class="icon-btn" onclick="event.stopPropagation();deleteTask(${projId}, ${t.id})">✕</button>
+        </div>`;
+    }).join('');
+}
+
+// ── Task CRUD ────────────────────────────────────────────────────
+function addTask(projId) {
+  const inputEl = document.getElementById('nt-' + projId);
+  const prioEl  = document.getElementById('np-' + projId);
+  const dateEl  = document.getElementById('nd-' + projId);
+  const titulo  = inputEl ? inputEl.value.trim() : '';
+  if (!titulo) return;
+  const proj = state.projects.find(p => p.id === projId);
+  if (!proj) return;
+  if (!proj.tasks) proj.tasks = [];
+  proj.tasks.push({
+    id: state.nextTaskId++, titulo,
+    prio: prioEl ? prioEl.value : 'media',
+    status: 'pendente',
+    criadaEm: new Date().toISOString().slice(0, 10),
+    deadline: dateEl && dateEl.value ? dateEl.value : null,
+  });
+  saveState();
+  if (inputEl) inputEl.value = '';
+  if (dateEl)  dateEl.value  = '';
+  renderProjectTasks(projId);
+  updateMetrics(); renderSummary();
+}
+window.addTask = addTask;
+
+function cycleTaskStatus(projId, taskId) {
+  const proj = state.projects.find(p => p.id === projId);
+  if (!proj) return;
+  const task = (proj.tasks || []).find(t => t.id === taskId);
+  if (!task) return;
+  task.status = TASK_NEXT[task.status] || 'pendente';
+  saveState();
+  renderProjectTasks(projId); updateMetrics(); renderSummary();
+}
+window.cycleTaskStatus = cycleTaskStatus;
+
+function deleteTask(projId, taskId) {
+  const proj = state.projects.find(p => p.id === projId);
+  if (!proj) return;
+  proj.tasks = (proj.tasks || []).filter(t => t.id !== taskId);
+  saveState();
+  renderProjectTasks(projId); updateMetrics(); renderSummary();
+}
+window.deleteTask = deleteTask;
+
+// ── Hoje ─────────────────────────────────────────────────────────
+function renderHoje() {
+  const list = document.getElementById('hoje-list');
+  if (!list) return;
+
+  const BY_STAT = { fazendo: 0, pendente: 1 };
+  const BY_PRIO = { alta: 0, media: 1, baixa: 2 };
+
+  const allOpen = state.projects.flatMap(p =>
+    (p.tasks || [])
+      .filter(t => t.status !== 'feita')
+      .map(t => ({ ...t, projNome: p.nome, projId: p.id, projColor: PRIO_COLOR[p.prio] }))
+  ).sort((a, b) => {
+    const sd = (BY_STAT[a.status] ?? 2) - (BY_STAT[b.status] ?? 2);
+    return sd !== 0 ? sd : BY_PRIO[a.prio] - BY_PRIO[b.prio];
+  });
+
+  if (!allOpen.length) {
+    list.innerHTML = '<p class="empty-msg">Nenhuma tarefa aberta. Excelente!</p>';
+    return;
+  }
+
+  let lastProj = null;
+  list.innerHTML = allOpen.map(t => {
+    const projHeader = t.projNome !== lastProj ? `
+      <div class="hoje-group-header">
+        <span class="hoje-group-dot" style="background:${t.projColor}"></span>
+        <span>${t.projNome}</span>
+      </div>` : '';
+    lastProj = t.projNome;
+    const iconColor = t.status === 'fazendo' ? 'var(--accent)' : 'var(--text-muted)';
+    return `
+      ${projHeader}
+      <div class="hoje-task ${t.status === 'fazendo' ? 'hoje-active' : ''}">
+        <button
+          class="task-icon-btn"
+          onclick="cycleFromHoje(${t.projId}, ${t.id})"
+          title="${TASK_TITLE[t.status]}"
+          style="color:${iconColor}"
+        >${TASK_ICON[t.status]}</button>
+        <span class="task-text">${t.titulo}</span>
+        <span class="prio-dot" style="background:${PRIO_COLOR[t.prio]}"></span>
+      </div>`;
+  }).join('');
+}
+
+function cycleFromHoje(projId, taskId) {
+  const proj = state.projects.find(p => p.id === projId);
+  if (!proj) return;
+  const task = (proj.tasks || []).find(t => t.id === taskId);
+  if (!task) return;
+  task.status = TASK_NEXT[task.status] || 'pendente';
+  saveState();
+  renderHoje(); updateMetrics(); renderSummary(); renderProjectTasks(projId);
+}
+window.cycleFromHoje = cycleFromHoje;
+
+// ── Rotina ───────────────────────────────────────────────────────
 function renderRotina() {
-  const grid  = document.getElementById('rotina-grid');
+  const grid   = document.getElementById('rotina-grid');
   const ativos = state.projects
     .filter(p => p.prio !== 'pausada')
     .sort((a, b) => PRIO_WEIGHT[b.prio] - PRIO_WEIGHT[a.prio]);
@@ -287,206 +702,401 @@ function renderRotina() {
     for (let s = 0; s < 3; s++) {
       const isSex = dia === 'Sex';
       if (isSex && s === 2) {
-        html += `<div class="rotina-slot slot-revisao">Revisão semanal</div>`;
+        html += `<div class="rotina-slot r-revisao">Revisão semanal</div>`;
       } else if (isSex && s === 1) {
-        html += `<div class="rotina-slot slot-buffer">buffer</div>`;
+        html += `<div class="rotina-slot r-buffer">buffer</div>`;
       } else {
         const p     = pool[(di * 3 + s) % pool.length];
         const color = PRIO_COLOR[p.prio];
         const bg    = PRIO_BG[p.prio];
-        html += `<div class="rotina-slot" style="background:${bg};color:${color};border-color:${color}22">${p.nome}</div>`;
+        html += `<div class="rotina-slot" style="background:${bg};color:${color}">${p.nome}</div>`;
       }
     }
     html += '</div>';
   });
-  html += '</div>';
-  grid.innerHTML = html;
+  grid.innerHTML = html + '</div>';
 }
 
-// ── Tasks ──────────────────────────────────────────────────────
-function renderTasks() {
-  const list = document.getElementById('tasks-list');
-  list.innerHTML = '';
-
-  if (!state.tasks.length) {
-    list.innerHTML = '<p class="empty-msg">Nenhuma tarefa ainda.</p>';
-    updateMetrics();
-    return;
-  }
-
-  state.tasks.forEach((t, i) => {
-    const proj = state.projects.find(p => p.id === t.projId);
-    const row  = document.createElement('div');
-    row.className = 'task-row' + (t.done ? ' task-done' : '');
-    row.innerHTML = `
-      <input type="checkbox" ${t.done ? 'checked' : ''} onchange="toggleTask(${i})" />
-      <span class="task-label">${t.nome}</span>
-      ${proj ? `<span class="task-proj">${proj.nome}</span>` : ''}
-      <button class="del-btn" style="margin-left:auto" onclick="deleteTask(${i})" aria-label="Remover">✕</button>
-    `;
-    list.appendChild(row);
-  });
-  updateMetrics();
-}
-
-function toggleTask(i) {
-  state.tasks[i].done = !state.tasks[i].done;
-  saveState();
-  renderTasks();
-}
-window.toggleTask = toggleTask;
-
-function deleteTask(i) {
-  state.tasks.splice(i, 1);
-  saveState();
-  renderTasks();
-}
-window.deleteTask = deleteTask;
-
-function updateTaskSelect() {
-  const sel = document.getElementById('t-proj');
-  sel.innerHTML = '<option value="">Projeto...</option>';
-  state.projects.forEach(p => {
-    const opt = document.createElement('option');
-    opt.value = p.id;
-    opt.textContent = p.nome;
-    sel.appendChild(opt);
-  });
-}
-
-function addTask() {
-  const nome   = document.getElementById('t-nome').value.trim();
-  const projId = parseInt(document.getElementById('t-proj').value) || null;
-  if (!nome) return;
-  state.tasks.push({ nome, projId, done: false });
-  saveState();
-  document.getElementById('t-nome').value = '';
-  renderTasks();
-}
-window.addTask = addTask;
-
-// ── Init ───────────────────────────────────────────────────────
+// ── Init ─────────────────────────────────────────────────────────
 renderProjects();
 </script>
 
-<style>
-/* ── Nav (mesmo padrão do labs) ── */
+<style is:global>
+
+/* ══ Login gate ══════════════════════════════════════════════════ */
+#login-gate {
+  position: fixed; inset: 0; z-index: 9999;
+  background: var(--bg);
+  display: flex; align-items: center; justify-content: center;
+  transition: opacity 0.25s ease;
+}
+.login-card {
+  width: 100%; max-width: 320px;
+  display: flex; flex-direction: column; align-items: center; gap: 24px;
+}
+.login-logo svg { width: 26px; height: auto; display: block; }
+.login-logo svg path { fill: var(--text-primary); stroke: none; }
+.login-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted);
+}
+#login-form { width: 100%; display: flex; flex-direction: column; gap: 8px; }
+.login-field {
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  padding: 11px 16px; border: 1px solid var(--border);
+  border-radius: 12px; background: var(--surface); color: var(--text-primary);
+  width: 100%; box-sizing: border-box; transition: border-color 0.15s;
+}
+.login-field:focus { outline: none; border-color: var(--accent); }
+.login-error { font-size: 12px; color: #ef4444; }
+
+/* ══ Nav ═════════════════════════════════════════════════════════ */
 .portal-nav { height: 64px; border-bottom: 1px solid var(--border); display: flex; align-items: center; }
-.portal-nav-inner { display: flex; align-items: center; gap: var(--sp-3); }
-.portal-logo { display: flex; align-items: center; line-height: 0; }
-.portal-logo :global(svg) { width: 22px; height: auto; }
-.portal-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
-.portal-nav-name { font-size: var(--fs-sm); font-weight: 600; }
-.portal-nav-back { margin-left: auto; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
+.portal-nav-inner { display: flex; align-items: center; gap: 24px; }
+.portal-logo { display: flex; align-items: center; }
+.portal-logo svg { width: 22px; height: auto; }
+.portal-logo svg path { fill: var(--text-primary); stroke: none; }
+.portal-nav-name { font-size: 14px; font-weight: 600; }
+.portal-nav-back { margin-left: auto; font-size: 14px; color: var(--text-muted); transition: color 0.15s; }
 .portal-nav-back:hover { color: var(--text-primary); }
 
-/* ── Hero ── */
-.labs-hero { padding: var(--sp-7) 0 var(--sp-6); border-bottom: 1px solid var(--border); }
-.labs-hero-title { font-size: var(--fs-hero); font-weight: 700; letter-spacing: -0.028em; line-height: 1.06; margin: var(--sp-3) 0 var(--sp-4); max-width: 560px; }
-.labs-hero-body { font-size: var(--fs-lg); color: var(--text-secondary); max-width: 500px; line-height: 1.65; }
+/* ══ Hero ════════════════════════════════════════════════════════ */
+.labs-hero { padding: 80px 0 64px; border-bottom: 1px solid var(--border); }
+.labs-hero-title {
+  font-size: var(--fs-hero); font-weight: 700;
+  letter-spacing: -0.028em; line-height: 1.06;
+  margin: 16px 0 24px; max-width: 560px;
+}
+.labs-hero-body { font-size: var(--fs-lg); color: var(--text-secondary); max-width: 480px; line-height: 1.65; }
 
-/* ── App shell ── */
-.app-section { border-bottom: none; }
-.app-shell { max-width: 720px; }
+/* ══ App shell ═══════════════════════════════════════════════════ */
+.app-section { padding: 64px 0 96px; }
+.app-shell { max-width: 680px; }
 
-/* ── Tabs ── */
-.tab-bar { display: flex; gap: 2px; background: var(--surface-dim); border-radius: var(--radius-md); padding: 4px; margin-bottom: var(--sp-4); border: 1px solid var(--border); }
-.tab { flex: 1; text-align: center; padding: 8px; font-size: var(--fs-sm); font-weight: 500; border-radius: 9px; cursor: pointer; border: none; background: none; color: var(--text-muted); font-family: 'DM Sans', sans-serif; transition: all 0.15s; }
-.tab.active { background: var(--surface); color: var(--text-primary); border: 1px solid var(--border); }
+/* ══ Tabs — underline ════════════════════════════════════════════ */
+.tab-bar {
+  display: flex;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.tab {
+  padding: 12px 20px 10px;
+  font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+  color: var(--text-muted); cursor: pointer;
+  background: none; border: none;
+  border-bottom: 2px solid transparent; margin-bottom: -1px;
+  transition: color 0.15s, border-color 0.15s;
+}
+.tab.active { color: var(--text-primary); border-bottom-color: var(--accent); }
 .tab:not(.active):hover { color: var(--text-secondary); }
 
-/* ── Views ── */
+/* ══ Views ═══════════════════════════════════════════════════════ */
 .view { display: none; }
 .view.active { display: block; }
-.view-intro { font-size: var(--fs-sm); color: var(--text-secondary); margin-bottom: var(--sp-3); line-height: 1.65; }
-.view-note { font-size: var(--fs-xs); color: var(--text-muted); margin-top: var(--sp-2); }
-.sub-label { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); margin-bottom: var(--sp-2); }
-.empty-msg { font-size: var(--fs-sm); color: var(--text-muted); padding: var(--sp-2) 0; }
+.view-intro {
+  font-size: 14px; color: var(--text-secondary);
+  line-height: 1.7; margin-bottom: 32px; max-width: 520px;
+}
+.view-note { font-size: 12px; color: var(--text-muted); margin-top: 24px; }
+.section-eyebrow {
+  font-size: 12px; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--text-muted); margin-bottom: 12px;
+  display: block;
+}
+.empty-msg { font-size: 14px; color: var(--text-muted); padding: 24px 0; }
 
-/* ── Metrics ── */
-.metrics-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--sp-1); margin-bottom: var(--sp-4); }
-.metric { background: var(--surface-dim); border-radius: var(--radius-md); padding: var(--sp-2) var(--sp-3); border: 1px solid var(--border); }
-.metric-val { font-size: 28px; font-weight: 700; letter-spacing: -0.02em; }
-.metric-label { font-size: var(--fs-xs); color: var(--text-muted); margin-top: 2px; }
-
-/* ── Project cards ── */
-.proj-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-3); margin-bottom: 1px; }
-.proj-card:last-child { margin-bottom: var(--sp-2); }
-.proj-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: var(--sp-2); }
-.proj-nome { font-size: var(--fs-md); font-weight: 600; letter-spacing: -0.015em; margin-bottom: 4px; }
-.proj-badge { display: inline-block; font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: var(--radius-pill); }
-.proj-prog-wrap { display: flex; align-items: center; gap: var(--sp-2); }
-.proj-prog-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.proj-prog-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease; }
-.proj-pct { font-size: var(--fs-xs); font-weight: 600; min-width: 32px; text-align: right; }
-.del-btn { background: none; border: none; cursor: pointer; color: var(--text-muted); font-size: 12px; padding: 4px 6px; border-radius: 4px; transition: color 0.15s; line-height: 1; }
-.del-btn:hover { color: var(--text-primary); }
-
-/* ── Add form ── */
-.form-card { background: var(--surface-dim); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-3); margin-bottom: var(--sp-2); }
-.form-row { display: flex; gap: var(--sp-1); flex-wrap: wrap; align-items: center; margin-bottom: var(--sp-2); }
-.form-actions { display: flex; gap: var(--sp-1); }
-.field { font-family: 'DM Sans', sans-serif; font-size: var(--fs-sm); padding: 9px 14px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--text-primary); flex: 1; min-width: 120px; transition: border-color 0.15s; }
-.field:focus { outline: none; border-color: var(--accent); }
-.add-btn { width: 100%; padding: var(--sp-2); background: none; border: 1px dashed var(--border); border-radius: var(--radius-md); color: var(--text-muted); font-size: var(--fs-sm); font-family: 'DM Sans', sans-serif; cursor: pointer; transition: all 0.15s; margin-top: var(--sp-1); }
-.add-btn:hover { border-color: var(--accent); color: var(--accent); background: var(--surface-dim); }
-
-/* ── Rotina ── */
-.rotina-legend { display: flex; gap: var(--sp-2); margin-bottom: var(--sp-3); flex-wrap: wrap; }
-.leg-item { font-size: var(--fs-xs); font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; padding: 3px 10px; border-radius: var(--radius-pill); }
-.leg-alta    { background: #fff7ed; color: #f97316; }
-.leg-media   { background: #fefce8; color: #eab308; }
-.leg-baixa   { background: #f0fdf4; color: #22c55e; }
-.leg-revisao { background: #f5f3ff; color: #a78bfa; }
-
-.rotina-table { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius-md); overflow: hidden; }
-.rotina-row { display: grid; grid-template-columns: 44px 1fr 1fr 1fr; gap: 1px; background: var(--border); }
-.rotina-dia { background: var(--surface-dim); display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted); padding: var(--sp-2) var(--sp-1); }
-.rotina-slot { background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: var(--fs-xs); font-weight: 600; text-align: center; padding: var(--sp-2); min-height: 52px; border: 1px solid transparent; }
-.slot-revisao { background: #f5f3ff !important; color: #a78bfa !important; }
-.slot-buffer  { background: var(--surface-dim) !important; color: var(--text-muted) !important; font-style: italic; }
-
-/* ── Tasks ── */
-.task-row { display: flex; align-items: center; gap: var(--sp-1); padding: var(--sp-1) 0; border-bottom: 1px solid var(--border); }
-.task-row:last-child { border-bottom: none; }
-.task-row input[type=checkbox] { width: 16px; height: 16px; accent-color: var(--accent); cursor: pointer; flex-shrink: 0; }
-.task-label { font-size: var(--fs-sm); flex: 1; }
-.task-proj { font-size: var(--fs-xs); color: var(--text-muted); white-space: nowrap; }
-.task-done .task-label { text-decoration: line-through; color: var(--text-muted); }
-
-/* ── Strategy ── */
-.strategy-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: var(--radius-md); overflow: hidden; }
-.strategy-item { background: var(--surface); padding: var(--sp-3) var(--sp-4); border-left: 3px solid; }
-.strategy-title { font-size: var(--fs-md); font-weight: 600; letter-spacing: -0.01em; margin-bottom: var(--sp-1); }
-.strategy-body { font-size: var(--fs-sm); color: var(--text-secondary); line-height: 1.7; }
-
-/* ── Footer ── */
-.footer { border-top: 1px solid var(--border); padding: var(--sp-3) 0; }
-.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; min-height: 48px; }
-.footer-logo { display: flex; align-items: center; line-height: 0; justify-self: start; }
-.footer-logo :global(svg) { width: 20px; height: auto; }
-.footer-logo :global(svg path) { fill: var(--text-primary); stroke: none; }
-.footer-copy { font-size: var(--fs-xs); color: var(--text-muted); text-align: center; }
-.footer-back { justify-self: end; font-size: var(--fs-sm); color: var(--text-muted); transition: color 0.15s; }
-.footer-back:hover { color: var(--text-primary); }
-
-@media (max-width: 600px) {
-  .metrics-row { grid-template-columns: 1fr 1fr; }
-  .metrics-row .metric:last-child { grid-column: 1 / -1; }
-  .form-row { flex-direction: column; }
-  .field { min-width: unset; width: 100%; }
-  .rotina-row { grid-template-columns: 36px 1fr 1fr 1fr; }
+/* ══ Metrics — border-right strip ═══════════════════════════════ */
+.metrics-row {
+  display: flex;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 48px;
+}
+.metric {
+  flex: 1; padding: 20px 24px;
+  border-right: 1px solid var(--border);
+}
+.metric:last-child { border-right: none; }
+.metric-val {
+  font-size: var(--fs-xl); font-weight: 700;
+  letter-spacing: -0.03em; line-height: 1;
+}
+.metric-label {
+  font-size: 11px; color: var(--text-muted); margin-top: 5px;
+  font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
 }
 
+/* ══ Signal board ════════════════════════════════════════════════ */
+#tasks-summary { margin-bottom: 48px; }
+.signal-board {
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 12px;
+}
+.signal-col { flex: 1; padding: 20px 24px; }
+.signal-col-next { background: var(--surface-dim); }
+.signal-divider { width: 1px; background: var(--border); flex-shrink: 0; }
+.signal-eyebrow {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 12px;
+}
+.signal-task { margin-top: 4px; }
+.signal-proj-name { font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 2px; }
+.signal-task-title { font-size: 14px; font-weight: 500; color: var(--text-primary); line-height: 1.45; }
+.signal-empty { font-size: 14px; color: var(--text-muted); font-style: italic; }
+.signal-alerts { display: flex; flex-wrap: wrap; gap: 6px; }
+.signal-alert {
+  font-size: 12px; font-weight: 500;
+  padding: 4px 12px;
+  border: 1px solid var(--border); border-radius: 100px;
+  color: var(--text-secondary);
+}
+.signal-alert--urgent {
+  border-color: #ef4444; color: #ef4444;
+  background: rgba(239, 68, 68, 0.06);
+}
+
+/* ══ Project list — gap pattern ══════════════════════════════════ */
+#proj-list {
+  display: flex; flex-direction: column;
+  gap: 1px; background: var(--border);
+  border-radius: 12px; overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.proj-card { background: var(--surface); }
+.proj-summary {
+  padding: 20px 24px; cursor: pointer; user-select: none;
+  transition: background 0.12s;
+}
+.proj-summary:hover { background: var(--surface-dim); }
+
+.proj-header {
+  display: flex; align-items: center;
+  justify-content: space-between; margin-bottom: 14px;
+}
+.proj-name-wrap { display: flex; align-items: center; gap: 10px; flex: 1; min-width: 0; }
+.proj-nome { font-size: 17px; font-weight: 600; letter-spacing: -0.015em; }
+.proj-badge {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 100px;
+  flex-shrink: 0;
+}
+.proj-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.proj-chevron {
+  font-size: 20px; color: var(--text-muted); line-height: 1;
+  transition: transform 0.2s ease;
+}
+.proj-chevron.rotated { transform: rotate(90deg); }
+.icon-btn {
+  background: none; border: none; cursor: pointer;
+  color: var(--text-muted); font-size: 12px;
+  padding: 4px 6px; border-radius: 4px; transition: color 0.15s;
+  line-height: 1;
+}
+.icon-btn:hover { color: var(--text-primary); }
+
+.proj-prog-row { display: flex; align-items: center; gap: 12px; }
+.prog-track { flex: 1; height: 3px; background: var(--border); border-radius: 2px; overflow: hidden; }
+.prog-fill { height: 100%; border-radius: 2px; transition: width 0.5s ease; }
+.prog-pct { font-size: 12px; font-weight: 600; min-width: 30px; text-align: right; }
+
+/* ══ Project detail ══════════════════════════════════════════════ */
+.proj-detail { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+.proj-detail.open { max-height: 960px; }
+
+.detail-block {
+  padding: 20px 24px;
+  border-top: 1px solid var(--border);
+  background: var(--surface-dim);
+}
+.detail-block + .detail-block { border-top: 1px solid var(--border); }
+
+.detail-eyebrow {
+  display: block; font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted);
+  margin-bottom: 10px;
+}
+.detail-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+.detail-tasks-header {
+  display: flex; align-items: baseline;
+  justify-content: space-between; margin-bottom: 12px;
+}
+.detail-count { font-size: 12px; color: var(--text-muted); }
+
+/* ══ Task list — gap pattern ═════════════════════════════════════ */
+.task-list {
+  display: flex; flex-direction: column;
+  gap: 1px; background: var(--border);
+  border-radius: 8px; overflow: hidden;
+  margin-bottom: 12px;
+}
+.task-row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 12px; background: var(--surface);
+  transition: background 0.1s;
+}
+.task-row.is-active {
+  background: color-mix(in srgb, var(--accent) 5%, var(--surface));
+}
+.task-row.is-done { opacity: 0.45; }
+.task-row.is-done .task-text { text-decoration: line-through; }
+
+.task-icon-btn {
+  background: none; border: none; cursor: pointer;
+  font-size: 14px; width: 20px; height: 20px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform 0.15s; padding: 0; line-height: 1;
+}
+.task-icon-btn:hover { transform: scale(1.25); }
+
+.task-text { font-size: 14px; flex: 1; line-height: 1.4; color: var(--text-primary); }
+.prio-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.task-empty-msg {
+  font-size: 12px; color: var(--text-muted);
+  padding: 12px; background: var(--surface); margin: 0;
+}
+
+/* ══ Task add row ════════════════════════════════════════════════ */
+.task-add { display: flex; gap: 6px; }
+.task-input {
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  padding: 8px 14px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--surface);
+  color: var(--text-primary); flex: 1; min-width: 0;
+  transition: border-color 0.15s;
+}
+.task-input:focus { outline: none; border-color: var(--accent); }
+.task-prio {
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  padding: 8px 10px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--surface);
+  color: var(--text-secondary); width: 74px; cursor: pointer;
+  -webkit-appearance: none;
+}
+.task-date {
+  font-family: 'DM Sans', sans-serif; font-size: 12px;
+  padding: 8px 8px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--surface);
+  color: var(--text-secondary); width: 116px; cursor: pointer;
+  transition: border-color 0.15s;
+}
+.task-date:focus { outline: none; border-color: var(--accent); }
+.task-deadline {
+  font-size: 11px; flex-shrink: 0; white-space: nowrap; line-height: 1;
+}
+.task-add-btn {
+  background: var(--text-primary); color: var(--bg);
+  border: none; border-radius: 8px; width: 34px;
+  font-size: 18px; line-height: 1; cursor: pointer;
+  transition: opacity 0.15s; flex-shrink: 0;
+  font-family: 'DM Sans', sans-serif;
+}
+.task-add-btn:hover { opacity: 0.75; }
+
+/* ══ Hoje ════════════════════════════════════════════════════════ */
+.hoje-group-header {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--text-muted);
+  padding: 20px 0 8px; border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.hoje-group-header:first-child { border-top: none; padding-top: 0; margin-top: 0; }
+.hoje-group-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+.hoje-task {
+  display: flex; align-items: center; gap: 8px;
+  padding: 9px 4px; border-bottom: 1px solid var(--border);
+}
+.hoje-task:last-of-type { border-bottom: none; }
+.hoje-task.hoje-active { background: color-mix(in srgb, var(--accent) 4%, transparent); border-radius: 6px; padding: 9px 8px; }
+
+/* ══ Add project form ════════════════════════════════════════════ */
+.add-project-form {
+  border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 24px; margin-bottom: 12px; background: var(--surface-dim);
+}
+.add-form-fields { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 14px; }
+.add-form-actions { display: flex; gap: 8px; }
+.field {
+  font-family: 'DM Sans', sans-serif; font-size: 14px;
+  padding: 9px 14px; border: 1px solid var(--border);
+  border-radius: 8px; background: var(--surface);
+  color: var(--text-primary); flex: 1; min-width: 120px;
+  transition: border-color 0.15s;
+}
+.field-sm { flex: 0 0 auto; min-width: 0; width: auto; }
+.field:focus { outline: none; border-color: var(--accent); }
+.add-proj-btn {
+  width: 100%; padding: 12px;
+  background: none; border: 1px dashed var(--border);
+  border-radius: 12px; color: var(--text-muted);
+  font-size: 14px; font-family: 'DM Sans', sans-serif;
+  cursor: pointer; transition: border-color 0.15s, color 0.15s;
+}
+.add-proj-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+/* ══ Rotina ══════════════════════════════════════════════════════ */
+.rotina-legend { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+.leg {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.06em;
+  text-transform: uppercase; padding: 3px 10px; border-radius: 100px;
+}
+.leg.alta    { background: #fff7ed; color: #f97316; }
+.leg.media   { background: #fffbeb; color: #f59e0b; }
+.leg.baixa   { background: #f0fdf4; color: #22c55e; }
+.leg.revisao { background: #f5f3ff; color: #a78bfa; }
+
+.rotina-table { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; }
+.rotina-row { display: grid; grid-template-columns: 44px 1fr 1fr 1fr; gap: 1px; background: var(--border); }
+.rotina-dia { background: var(--surface-dim); display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 600; color: var(--text-muted); }
+.rotina-slot { background: var(--surface); display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 600; text-align: center; padding: 14px 8px; min-height: 52px; }
+.r-revisao { background: #f5f3ff !important; color: #a78bfa !important; }
+.r-buffer  { background: var(--surface-dim) !important; color: var(--text-muted) !important; font-style: italic; }
+
+/* ══ Strategy ════════════════════════════════════════════════════ */
+.strategy-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border-radius: 12px; overflow: hidden; }
+.strategy-item {
+  background: var(--surface); padding: 24px 32px;
+  border-left: 3px solid var(--s-color, var(--border));
+}
+.strategy-title { font-size: 17px; font-weight: 600; letter-spacing: -0.01em; margin-bottom: 8px; }
+.strategy-body { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+/* ══ Footer ══════════════════════════════════════════════════════ */
+.footer { border-top: 1px solid var(--border); padding: 24px 0; }
+.footer-inner { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; }
+.footer-logo { display: flex; justify-self: start; }
+.footer-logo svg { width: 20px; height: auto; }
+.footer-logo svg path { fill: var(--text-primary); stroke: none; }
+.footer-copy { font-size: 12px; color: var(--text-muted); text-align: center; }
+.footer-back { justify-self: end; font-size: 14px; color: var(--text-muted); transition: color 0.15s; }
+.footer-back:hover { color: var(--text-primary); }
+
+/* ══ Responsive ══════════════════════════════════════════════════ */
+@media (max-width: 600px) {
+  .metrics-row { flex-wrap: wrap; }
+  .metric { min-width: 50%; }
+  .metric:nth-child(2) { border-right: none; }
+  .signal-board { flex-direction: column; }
+  .signal-divider { width: auto; height: 1px; }
+  .add-form-fields { flex-direction: column; }
+  .rotina-row { grid-template-columns: 32px 1fr 1fr 1fr; }
+  .task-add { flex-wrap: wrap; }
+  .task-input { min-width: 0; }
+  .task-date { width: 100%; }
+}
+
+/* ══ Dark mode ═══════════════════════════════════════════════════ */
 @media (prefers-color-scheme: dark) {
-  .leg-alta    { background: #431407; color: #fb923c; }
-  .leg-media   { background: #422006; color: #facc15; }
-  .leg-baixa   { background: #052e16; color: #4ade80; }
-  .leg-revisao { background: #2e1065; color: #c4b5fd; }
-  .slot-revisao { background: #2e1065 !important; color: #c4b5fd !important; }
-  .proj-badge[style*="#fff7ed"] { background: #431407 !important; }
-  .proj-badge[style*="#fefce8"] { background: #422006 !important; }
-  .proj-badge[style*="#f0fdf4"] { background: #052e16 !important; }
-  .proj-badge[style*="#f7f7f5"] { background: #1e1e1e !important; }
+  .leg.alta    { background: #431407; color: #fb923c; }
+  .leg.media   { background: #422006; color: #facc15; }
+  .leg.baixa   { background: #052e16; color: #4ade80; }
+  .leg.revisao { background: #2e1065; color: #c4b5fd; }
+  .r-revisao   { background: #2e1065 !important; color: #c4b5fd !important; }
 }
 </style>
