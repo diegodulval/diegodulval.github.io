@@ -9,20 +9,14 @@ import CTA from '../../components/CTA.astro';
 import Footer from '../../components/Footer.astro';
 import logoRaw from '../../assets/dd-logo.svg?raw';
 
-const nowItems = [
-  { label: 'Noh', desc: 'Building the payment infra — cartão, Pix, wallets, BaaS.', status: 'ativo' },
-  { label: 'Conecta', desc: 'Automatizando fluxos de negócio com agentes de IA.', status: 'ativo' },
-  { label: 'Café Dulval', desc: 'Estruturando a linha de produtos e e-commerce.', status: 'em breve' },
-  { label: 'DiMata / PriMata', desc: 'IA aplicada ao processamento de café especial.', status: 'beta' },
-];
-
-const ecoLinks = [
-  { name: 'conecta', label: 'IA para negócios', href: '/conecta', accent: '#0ea5e9' },
-  { name: 'café', label: 'Café de altitude', href: '/cafe', accent: '#c2955a' },
-  { name: 'agro', label: 'IA para o campo', href: '/agro', accent: '#22c55e' },
-  { name: 'labs', label: 'Laboratório', href: '/labs', accent: '#a78bfa' },
-  { name: 'edu', label: 'Conteúdo', href: '/edu', accent: '#fb923c' },
-];
+// Ecossistema — desativado durante standby, descomentar para reativar
+// const ecoLinks = [
+//   { name: 'conecta', label: 'IA para negócios', href: '/conecta', accent: '#0ea5e9' },
+//   { name: 'café', label: 'Café de altitude', href: '/cafe', accent: '#c2955a' },
+//   { name: 'agro', label: 'IA para o campo', href: '/agro', accent: '#22c55e' },
+//   { name: 'labs', label: 'Laboratório', href: '/labs', accent: '#a78bfa' },
+//   { name: 'edu', label: 'Conteúdo', href: '/edu', accent: '#fb923c' },
+// ];
 ---
 
 <Layout
@@ -34,8 +28,7 @@ const ecoLinks = [
   <Services />
   <Projects />
 
-
-  <!-- ECO LINKS -->
+  <!-- ECO LINKS — desativado durante standby, descomentar para reativar
   <section class="section">
     <div class="container">
       <span class="eyebrow">Ecossistema</span>
@@ -51,7 +44,7 @@ const ecoLinks = [
       </div>
     </div>
   </section>
-
+  -->
 
   <Footer />
 </Layout>
